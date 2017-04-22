@@ -23,12 +23,14 @@ router.get('/:userId', function(req, res, next) {
 router.post('/authenticate', function(req, res) {
     User.authenticateUser(req.body.email, req.body.password).then(function (user) {
         //if (err) throw err;
-        if (!user) {
-            res.json({ success: false, message: 'authentication failed. User not found.' });
+        if (!user[0]) {
+            console.log('0');
+            res.json({ success: false, message: 'Authentication failed. User not found or wrong password.' });
         } else if (user) {
             // check if password matches
             if (user[0].password != req.body.password) {
-                res.json({ success: false, message: 'authentication failed. Wrong password.' });
+                console.log('`');
+                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
                 // if user is found and password is right
                 // create a token
