@@ -1,9 +1,51 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/UserModel');
+var Transaction = require('../models/TransactionModel');
 
-/* GET users listing. */
+/* /transactions/:status/:userId
+
+ /* GET All users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+    User.getAll().then(function (rows) {
+        res.json(rows);
+    });
+});
+
+/* GET User data by User id. */
+router.get('/:userId', function(req, res, next) {
+    User.getByUser(req.params.userId).then(function (rows) {
+        res.json(rows);
+    });
+});
+
+// route to authenticate a user (POST http://localhost:8080/users/authenticate)
+router.post('/authenticate', function(req, res) {
+    User.authenticateUser(req.body.email, req.body.password).then(function (user) {
+        //if (err) throw err;
+        if (!user) {
+            res.json({ success: false, message: 'authentication failed. User not found.' });
+        } else if (user) {
+            // check if password matches
+            if (user[0].password != req.body.password) {
+                res.json({ success: false, message: 'authentication failed. Wrong password.' });
+            } else {
+                // if user is found and password is right
+                // create a token
+                var token = user[0].password + "|" + user[0].email_address;
+                // return the information including token as JSON and check whether the user made any conversions
+                Transaction.getByUser(0, user[0].id).then(function (transactions) {
+                    res.json({
+                        success: true,
+                        message: 'Authentication success',
+                        token: token,
+                        user: user[0],
+                        transactions: transactions
+                    });
+                });
+            }
+        }
+    });
 });
 
 module.exports = router;

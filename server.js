@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var transactions = require('./routes/transcations');
 
 var app = express();
+var port = process.env.PORT || '3000';
 
 
 // uncomment after placing your favicon in /public
@@ -31,15 +32,24 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+process.on('uncaughtException', function(err) {
+    console.log(err);
 });
 
-module.exports = app;
+// Start Server
+app.listen(port, function () {
+    console.log( "Express server listening on port " + port);
+});
+
+// error handler
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+//
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
+//
+// module.exports = app;
