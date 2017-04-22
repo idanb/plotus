@@ -9,6 +9,7 @@ exports.getAll = function() {
             console.error(error);
             deferred.reject(error);
         }
+
         deferred.resolve(results);
     });
     return deferred.promise;
