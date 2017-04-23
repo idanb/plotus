@@ -24,18 +24,16 @@ router.post('/authenticate', function(req, res) {
     User.authenticateUser(req.body.email, req.body.password).then(function (user) {
         //if (err) throw err;
         if (!user[0]) {
-            console.log('0');
             res.json({ success: false, message: 'Authentication failed. User not found or wrong password.' });
         } else if (user) {
             // check if password matches
             if (user[0].password != req.body.password) {
-                console.log('`');
                 res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
                 // if user is found and password is right
                 // create a token
-                var token = user[0].password + "|" + user[0].email_address;
                 // return the information including token as JSON and check whether the user made any conversions
+                var token = user[0].password + "|" + user[0].email_address;
                 Transaction.getByUser(0, user[0].id).then(function (transactions) {
                     res.json({
                         success: true,
