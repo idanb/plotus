@@ -1,17 +1,23 @@
 'use strict';
 angular.module('Home')
     .controller('HomeController',
-        ['$scope','$rootScope','$cookies', '$location', '$http',
-            function ($scope, $rootScope, $cookies, $location, $http) {
+        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window',
+            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window) {
                 if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
                 $scope.user = $cookies.getObject('globals').currentUser.user;
                 $scope.welcome_text = $cookies.getObject('globals').transactions.length >= 1  ? 'Welcome back, for additional fans transfer.' :
                     'Welcome to Plotu$, you have not made any money conversions yet. it\'s time to start !';
-
-                $http.get("http://www.apilayer.net/api/live?access_key=284b0fa1855d9fc703d67d39bae6a659&currencies=USD,ILS,JPY,EUR,GBP&format = 1",{ headers: {
-                    'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-                }}).then(function(response) {
-                        $scope.rates = response.data.quotes;
-                    });
+                var URL = "https://openexchangerates.org/api/latest.json?app_id=1f49ab9363964bf2ad2f113800a44fbe";
+                $sce.trustAsResourceUrl(URL);
+                $http.get(URL)
+                    .then(function (response) {
+                        var types = ['USD','ILS','JPY','EUR','GBP'];
+                        $scope.rates = "";
+                        types.forEach(function(k) {
+                            $scope.rates += k + ':' + response.data.rates[k] + ', ';
+                        });
+                    }).catch(function (e) {
+                    console.log('error',e);
+                });
 
             }]);
