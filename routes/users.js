@@ -19,6 +19,13 @@ router.get('/:userId', function(req, res, next) {
     });
 });
 
+/* GET User balance by User id. */
+router.get('/balance/:userId', function(req, res, next) {
+    User.getUserBalanceByUserId(req.params.userId).then(function (rows) {
+        res.json(rows);
+    });
+});
+
 // route to authenticate a user (POST http://localhost:8080/users/authenticate)
 router.post('/authenticate', function(req, res) {
     User.authenticateUser(req.body.email, req.body.password).then(function (user) {

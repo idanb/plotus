@@ -1,0 +1,54 @@
+<div class="profile_header">
+    <div> <p>Hi, <br/> {{user.first_name + " " + user.last_name }},</p> </div>
+    <div> <img class="profile_image" ng-src="{{ user.profile_picture_url }}" /> </div>
+</div>
+
+<p style="text-decoration: underline">Your Account balance is :</p>
+
+
+<div class="currency_balance" ng-repeat="currency in balanace track by $index">
+    <img ng-src="{{currency.picture_url}}" alt="Description" />
+    <div> {{currency.code}} {{currency.value}}<br/>
+    <button type="button" class="btn btn-primary btn-sm bold">Add</button>
+    </div>
+</div>
+
+
+<div class="buttons_wrapper">
+<button type="button" class="btn btn-primary btn-lg">Reedem The Money</button>
+<button type="button" class="btn btn-secondary btn-lg">New Exchange</button>
+</div>
+
+
+
+<style>
+    .profile_header{
+        display: -webkit-flex; /* Safari */
+        display: flex;}
+
+    .profile_header div:nth-of-type(1) {-webkit-flex-grow: 1;}
+    .profile_header div:nth-of-type(2) {-webkit-flex-grow: 1; text-align: right;}
+
+
+    .currency_balance{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+    }
+
+    .currency_balance img {-webkit-flex-grow: 1;
+        min-width: 50px;
+        height: 80px;
+        margin: 5px;}
+    .currency_balance div {-webkit-flex-grow: 1; text-align: left;}
+
+    .buttons_wrapper{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+    }
+
+    .buttons_wrapper button { margin: 5px;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;}
+
+
+</style>

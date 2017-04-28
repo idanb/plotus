@@ -15,7 +15,20 @@ exports.getAll = function() {
 
 exports.getByUser = function(userId) {
     var deferred = q.defer();
-    db.query('SELECT * FROM tblUsers WHERE id = ?', userId, function (error, results) {
+    db.query('SELECT * FROM tblUsers u WHERE id = ?', userId, function (error, results) {
+        if (error) {
+            console.error(error);
+            deferred.reject(error);
+        }
+        deferred.resolve(results);
+    });
+    return deferred.promise;
+}
+// SELECT * FROM tblUserBalance ub WHERE userId = ? LEFT JOIN tblCurrency c ON c.id = ub.currencyId
+
+exports.getUserBalanceByUserId = function(userId) {
+    var deferred = q.defer();
+    db.query('SELECT * FROM `tblUserBalance` ub LEFT JOIN `tblCurrency` c ON c.id = ub.currencyId WHERE ub.userId = ?', userId, function (error, results) {
         if (error) {
             console.error(error);
             deferred.reject(error);

@@ -1,0 +1,100 @@
+<h3>Update Personal Information</h3>
+<p style="text-decoration: underline">Personal Information:</p>
+
+<div class="name_fields">
+    <input type="text" class="form-control" ng-model="first_name" placeholder="First Name" required="true" autofocus="">
+    <input type="text" class="form-control" ng-model="last_name" placeholder="Last Name" required="true" autofocus="">
+</div>
+
+<div class="ids_fields">
+    <input type="number" class="form-control" ng-model="socail_id" placeholder="ID ?" required="true" autofocus="">
+    <input type="email" class="form-control" ng-model="email_address" placeholder="Email address" required="true" autofocus="">
+</div>
+
+<p style="text-decoration: underline">Contact Information:</p>
+
+<div class="contact_fields">
+    <input type="text" class="form-control" ng-model="city" placeholder="city" required="true" autofocus="">
+    <input type="text" class="form-control" ng-model="street" placeholder="Street" required="true" autofocus="">
+    <input type="number" class="form-control" ng-model="s_number" placeholder="Number" required="true" autofocus="">
+</div>
+<input type="number" class="form-control" placeholder="Phone Number" ng-model="phone_number" required="true" autofocus="">
+
+<p style="text-decoration: underline">Credit Details:</p>
+
+<div class="credit_fields">
+    <input type="number" class="form-control" ng-model="credit_card" placeholder="Credit Card Number" required="true" autofocus="">
+    <input type="number" class="form-control" placeholder="CW" ng-model="credit_card_cw" required="true" autofocus="">
+</div>
+Validity:
+<input type="month" class="form-control" placeholder="month" ng-model="credit_card_date" required="true" autofocus="">
+
+<div class="buttons_wrapper">
+<button type="button" class="btn btn-primary btn-lg">Save</button>
+<button type="button" class="btn btn-secondary btn-lg">Cancel Changes</button>
+</div>
+
+
+<!--Personal Information: (כותרת)-->
+<!--First name, Last name, ID, Email, Address, Telephone.-->
+<!--Credit Details: (כותרת)-->
+<!--Credit card number, validity, CVV.-->
+
+
+<style>
+
+    input{
+        margin: 5px;
+    }
+    .name_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex;}
+
+    .name_fields input:nth-of-type(1) {-webkit-flex-grow: 1;}
+    .name_fields input:nth-of-type(2) {-webkit-flex-grow: 1;}
+
+    .ids_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex;}
+
+    .ids_fields input:nth-of-type(1) {-webkit-flex-grow: 1;}
+    .ids_fields input:nth-of-type(2) {-webkit-flex-grow: 1;}
+
+    .contact_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex;}
+
+    .contact_fields input:nth-of-type(1) {-webkit-flex-grow: 2;}
+    .contact_fields input:nth-of-type(2) {-webkit-flex-grow: 2;}
+    .contact_fields input:nth-of-type(3) {-webkit-flex-grow: 1;}
+
+    .credit_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex;}
+
+    .credit_fields input:nth-of-type(1) {-webkit-flex-grow: 4;}
+    .credit_fields input:nth-of-type(2) {-webkit-flex-grow: 1;}
+
+
+    .currency_balance{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+    }
+
+    .currency_balance img {-webkit-flex-grow: 1;
+        min-width: 50px;
+        height: 80px;
+        margin: 5px;}
+    .currency_balance div {-webkit-flex-grow: 1; text-align: left;}
+
+    .buttons_wrapper{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+    }
+
+    .buttons_wrapper button { margin: 5px;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;}
+
+
+</style>

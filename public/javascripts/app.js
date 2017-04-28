@@ -3,12 +3,16 @@
 // declare modules
 angular.module('Authentication', []);
 angular.module('Home', []);
+angular.module('Profile', []);
+angular.module('Personal', []);
 
-angular.module('BasicHttpAuthExample', [
+angular.module('PlotusApp', [
     'Authentication',
     'Home',
     'ngRoute',
-    'ngCookies'
+    'ngCookies',
+    'Profile',
+    'Personal',
 ])
 
     .config(['$routeProvider', function ($routeProvider) {
@@ -19,27 +23,34 @@ angular.module('BasicHttpAuthExample', [
                 templateUrl: 'modules/authentication/views/login.html',
                 hideMenus: true
             })
-
             .when('/', {
                 controller: 'HomeController',
                 templateUrl: 'modules/home/views/home.html'
             })
+            .when('/profile', {
+                controller: 'ProfileController',
+                templateUrl: 'modules/profile/views/profile.html'
+            })
+            .when('/personal', {
+                templateUrl: 'modules/personal/views/personal.html',
+                controller: 'PersonalController',
+
+            })
 
             .otherwise({ redirectTo: '/login' });
     }])
+    .run(['$rootScope', '$location', '$cookieStore', '$http',
+        function ($rootScope, $location, $cookieStore, $http) {
+            // keep user logged in after page refresh
+            $rootScope.globals = $cookieStore.get('globals') || {};
+            if ($rootScope.globals.currentUser) {
+                $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+            }
 
-    // .run(['$rootScope', '$location', '$cookieStore', '$http',
-    //     function ($rootScope, $location, $cookieStore, $http) {
-    //         // keep user logged in after page refresh
-    //         $rootScope.globals = $cookieStore.get('globals') || {};
-    //         if ($rootScope.globals.currentUser) {
-    //             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-    //         }
-    //
-    //         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-    //             // redirect to login page if not logged in
-    //             if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-    //                 $location.path('/login');
-    //             }
-    //         });
-    //     }]);
+            $rootScope.$on('$locationChangeStart', function (event, next, current) {
+                // redirect to login page if not logged in
+                if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                    $location.path('/login');
+                }
+            });
+        }]);

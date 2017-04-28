@@ -1,46 +1,154 @@
 <!DOCTYPE html>
-<html ng-app="BasicHttpAuthExample">
+<html ng-app="PlotusApp">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AngularJS Basic HTTP Authentication Example</title>
+    <title>Plotus Application</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">TimeToSave</a>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#/about">About</a>
+    <a href="#/personal">Update Personal Details</a>
+    <a href="#/exchange-rates">Watching exchange rates</a>
+    <a href="#/">Home Page</a>
+    <a href="#/profile">Profile - delete</a>
+</div>
+
+<div id="main">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <div class="hamburger">
+                <md-button ng-click="toggleLeft()" class="md-raised" style="color:white">
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                </md-button>
+            </div>
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">TimeToSave</a>
+            </div>
+
+            <div class="navbar-logo">
+                <img width="40" height="40" ng-src="https://image.flaticon.com/icons/png/128/189/189093.png" alt="logo" />
+            </div>
         </div>
-        <!--<ul class="nav navbar-nav">-->
-            <!--<li class="active"><a href="#">Home</a></li>-->
-            <!--<li><a href="#">Page 1</a></li>-->
-            <!--<li><a href="#">Page 2</a></li>-->
-            <!--<li><a href="#">Page 3</a></li>-->
-        <!--</ul>-->
-    </div>
-</nav>
+
+    </nav>
 
 
-<div class="jumbotron">
-    <div class="container">
-        <div class=" col-xs-offset-1 col-xs-10">
-            <div ng-view></div>
+
+    <style>
+
+        .container-fluid {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+        }
+
+        .navbar-header{ flex-grow: 1; }
+        .hamburger { flex-grow: 1; }
+        .hamburger { flex-grow: 1; }
+
+        body{
+            /*background-color: #eee;*/
+            font-family: "Lato", sans-serif;
+            transition: background-color .5s;
+        }
+
+        .navbar-inverse {
+            background-color: #e80000;
+            border-color: #e80000;
+        }
+
+        .navbar-inverse .navbar-brand{
+            color: #fff;
+        }
+
+        .jumbotron{
+            background-color: #fff;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #c7c7c7;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #ffffff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover, .offcanvas a:focus{
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
+    </style>
+
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            //document.getElementById("main").style.marginLeft = "250px";
+            //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            //document.getElementById("main").style.marginLeft= "0";
+            //document.body.style.backgroundColor = "white";
+        }
+    </script>
+
+    <div class="jumbotron">
+        <div class="container">
+            <div class=" col-xs-offset-1 col-xs-10">
+                <div ng-view></div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="credits text-center">
-    <p>
-        <a href="/">Footer</a>
-    </p>
-    <p>
-        <a href="/">Footer Link</a>
-    </p>
-</div>
+<!--<div class="credits text-center">-->
+<!--<p>-->
+<!--<a href="/">Footer</a>-->
+<!--</p>-->
+<!--<p>-->
+<!--<a href="/">Footer Link</a>-->
+<!--</p>-->
+<!--</div>-->
 
 <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="//code.angularjs.org/1.5.1/angular.js"></script>
@@ -50,6 +158,8 @@
 <script src="/modules/authentication/services.js"></script>
 <script src="/modules/authentication/controllers.js"></script>
 <script src="/modules/home/controllers.js"></script>
+<script src="/modules/profile/controllers.js"></script>
+<script src="/modules/personal/controllers.js"></script>
 </body>
 
 </html>
