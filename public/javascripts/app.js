@@ -41,6 +41,8 @@ angular.module('PlotusApp', [
     }])
     .run(['$rootScope', '$location', '$cookieStore', '$http',
         function ($rootScope, $location, $cookieStore, $http) {
+            $rootScope.currentPath = $location.path();
+
             // keep user logged in after page refresh
             $rootScope.globals = $cookieStore.get('globals') || {};
             if ($rootScope.globals.currentUser) {

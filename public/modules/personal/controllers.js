@@ -5,8 +5,22 @@ angular.module('Personal')
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window) {
                 if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
                 $scope.user = $cookies.getObject('globals').currentUser.user;
-                $scope.first_name = $scope.user.first_name;
-                $scope.last_name = $scope.user.last_name;
-                $scope.email_address = $scope.user.email_address;
+                $scope.user.cc_date = new Date($scope.user.cc_date);
+
+
+                $scope.sub = function() {
+                    $http.put('/users/' + $scope.user.id,$scope.user).
+                    success(function(data) {
+                        var globals = $cookies.getObject('globals');
+                        globals.currentUser.user = $scope.user;
+                        $cookies.putObject('globals', globals);
+                        $(".alert.alert-success").css('display','block');
+                        console.log("posted successfully");
+                    }).error(function(data) {
+                        debugger;
+                        console.error("error in posting");
+                    })
+                }
+
 
             }]);

@@ -38,6 +38,19 @@ exports.getUserBalanceByUserId = function(userId) {
     return deferred.promise;
 }
 
+exports.updateUserByUserId = function(userId,data) {
+    var deferred = q.defer();
+    var query = "UPDATE tblUsers SET ? WHERE ?";
+    db.query(query, [data, { id: userId }], function (error, results) {
+        if (error) {
+            console.error(error);
+            deferred.reject(error);
+        }
+        deferred.resolve(results);
+    });
+    return deferred.promise;
+}
+
 
  exports.authenticateUser = function(email,password) {
      var deferred = q.defer();

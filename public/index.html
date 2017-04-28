@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Plotus Application</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 
 <body>
@@ -17,14 +17,14 @@
     <a href="#/exchange-rates">Watching exchange rates</a>
     <a href="#/">Home Page</a>
     <a href="#/profile">Profile - delete</a>
+    <a href="#/login">Logout</a>
 </div>
 
 <div id="main">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-
             <div class="hamburger">
-                <md-button ng-click="toggleLeft()" class="md-raised" style="color:white">
+                <md-button ng-show="currentPath !== '/login'" ng-click="toggleLeft()" class="md-raised" style="color:white">
                     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
                 </md-button>
             </div>
@@ -52,6 +52,10 @@
         .navbar-header{ flex-grow: 1; }
         .hamburger { flex-grow: 1; }
         .hamburger { flex-grow: 1; }
+
+        .hamburger .md-button{
+            visibility: hidden;
+        }
 
         body{
             /*background-color: #eee;*/
@@ -115,6 +119,12 @@
             .sidenav a {font-size: 18px;}
         }
 
+        .jumbotron {
+            padding: 15px;
+        }
+        .alert{
+            display: none;
+        }
     </style>
 
 
@@ -134,7 +144,19 @@
 
     <div class="jumbotron">
         <div class="container">
-            <div class=" col-xs-offset-1 col-xs-10">
+            <div class="alert alert-success">
+                <strong>Success!</strong> Update User Details Success !
+            </div>
+            <div class="alert alert-info">
+                <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
+            </div>
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
+            </div>
+            <div class="alert alert-danger">
+                <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+            </div>
+            <div class="col-xs-12 col-md-12">
                 <div ng-view></div>
             </div>
         </div>
@@ -154,6 +176,8 @@
 <script src="//code.angularjs.org/1.5.1/angular.js"></script>
 <script src="//code.angularjs.org/1.5.1/angular-route.js"></script>
 <script src="//code.angularjs.org/1.5.1/angular-cookies.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="/javascripts/app.js"></script>
 <script src="/modules/authentication/services.js"></script>
 <script src="/modules/authentication/controllers.js"></script>

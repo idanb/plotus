@@ -18,6 +18,17 @@ router.get('/:userId', function(req, res, next) {
         res.json(rows);
     });
 });
+/* PUT User data by User id. */
+router.put('/:userId', function(req, res, next) {
+    var userId = req.body['id'];
+    delete req.body['id'];
+    req.body['cc_date'] = req.body['cc_date'].slice(0,7);
+    User.updateUserByUserId(userId,req.body).then(function (rows) {
+        console.log(rows);
+        res.json(rows);
+    });
+
+});
 
 /* GET User balance by User id. */
 router.get('/balance/:userId', function(req, res, next) {
