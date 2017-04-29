@@ -14,7 +14,9 @@ angular.module('Personal')
                         var globals = $cookies.getObject('globals');
                         globals.currentUser.user = $scope.user;
                         $cookies.putObject('globals', globals);
-                        $(".alert.alert-success").css('display','block');
+                        $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+                            $(".alert-success").slideUp(500);
+                        });
                         console.log("posted successfully");
                     }).error(function(data) {
                         debugger;
