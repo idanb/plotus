@@ -8,6 +8,8 @@ var Transaction = require('../models/TransactionModel');
 router.get('/', function(req, res, next) {
     Transaction.getAll().then(function (rows) {
         res.json(rows);
+    }, function(reason) {
+        res.json(reason);
     });
 });
 
@@ -15,6 +17,8 @@ router.get('/', function(req, res, next) {
 router.get('/:status', function(req, res, next) {
     Transaction.getbyStatus(req.params.status).then(function (rows) {
         res.json(rows);
+    }, function(reason) {
+        res.json(reason);
     });
 });
 
@@ -22,6 +26,8 @@ router.get('/:status', function(req, res, next) {
 router.get('/:status/:userId', function(req, res, next) {
     Transaction.getByUser(req.params.status, req.params.userId).then(function (rows) {
         res.json(rows);
+    }, function(reason) {
+        res.json(reason);
     });
 });
 

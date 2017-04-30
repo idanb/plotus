@@ -1,4 +1,4 @@
-<h3>Update Personal Information</h3>
+<h3>Update Personal Details</h3>
 <p style="text-decoration: underline">Personal Information:</p>
 <form ng-submit="sub()" method="put">
     <div class="name_fields">
@@ -49,32 +49,33 @@
     }
     .name_fields{
         display: -webkit-flex; /* Safari */
-        display: flex;}
+        display: flex;
+        flex-basis: 0;}
 
-    .name_fields input:nth-of-type(1) {-webkit-flex-grow: 1;}
-    .name_fields input:nth-of-type(2) {-webkit-flex-grow: 1;}
+    .name_fields input:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .name_fields input:nth-of-type(2) {-webkit-flex-grow: 1;  flex-grow: 1; flex-basis: 0;}
 
     .ids_fields{
         display: -webkit-flex; /* Safari */
         display: flex;}
 
-    .ids_fields input:nth-of-type(1) {-webkit-flex-grow: 1;}
-    .ids_fields input:nth-of-type(2) {-webkit-flex-grow: 1;}
+    .ids_fields input:nth-of-type(1) {-webkit-flex-grow: 1;  flex-grow: 1; flex-basis: 0;}
+    .ids_fields input:nth-of-type(2) {-webkit-flex-grow: 1;  flex-grow: 1; flex-basis: 0;}
 
     .contact_fields{
         display: -webkit-flex; /* Safari */
         display: flex;}
 
-    .contact_fields input:nth-of-type(1) {-webkit-flex-grow: 2;}
-    .contact_fields input:nth-of-type(2) {-webkit-flex-grow: 2;}
-    .contact_fields input:nth-of-type(3) {-webkit-flex-grow: 1;}
+    .contact_fields input:nth-of-type(1) {-webkit-flex-grow: 2; flex-grow: 2; flex-basis: 0;}
+    .contact_fields input:nth-of-type(2) {-webkit-flex-grow: 2.6; flex-grow: 2.6; flex-basis: 0;}
+    .contact_fields input:nth-of-type(3) {-webkit-flex-grow: 0.4; flex-grow: 0.4; flex-basis: 0;}
 
     .credit_fields{
         display: -webkit-flex; /* Safari */
         display: flex;}
 
-    .credit_fields input:nth-of-type(1) {-webkit-flex-grow: 4;}
-    .credit_fields input:nth-of-type(2) {-webkit-flex-grow: 1;}
+    .credit_fields input:nth-of-type(1) {-webkit-flex-grow: 4.4; flex-grow: 4.4; flex-basis: 0;}
+    .credit_fields input:nth-of-type(2) {-webkit-flex-grow: 0.6; flex-grow: 0.6; flex-basis: 0;}
 
 
     .currency_balance{
@@ -82,20 +83,20 @@
         display: flex;
     }
 
-    .currency_balance img {-webkit-flex-grow: 1;
+    .currency_balance img {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;
         min-width: 50px;
         height: 80px;
         margin: 5px;}
-    .currency_balance div {-webkit-flex-grow: 1; text-align: left;}
+    .currency_balance div {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0; text-align: left;}
 
     .buttons_wrapper{
         display: -webkit-flex; /* Safari */
-        display: flex;
+        display: flex; flex-basis: 0;
     }
 
     .buttons_wrapper button { margin: 5px;}
-    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1;}
-    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
 
 
 </style>

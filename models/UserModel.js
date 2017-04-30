@@ -57,6 +57,7 @@ exports.updateUserByUserId = function(userId,data) {
      db.query('SELECT * FROM tblUsers WHERE email_address = ? AND password = ?', [email, password], function (error, results) {
          if (error) {
              console.error(error);
+             console.log("ERROR",error);
              deferred.reject(error);
          }
          deferred.resolve(results);

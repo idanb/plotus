@@ -9,6 +9,8 @@ var Transaction = require('../models/TransactionModel');
 router.get('/', function(req, res, next) {
     User.getAll().then(function (rows) {
         res.json(rows);
+    }, function(reason) {
+        res.json(reason);
     });
 });
 
@@ -16,6 +18,8 @@ router.get('/', function(req, res, next) {
 router.get('/:userId', function(req, res, next) {
     User.getByUser(req.params.userId).then(function (rows) {
         res.json(rows);
+    }, function(reason) {
+        res.json(reason);
     });
 });
 /* PUT User data by User id. */
@@ -26,14 +30,18 @@ router.put('/:userId', function(req, res, next) {
     User.updateUserByUserId(userId,req.body).then(function (rows) {
         console.log(rows);
         res.json(rows);
+    }, function(reason) {
+        res.json(reason);
     });
 
 });
 
 /* GET User balance by User id. */
 router.get('/balance/:userId', function(req, res, next) {
-    User.getUserBalanceByUserId(req.params.userId).then(function (rows) {
+    User.getUserBalanceByUserId(req.params.userId).then(function (rows,error) {
         res.json(rows);
+    }, function(reason) {
+        res.json(reason);
     });
 });
 
@@ -60,9 +68,16 @@ router.post('/authenticate', function(req, res) {
                         user: user[0],
                         transactions: transactions
                     });
+                }, function(reason) {
+                    res.json(reason);
                 });
             }
         }
+        else{
+            return user;
+        }
+    }, function(reason) {
+        res.json(reason);
     });
 });
 
