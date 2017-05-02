@@ -1,9 +1,8 @@
 'use strict';
 angular.module('Authentication')
-
     .controller('LoginController',
-        ['$scope', '$rootScope', '$location', 'AuthenticationService',
-            function ($scope, $rootScope, $location, AuthenticationService) {
+        ['$scope', '$rootScope', '$location', '$timeout', 'AuthenticationService',
+            function ($scope, $rootScope, $location, $timeout, AuthenticationService) {
                 // reset login status
                 AuthenticationService.ClearCredentials();
                 $scope.login = function () {
@@ -12,7 +11,7 @@ angular.module('Authentication')
                         if(response.success) {
                             AuthenticationService.SetCredentials($scope.email, $scope.password, response.user,
                                 response.transactions);
-                            $location.path('/');
+                            $timeout(function(){ $location.path('/'); },2000);
                         } else {
                             $scope.error = response.message;
                             $scope.dataLoading = false;

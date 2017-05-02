@@ -1,0 +1,99 @@
+<h3>Instant Currency Conversion</h3>
+<p style="">1    -     2      -    3</p>
+<p style="">enter details    -     search      -    appeal</p>
+<form>
+    <div class="form-group">
+        <label for="amount">How much money would you like to exchange ?</label>
+        <input type="number" class="form-control" ng-model="user.email_address" id="amount" placeholder="amount" required="true" autofocus="">
+    </div>
+
+    <div class="form-group">
+        <label for="currency_own">Select the currency you own:</label>
+        <select class="form-control" id="currency_own">
+            <option ng-repeat="cur in currency track by $index">
+               {{cur.code}}
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="currency_to_exchange">Select the currency you want to exchange:</label>
+        <select class="form-control" id="currency_to_exchange">
+            <option ng-repeat="cur in currency track by $index">
+                {{cur.code}}
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="currency_rate">What is your wanted rate ?</label>
+        <div class="currency_rate_wrapper">
+            <div class="dec button">-</div>
+            <input id="currency_rate" type="number" class="form-control" step="0.01000" value="2.33000">
+            <div class="inc button">+</div>
+    </div>
+    </div>
+</form>
+
+<p>Click on 'search' for best matches</p>
+
+<div class="buttons_wrapper">
+    <button ng-submit="sub()" class="btn btn-primary btn-lg">Search</button>
+    <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
+</div>
+
+
+
+
+
+
+<!--Personal Information: (כותרת)-->
+<!--First name, Last name, ID, Email, Address, Telephone.-->
+<!--Credit Details: (כותרת)-->
+<!--Credit card number, validity, CVV.-->
+
+
+<style>
+
+    .button {
+        margin: 0 0 0 5px;
+        text-indent: -9999px;
+        cursor: pointer;
+        width: 29px;
+        height: 29px;
+        display: inline-block;
+        text-align: center;
+        background: url('/images/buttons.png') no-repeat;
+    }
+    .dec {
+        background-position: 0 -29px;
+    }
+
+    .buttons {
+        padding: 20px 0 0 140px;
+    }
+
+
+    select,input{
+        width: auto !important;
+        display: inline-block !important;
+    }
+
+    input{
+        margin: 5px;
+    }
+
+    input#currency_rate{
+        width: 30% !important;
+    }
+    .buttons_wrapper{
+        display: -webkit-flex; /* Safari */
+        display: flex; flex-basis: 0;
+    }
+
+    .buttons_wrapper button { margin: 5px;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
+
+
+</style>
