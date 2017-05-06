@@ -6,6 +6,7 @@ angular.module('Home', []);
 angular.module('Profile', []);
 angular.module('Personal', []);
 angular.module('Exchange', []);
+angular.module('Helpers', []);
 
 angular.module('PlotusApp', [
     'Authentication',
@@ -15,6 +16,7 @@ angular.module('PlotusApp', [
     'Profile',
     'Personal',
     'Exchange',
+    'Helpers'
 ])
 
     .config(['$routeProvider', function ($routeProvider) {
@@ -35,12 +37,22 @@ angular.module('PlotusApp', [
             })
             .when('/personal', {
                 templateUrl: 'modules/personal/views/personal.html',
-                controller: 'PersonalController',
+                controller: 'PersonalController'
 
             })
-            .when('/exchangenow', {
-                templateUrl: 'modules/exchangenow/views/exchangenow.html',
-                controller: 'ExchangeNowController',
+            .when('/exchangeNow', {
+                templateUrl: 'modules/exchangenow/views/exchangeNow.html',
+                controller: 'ExchangeNowController'
+
+            })
+            .when('/searchCurrencyRate', {
+                templateUrl: 'modules/searchCurrencyRate/views/searchCurrencyRate.html',
+                controller: 'SearchCurrencyRateController'
+
+            })
+            .when('/exchangeConfirm', {
+                templateUrl: 'modules/exchangeConfirm/views/exchangeConfirm.html',
+                controller: 'exchangeConfirmController'
 
             })
 

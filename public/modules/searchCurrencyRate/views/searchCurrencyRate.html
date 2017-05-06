@@ -1,0 +1,123 @@
+<h3>Instant Currency Conversion</h3>
+
+<progress-bar stage="2"></progress-bar>
+
+<div class="money-present-box replace-amount">
+    <p>The amount money i have : <span>{{offered_amount}} {{offered_amount_currency}}</span></p>
+</div>
+
+<div class="money-present-box requested-amount">
+    <p>My desired target amount : <span>{{requested_amount}} {{requested_amount_currency}}</span></p>
+</div>
+
+<div class="sort-options-wrapper">
+    <div class="sort-option" ng-click="sortBy('currency_offer_amount')" ng-class="{'selected':propertyName === 'currency_offer_amount'}"><i class="fa fa-fw fa-sort"></i>Best Match</div>
+    <div class="sort-option" ng-click="sortBy('-rate')" ng-class="{'selected':propertyName === '-rate'}"><i class="fa fa-fw fa-sort"></i>Lowest Rate</div>
+    <div class="sort-option" ng-click="sortBy('rate')" ng-class="{'selected':propertyName === 'rate'}"><i class="fa fa-fw fa-sort"></i>Highest Rate</div>
+</div>
+
+<div id="ptransactions_wrapper">
+    <div class="potential_transaction" ng-repeat="transaction in ptransactions | orderBy:propertyName track by $index "
+         ng-class="{'selected':selectedDeal === $index}" ng-click="selectDeal($index)" >
+        <input type="checkbox" ng-model="selectedDeal[$index]" name="group" id="$index"/>
+               <!-- ng-disabled="{{transaction.currency_offer_requested > offered_amount}}"-->
+        <img ng-src="{{transaction.profile_picture_url}}" alt="Description" />
+        <div class="potential_transaction_user">{{transaction.first_name}} {{transaction.last_name}}</div>
+        <div class="potential_transaction_offer"> Offers you {{transaction.currency_offer_amount}} {{transaction.off_code}} for
+            {{transaction.currency_offer_requested}} {{transaction.req_code}}
+        </div>
+    </div>
+</div>
+
+<div class="buttons_wrapper">
+    <button ng-click="confirmSelection()" class="btn btn-primary btn-lg">Confirm</button>
+    <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
+</div>
+
+
+<style>
+
+    .dec {
+        background-position: 0 -29px;
+    }
+
+    .buttons {
+        padding: 20px 0 0 140px;
+    }
+
+
+    select,input{
+        width: auto !important;
+        display: inline-block !important;
+    }
+
+    input{
+        margin: 5px;
+    }
+
+    input#currency_rate{
+        width: 30% !important;
+    }
+    .buttons_wrapper{
+        display: -webkit-flex; /* Safari */
+        display: flex; flex-basis: 0;
+    }
+
+    .buttons_wrapper button { margin: 5px;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
+
+    .money-present-box {
+        width: 45%;
+        display: inline-block;
+        background: #dadada;
+        padding: 8px;
+        overflow: hidden;
+    }
+
+    .sort-option {
+        display: inline-block;
+        font-size: 12px;
+        background: gainsboro;
+        border-radius: 10px;
+        padding: 1px;
+    }
+
+    .potential_transaction {
+        overflow: hidden;
+        background: #efe9e9;
+        padding: 5px;
+        margin: 3px;
+        border-radius: 3px;
+        position: relative;
+    }
+
+    .potential_transaction div{
+        display: inline-block;
+    }
+    .potential_transaction img{
+        width: 70px;
+        display: inline-block;
+    }
+
+    .potential_transaction_user {
+        vertical-align: top;
+    }
+
+    .potential_transaction_offer {
+        width: 60%;
+        /* float: right; */
+        position: absolute;
+        top: 26px;
+        left: 97px;
+    }
+
+    p span{
+        white-space: nowrap;
+    }
+
+    .selected{
+        background-color: #ccb7b7;
+    }
+
+</style>

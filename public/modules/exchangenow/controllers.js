@@ -5,11 +5,12 @@ angular.module('Exchange')
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window) {
                 if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
 
-
+                $scope.session = $cookies.getObject('globals').session;
+                var user = $cookies.getObject('globals').currentUser.user;
+                $scope.balance = $cookies.getObject('globals').balanace;
 
                 $http.get('currency/')
                     .then(function (response) {
-                        debugger;
                         $scope.currency = response.data;
                     }).catch(function (e) {
                     console.log('error',e);
@@ -35,6 +36,16 @@ angular.module('Exchange')
                     $button.parent().find("input").val(newVal);
 
                 });
+
+
+                $scope.sub = function() {
+                    $rootScope.session = $scope.session;
+                    var globals = $cookies.getObject('globals');
+
+                    globals.session = $rootScope.session;
+                    $cookies.putObject('globals', globals);
+                    $location.path("/searchCurrencyRate");
+                }
 
 
                 // $scope.user = $cookies.getObject('globals').currentUser.user;

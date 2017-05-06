@@ -8,6 +8,18 @@ var Transaction = require('../models/CurrencyModel');
 router.get('/', function(req, res, next) {
     console.log("IDAN");
     Transaction.getAll().then(function (rows) {
+// result = [];
+//         for (var i = 0; i < rows.length; i++) {
+//
+//             Object.keys(rows[i]).forEach(function (key) {
+//                 var val = rows[i][key];
+//                 console.log('key is: ' + key);
+//                 console.log('val is: ' + val);
+//             });
+//
+//         }
+
+
         res.json(rows);
     }, function(reason) {
         res.json(reason);

@@ -20,4 +20,35 @@ angular.module('Home')
                 //     console.log('error',e);
                 // });
 
+
+
+
+                $http.get('currency/')
+                    .then(function (response) {
+                        var globals = $cookies.getObject('globals');
+
+                        globals.currency = response.data;
+                        $cookies.putObject('globals', globals);
+                        $http.get('users/balance/' + $scope.user.id)
+                            .then(function (response) {
+                                $scope.balanace = response.data;
+                                globals.balanace = $scope.balanace;
+                                $cookies.putObject('globals', globals);
+
+                            }).catch(function (e) {
+                            console.log('error',e);
+                        });
+
+                    }).catch(function (e) {
+                    console.log('error',e);
+                });
+
+
+
+
+
+                $scope.exchangenow = function() {
+                    $location.path("/exchangeNow");
+                }
+
             }]);

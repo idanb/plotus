@@ -1,0 +1,152 @@
+<h3>Instant Currency Conversion</h3>
+
+<progress-bar stage="3"></progress-bar>
+
+<h3>Your Prefrences</h3>
+
+<div id="ptransactions_wrapper">
+    <div class="potential_transaction" ng-repeat="transaction in ptransactions | orderBy:propertyName track by $index "
+         ng-class="{'selected':selectedDeal === $index}" ng-click="selectDeal($index)" >
+        <img ng-src="{{transaction.profile_picture_url}}" alt="Description" />
+        <div class="potential_transaction_user">{{transaction.first_name}} {{transaction.last_name}}</div>
+        <div class="potential_transaction_offer"> Offers you {{transaction.currency_offer_amount}} {{transaction.off_code}} for
+            {{transaction.currency_offer_requested}} {{transaction.req_code}}
+        </div>
+    </div>
+</div>
+
+
+<p>
+
+Please note: Once you click 'Confirm' the conversion will be done and
+    the money will be taken from the credit card stored in the system.
+You can change your credit information at any time in 'My Profile'.
+
+</p>
+
+
+<div class="buttons_wrapper">
+    <button ng-click="confirmTransfer()" class="btn btn-primary btn-lg">Confirm</button>
+    <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    The transaction completed successfully!
+                    Your conversion transaction number: {{transfer.id + '234249866'}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Your transaction details: <br/>
+                    Amount of money for conversion: {{transfer.currency_offer_amount}} {{transfer.off_code}}<br/>
+                    Source currency: {{transfer.off_code}}<br/>
+                    Target currency: {{transfer.req_code}}<br/>
+                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_offer_requested}}<br/>
+                    Amount of money after conversion: {{transfer.currency_offer_requested}} {{transfer.req_code}}<br/>
+                    You chose to exchange the money with {{transfer.first_name}} {{transfer.last_name}}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: left; margin-bottom: 0">You can redeem the money at any time in My Profile by clicking "Realize Money".
+                    For your convenience, you can click here and transfer immediately to redeem the money.</p>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    .dec {
+        background-position: 0 -29px;
+    }
+
+    .buttons {
+        padding: 20px 0 0 140px;
+    }
+
+
+    select,input{
+        width: auto !important;
+        display: inline-block !important;
+    }
+
+    input{
+        margin: 5px;
+    }
+
+    input#currency_rate{
+        width: 30% !important;
+    }
+    .buttons_wrapper{
+        display: -webkit-flex; /* Safari */
+        display: flex; flex-basis: 0;
+    }
+
+    .buttons_wrapper button { margin: 5px;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
+
+    .money-present-box {
+        width: 45%;
+        display: inline-block;
+        background: #dadada;
+        padding: 8px;
+        overflow: hidden;
+    }
+
+    .sort-option {
+        display: inline-block;
+        font-size: 12px;
+        background: gainsboro;
+        border-radius: 10px;
+        padding: 1px;
+    }
+
+    .potential_transaction {
+        overflow: hidden;
+        background: #efe9e9;
+        padding: 5px;
+        margin: 3px;
+        border-radius: 3px;
+        position: relative;
+    }
+
+    .potential_transaction div{
+        display: inline-block;
+    }
+    .potential_transaction img{
+        width: 70px;
+        display: inline-block;
+    }
+
+    .potential_transaction_user {
+        vertical-align: top;
+    }
+
+    .potential_transaction_offer {
+        width: 60%;
+        /* float: right; */
+        position: absolute;
+        top: 26px;
+        left: 80px;
+    }
+
+    p span{
+        white-space: nowrap;
+    }
+
+    .selected{
+        background-color: #ccb7b7;
+    }
+
+</style>
