@@ -12,14 +12,28 @@ angular.module('Exchange')
 
                 $scope.confirmTransfer = function() {
                     debugger;
-                    $scope.transfer = $scope.ptransactions[0];
-debugger;
+
+                    $scope.transfer = angular.copy($scope.ptransactions[0]);
+
+                    if($scope.ptransactions.length > 1) {
+                        $scope.transfer.currency_offer_amount = 0;
+                        $scope.transfer.currency_offer_requested = 0;
+                        angular.forEach($scope.ptransactions, function (trans, key) {
+                            debugger;
+                            $scope.transfer.currency_offer_amount += trans.currency_offer_amount;
+                            $scope.transfer.currency_offer_requested += trans.currency_offer_requested;
+                        });
+                    }
 
                     $http.put('/transactions/'+ $scope.transfer.id +'/'+ user.id)
                         .then(function (response) {
                             //$scope.ptransactions = response.data;
                             debugger;
                             $('#myModal').modal('show');
+                            $('#myModal').on('hidden.bs.modal', function () {
+                                $location.path("/");
+                                $scope.$apply()
+                            })
                         }).catch(function (e) {
                         console.log('error',e);
                     });

@@ -1,14 +1,14 @@
 <h3>Instant Currency Conversion</h3>
 <progress-bar stage="1"></progress-bar>
-<form>
-    <div class="form-group amount-field">
-        <label for="amount">How much money would you like to exchange ?</label>
-        <input type="number" max="{{balance[session.off_curr - 1].value}}" class="form-control" ng-model="session.amount" id="amount" placeholder="amount" required="true" autofocus="">
+<form class="exchangeNowForm">
+    <div class="form-group amount-field row">
+        <label class="col-sm-2 col-form-label" for="amount">How much money would you like to exchange ?</label>
+        <input type="number" class="form-control" ng-model="session.amount" id="amount" placeholder="amount" required="true" autofocus="">
         <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
-<!--</span>-->
+<!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
     </div>
-    <div class="form-group">
-        <label for="currency_own">Select the currency you own:</label>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="currency_own">Select the currency you own:</label>
         <select class="form-control" id="currency_own" ng-model="session.off_curr">
             <option ng-repeat="cur in currency" value="{{cur.id}}">
                {{cur.code}}
@@ -16,8 +16,8 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="currency_to_exchange">Select the currency you want to exchange:</label>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="currency_to_exchange">Select the currency you want to exchange:</label>
         <select class="form-control" id="currency_to_exchange" ng-model="session.req_curr">
             <option ng-repeat="cur in currency" value="{{cur.id}}">
                 {{cur.code}}
@@ -25,8 +25,8 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="currency_rate">What is your wanted rate ?</label>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="currency_rate">What is your wanted rate ?</label>
         <div class="currency_rate_wrapper">
             <div class="dec button">-</div>
             <input id="currency_rate" ng-model="session.rate" type="number" class="form-control">
@@ -44,6 +44,11 @@
 
 
 <style>
+
+    .exchangeNowForm label.col-sm-2.col-form-label {
+        width: 65%;
+        padding: 0;
+    }
 
     .button {
         margin: 0 0 0 5px;
@@ -94,7 +99,7 @@
     /*}*/
 
     .form-group.amount-field input{
-        width: 30% !important;
+        width: 20% !important;
     }
 
 

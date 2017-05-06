@@ -17,6 +17,7 @@
 </div>
 
 <div id="ptransactions_wrapper">
+    <h3 ng-show="notice">no deals found for trade</h3>
     <div class="potential_transaction" ng-repeat="transaction in ptransactions | orderBy:propertyName track by $index "
          ng-class="{'selected':selectedDeal === $index}" ng-click="selectDeal($index)" >
         <input type="checkbox" ng-model="selectedDeal[$index]" name="group" id="$index"/>
@@ -30,7 +31,7 @@
 </div>
 
 <div class="buttons_wrapper">
-    <button ng-click="confirmSelection()" class="btn btn-primary btn-lg">Confirm</button>
+    <button ng-click="confirmSelection()" ng-disabled="notice" class="btn btn-primary btn-lg">Confirm</button>
     <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
 </div>
 

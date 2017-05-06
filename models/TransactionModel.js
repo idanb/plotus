@@ -38,7 +38,7 @@ exports.getPotentialTransactions = function(offered_cur, requested_cur, user_id)
     var conditions = " WHERE currency_offer_type = ? AND currency_requested_type = ? AND offer_user_id <> ? AND status = ?";
 
 // console.log(fields + tables + conditions);
-    db.query(fields + tables + conditions, [requested_cur,offered_cur, user_id, 0], function (error, results) {
+    db.query(fields + tables + conditions, [offered_cur,requested_cur, user_id, 0], function (error, results) {
         if (error) {
             console.error(error);
             deferred.reject(error);

@@ -7,7 +7,8 @@ angular.module('Exchange')
                 var user = $cookies.getObject('globals').currentUser.user;
                 var session = $cookies.getObject('globals').session;
                 var currency = $cookies.getObject('globals').currency;
-debugger;
+                $scope.notice = false;
+
                 $scope.offered_amount = session.amount;
                 $scope.offered_amount_currency = currency[session.off_curr-1].code;
 
@@ -20,15 +21,9 @@ debugger;
                 $scope.sortBy = function(propertyName) {
                     $scope.propertyName = propertyName;
                 };
-                // $scope.selectDeal = function(index) {
-                //     $scope.selectedDeal = index;
-                // };
-
-
 
                 $scope.confirmSelection = function() {
                     var globals = $cookies.getObject('globals');
-
                     globals.prefreredDeals = [];
 
                     if(angular.equals($scope.selectedDeal, {})){
@@ -41,12 +36,12 @@ debugger;
                     });
 
                     $cookies.putObject('globals', globals);
-
                     $location.path("/exchangeConfirm");
                 }
 
                 $http.get('/transactions/'+ session.off_curr +'/'+ session.req_curr +'/' + user.id)
                     .then(function (response) {
+                        if(response.data.length == 0) $scope.notice = true;
                         $scope.ptransactions = response.data;
                     }).catch(function (e) {
                     console.log('error',e);
