@@ -41,7 +41,7 @@ angular.module('PlotusApp', [
 
             })
             .when('/exchangeNow', {
-                templateUrl: 'modules/exchangenow/views/exchangeNow.html',
+                templateUrl: 'modules/exchangeNow/views/exchangeNow.html',
                 controller: 'ExchangeNowController'
 
             })
