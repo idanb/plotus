@@ -118,8 +118,8 @@
       <file leaf-file-name="db.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/db.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+            <state relative-caret-position="150">
+              <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -676,7 +676,7 @@
       <workItem from="1493473592999" duration="12494000" />
       <workItem from="1493763853739" duration="216000" />
       <workItem from="1493791661429" duration="35995000" />
-      <workItem from="1494119058177" duration="490000" />
+      <workItem from="1494119058177" duration="1036000" />
     </task>
     <task id="LOCAL-00001" summary="sd">
       <created>1492893402909</created>
@@ -815,11 +815,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106301000" />
+    <option name="totallyTimeSpent" value="106847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -872,7 +871,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="stage c - exchange now" />
     <MESSAGE value="update db details" />
-    <option name="LAST_COMMIT_MESSAGE" value="update db details" />
+    <MESSAGE value="Merge branch 'master' of github.com:idanb/plotus&#10;&#10;# Conflicts:&#10;#&#9;db.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of github.com:idanb/plotus&#10;&#10;# Conflicts:&#10;#&#9;db.js" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1159,8 +1159,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        <state relative-caret-position="150">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
           <folding />
         </state>
       </provider>
