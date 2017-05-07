@@ -4,12 +4,15 @@ var q = require("q");
 
 exports.getAll = function() {
    var deferred = q.defer();
-    db.query('SELECT * FROM tblCurrency', function (error, results) {
-        if (error) {
-            console.error(error);
-            deferred.reject(error);
-        }
-        deferred.resolve(results);
+    db.getConnection(function(err, connection) {
+        connection.query('SELECT * FROM tblCurrency', function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
     });
     return deferred.promise;
 }
