@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cron = require('node-cron');
+var request = require('request');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -34,6 +36,22 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+var task = cron.schedule('1,2,3 * * * * *', function() {
+    console.log('immediately started');
+    // var url = "https://openexchangerates.org/api/latest.json?app_id=1f49ab9363964bf2ad2f113800a44fbe";
+    //
+    // request(url, function(err, resp, response) {
+    //     response = JSON.parse(response);
+    //     var types = ['USD','ILS','JPY','EUR','GBP'];
+    //             $scope.rates = "";
+    //             types.forEach(function(k) {
+    //                 $scope.rates += k + ':' + response.data.rates[k] + ', ';
+    //             });
+    // });
+}, false);
+
+task.start();
+
 process.on('uncaughtException', function(err) {
     console.log(err);
 });
@@ -42,6 +60,7 @@ process.on('uncaughtException', function(err) {
 app.listen(port, function () {
     console.log( "Express server listening on port " + port);
 });
+
 
 // error handler
 // app.use(function(err, req, res, next) {

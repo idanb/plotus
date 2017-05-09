@@ -1,15 +1,18 @@
 <div class="stepwizard">
     <div class="stepwizard-row">
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-circle {{circle1}}" disabled="disabled">1</button>
+            <button type="button" class="btn btn-circle {{circle1}}" ng-disabled="{{circle1}} != btn-primary"
+                    ng-click="circle1 != btn-primary && changePage(circle1_link)">1</button>
             <p>Enter Details</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-circle {{circle2}}" disabled="disabled">2</button>
+            <button type="button" class="btn btn-circle {{circle2}}" ng-disabled="{{circle2}} != btn-primary"
+                    ng-click="circle2 != btn-primary && changePage(circle2_link)">2</button>
             <p>Search</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-circle {{circle3}}" disabled="disabled">3</button>
+            <button type="button" class="btn btn-circle {{circle3}}" ng-disabled="{{circle3}} != btn-primary"
+                    ng-click="circle3 != btn-primary && changePage(circle3_link)">3</button>
             <p>Approved</p>
         </div>
     </div>

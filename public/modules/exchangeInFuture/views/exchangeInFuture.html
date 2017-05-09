@@ -3,22 +3,22 @@
 <form class="exchangeNowForm">
     <div class="form-group amount-field row">
         <label class="col-sm-2 col-form-label" for="amount">How much money would you like to exchange ?</label>
-        <input type="number" class="form-control" required ng-model="session.amount" id="amount" placeholder="amount" required="true" autofocus="">
+        <input type="number" class="form-control" ng-model="session.amount" id="amount" placeholder="amount" required="true" autofocus="">
         <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
-        <!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
+<!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_own">Select the currency you own:</label>
-        <select class="form-control" id="currency_own" required ng-model="session.off_curr" ng-change="updateRate()">
+        <select class="form-control" id="currency_own" ng-model="session.off_curr" ng-change="updateRate()">
             <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
-                {{cur.code}} {{cur.symbol}}
+               {{cur.code}} {{cur.symbol}}
             </option>
         </select>
     </div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_to_exchange">Select the currency you want to exchange:</label>
-        <select class="form-control" id="currency_to_exchange" required ng-model="session.req_curr" ng-change="updateRate()">
+        <select class="form-control" id="currency_to_exchange" ng-model="session.req_curr" ng-change="updateRate()">
             <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
                 {{cur.code}} {{cur.symbol}}
             </option>
@@ -29,10 +29,24 @@
         <label class="col-sm-2 col-form-label"  for="currency_rate">What is your wanted rate ?</label>
         <div class="currency_rate_wrapper">
             <div class="dec button">-</div>
-            <input id="currency_rate" ng-model="session.rate" required disabled="true" type="number" class="form-control">
+            <input id="currency_rate" ng-model="session.rate" disabled="true" type="number" class="form-control">
             <div class="inc button">+</div>
         </div>
     </div>
+
+    <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="end_date">Set end date to exchange :</label>
+
+            <p class="input-group">
+                <input type="text" class="form-control end-date-picker" id="end_date" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened"
+                       datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <span class="input-group-btn datepicker">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+            </p>
+        </div>
+
+
 </form>
 
 <p>Click on 'search' for best matches</p>
@@ -108,11 +122,11 @@
     .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
 
     /*span.notice{*/
-    /*color: gray;*/
-    /*font-size: 12px;*/
-    /*width: 160px;*/
-    /*display: inline-block;*/
-    /*float: right;*/
+        /*color: gray;*/
+        /*font-size: 12px;*/
+        /*width: 160px;*/
+        /*display: inline-block;*/
+        /*float: right;*/
     /*}*/
 
     .form-group.amount-field input{

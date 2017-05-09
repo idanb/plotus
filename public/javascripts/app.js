@@ -12,11 +12,14 @@ angular.module('PlotusApp', [
     'Authentication',
     'Home',
     'ngRoute',
+    'ngSanitize',
+    'ngAnimate',
     'ngCookies',
     'Profile',
     'Personal',
     'Exchange',
-    'Helpers'
+    'Helpers',
+    'ngAnimate', 'ngSanitize', 'ui.bootstrap'
 ])
 
     .config(['$routeProvider', function ($routeProvider) {
@@ -43,6 +46,11 @@ angular.module('PlotusApp', [
             .when('/exchangeNow', {
                 templateUrl: 'modules/exchangeNow/views/exchangeNow.html',
                 controller: 'ExchangeNowController'
+
+            })
+            .when('/exchangeInFuture', {
+                templateUrl: 'modules/exchangeInFuture/views/exchangeInFuture.html',
+                controller: 'ExchangeInFutureController'
 
             })
             .when('/searchCurrencyRate', {

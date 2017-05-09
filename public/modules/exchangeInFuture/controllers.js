@@ -1,6 +1,6 @@
 'use strict';
 angular.module('Exchange')
-    .controller('ExchangeNowController',
+    .controller('ExchangeInFutureController',
         ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window','$animate', '$sanitize',
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, uibDateParser) {
                 if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
@@ -35,8 +35,8 @@ angular.module('Exchange')
 
                 $scope.updateRate = function(rate) {
                     console.log($scope.session.req_curr,$scope.session.off_curr);
-                    // if( typeof $scope.session.off_curr != 'undefined' &&  typeof $scope.session.req_curr != 'undefined')
-                    $scope.session.rate = $scope.currency[$scope.session.off_curr-1].rate / $scope.currency[$scope.session.req_curr-1].rate
+                   // if( typeof $scope.session.off_curr != 'undefined' &&  typeof $scope.session.req_curr != 'undefined')
+                        $scope.session.rate = $scope.currency[$scope.session.off_curr-1].rate / $scope.currency[$scope.session.req_curr-1].rate
                 }
 
 

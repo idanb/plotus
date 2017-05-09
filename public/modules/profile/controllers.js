@@ -16,4 +16,8 @@ angular.module('Profile')
                     console.log('error',e);
                 });
 
+                $scope.changePage = function(){
+                    $location.path("/exchangeNow");
+                }
+
             }]);

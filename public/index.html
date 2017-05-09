@@ -45,6 +45,7 @@
 
     <style>
 
+
         .container-fluid {
             display: -webkit-flex; /* Safari */
             display: flex;
@@ -62,6 +63,12 @@
             /*background-color: #eee;*/
             font-family: "Lato", sans-serif;
             transition: background-color .5s;
+        }
+
+        h3{
+            white-space: nowrap;
+            margin-bottom: 18px;
+
         }
 
         .navbar-inverse {
@@ -181,6 +188,25 @@
             font-size: 14px;
         }
 
+        .alert{
+            top: 60px;
+            left: 7%;
+            position: relative;
+            width: 80%;
+        }
+
+        .alerts {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.42);
+            width: 105%;
+            height: 100%;
+            z-index: 99;
+            display: none;
+        }
+
     </style>
 
 
@@ -206,18 +232,24 @@
     </script>
 
     <div class="jumbotron">
-        <div class="container">
-            <div class="alert alert-success">
-                <strong>Success!</strong> Update User Details Success !
-            </div>
-            <div class="alert alert-info">
-                <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
-            </div>
-            <div class="alert alert-warning">
-                <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
-            </div>
-            <div class="alert alert-danger">
-                <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+        <div class="container ">
+            <div class="alerts">
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Update User Details Success !
+                    <a class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                </div>
+                <div class="alert alert-info">
+                    <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                </div>
+                <div class="alert alert-danger">
+                    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                </div>
             </div>
             <div class="col-xs-12 col-md-12">
                 <div ng-view></div>
@@ -241,6 +273,10 @@
 <script src="//code.angularjs.org/1.5.1/angular.js"></script>
 <script src="//code.angularjs.org/1.5.1/angular-route.js"></script>
 <script src="//code.angularjs.org/1.5.1/angular-cookies.js"></script>
+<script src="//code.angularjs.org/1.5.1/angular-sanitize.min.js"></script>
+<script src="//code.angularjs.org/1.5.1/angular-animate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="/javascripts/app.js"></script>
@@ -253,6 +289,7 @@
 <script src="/modules/exchangeNow/controllers.js"></script>
 <script src="/modules/searchCurrencyRate/controllers.js"></script>
 <script src="/modules/exchangeConfirm/controllers.js"></script>
+<script src="/modules/exchangeInFuture/controllers.js"></script>
 </body>
 
 </html>
