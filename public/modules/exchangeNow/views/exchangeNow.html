@@ -1,9 +1,15 @@
 <h3>Future Currency Conversion</h3>
 <progress-bar stage="1"></progress-bar>
-<form class="exchangeNowForm">
+<form class="exchangeNowForm css-form" name="form" novalidate>
     <div class="form-group amount-field row">
         <label class="col-sm-2 col-form-label" for="amount">How much money would you like to exchange ?</label>
-        <input type="number" class="form-control" required ng-model="session.amount" id="amount" placeholder="amount" required="true" autofocus="">
+        <input type="number" class="form-control" required ng-model="session.amount" name="amount" id="amount" placeholder="amount" required="true" autofocus="">
+        <br />
+        <div ng-show="form.$submitted || form.amount.$touched">
+            <span class="form-error" ng-show="form.amount.$error.required">Place amount</span>
+            <span class="form-error" ng-show="overload">Amount is higher then your balance {{amount_balance}}</span>
+        </div>
+
         <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
         <!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
     </div>
@@ -29,95 +35,17 @@
         <label class="col-sm-2 col-form-label"  for="currency_rate">What is your wanted rate ?</label>
         <div class="currency_rate_wrapper">
             <div class="dec button">-</div>
-            <input id="currency_rate" ng-model="session.rate" required disabled="true" type="number" class="form-control">
+            <input name="currency_rate" id="currency_rate" ng-model="session.rate" required disabled="true" type="number" class="form-control">
             <div class="inc button">+</div>
         </div>
+        <span class="form-error" ng-show="rate_is_lower">You cannot offer under formal Exchange rate</span>
+
     </div>
 </form>
 
 <p>Click on 'search' for best matches</p>
 
 <div class="buttons_wrapper">
-    <button ng-click="sub()" class="btn btn-primary btn-lg">Confirm</button>
+    <button ng-click="sub()" class="btn btn-primary btn-lg">Search</button>
     <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
 </div>
-
-
-<style>
-
-    .input-group .end-date-picker, .input-group div{
-        display: inline-block;
-        margin-right: 0;
-        top: -5px;
-    }
-
-    #end-date{
-        margin-right: 0;
-    }
-
-    .input-group-btn.datepicker{
-        display: inline-block;
-    }
-    .input-group-btn.datepicker button{
-        padding: 5px 9px;
-    }
-
-    .exchangeNowForm label.col-sm-2.col-form-label {
-        width: 65%;
-        padding: 0;
-    }
-
-    .ratepicker .button {
-        margin: 0 0 0 5px;
-        text-indent: -9999px;
-        cursor: pointer;
-        width: 29px;
-        height: 29px;
-        display: inline-block;
-        text-align: center;
-        background: url('/images/buttons.png') no-repeat;
-    }
-    .ratepicker .button.dec {
-        background-position: 0 -29px;
-    }
-
-    .ratepicker .buttons {
-        padding: 20px 0 0 140px;
-    }
-
-
-    select,input{
-        width: auto !important;
-        display: inline-block !important;
-    }
-
-    input{
-        margin: 5px;
-    }
-
-    input#currency_rate{
-        width: 30% !important;
-    }
-    .buttons_wrapper{
-        display: -webkit-flex; /* Safari */
-        display: flex; flex-basis: 0;
-    }
-
-    .buttons_wrapper button { margin: 5px;}
-    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
-    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
-
-    /*span.notice{*/
-    /*color: gray;*/
-    /*font-size: 12px;*/
-    /*width: 160px;*/
-    /*display: inline-block;*/
-    /*float: right;*/
-    /*}*/
-
-    .form-group.amount-field input{
-        width: 20% !important;
-    }
-
-
-</style>

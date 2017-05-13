@@ -1,0 +1,161 @@
+
+.input-group .end-date-picker, .input-group div{
+    display: inline-block;
+    margin-right: 0;
+    top: -5px;
+}
+
+#end-date{
+    margin-right: 0;
+}
+
+.input-group-btn.datepicker{
+    display: inline-block;
+}
+.input-group-btn.datepicker button{
+    padding: 5px 9px;
+}
+
+.exchangeNowForm label.col-sm-2.col-form-label {
+    width: 65%;
+    padding: 0;
+}
+
+.ratepicker .button {
+    margin: 0 0 0 5px;
+    text-indent: -9999px;
+    cursor: pointer;
+    width: 29px;
+    height: 29px;
+    display: inline-block;
+    text-align: center;
+    background: url('/images/buttons.png') no-repeat;
+}
+.ratepicker .button.dec {
+    background-position: 0 -29px;
+}
+
+.ratepicker .buttons {
+    padding: 20px 0 0 140px;
+}
+
+
+select,input{
+    width: auto !important;
+    display: inline-block !important;
+}
+
+input{
+    margin: 5px;
+}
+
+input#currency_rate{
+    width: 30% !important;
+}
+.buttons_wrapper{
+    display: -webkit-flex; /* Safari */
+    display: flex; flex-basis: 0;
+}
+
+.buttons_wrapper button { margin: 5px;}
+.buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+.buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
+
+/*span.notice{*/
+/*color: gray;*/
+/*font-size: 12px;*/
+/*width: 160px;*/
+/*display: inline-block;*/
+/*float: right;*/
+/*}*/
+
+.form-error{
+    color: red;
+}
+
+.form-group.amount-field input{
+    width: 20% !important;
+}
+
+
+
+/*exchange now*/
+ .currency_rate_wrapper{
+     width: 50%;
+ }
+
+.input-group .end-date-picker, .input-group div{
+    display: inline-block;
+    margin-right: 0;
+    top: -5px;
+}
+
+#end-date{
+    margin-right: 0;
+}
+
+.input-group-btn.datepicker{
+    display: inline-block;
+}
+.input-group-btn.datepicker button{
+    padding: 5px 9px;
+}
+
+.exchangeNowForm label.col-sm-2.col-form-label {
+    width: 65%;
+    padding: 0;
+}
+
+.ratepicker .button {
+    margin: 0 0 0 5px;
+    text-indent: -9999px;
+    cursor: pointer;
+    width: 29px;
+    height: 29px;
+    display: inline-block;
+    text-align: center;
+    background: url('/images/buttons.png') no-repeat;
+}
+.ratepicker .button.dec {
+    background-position: 0 -29px;
+}
+
+.ratepicker .buttons {
+    padding: 20px 0 0 140px;
+}
+
+
+select,input{
+    width: auto !important;
+    display: inline-block !important;
+}
+
+input{
+    margin: 5px;
+}
+
+input#currency_rate{
+    width: 30% !important;
+}
+.buttons_wrapper{
+    display: -webkit-flex; /* Safari */
+    display: flex; flex-basis: 0;
+}
+
+.buttons_wrapper button { margin: 5px;}
+.buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+.buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
+
+/*span.notice{*/
+/*color: gray;*/
+/*font-size: 12px;*/
+/*width: 160px;*/
+/*display: inline-block;*/
+/*float: right;*/
+/*}*/
+
+.form-group.amount-field input{
+    width: 20% !important;
+}
+
+

@@ -1,35 +1,43 @@
 'use strict';
 angular.module('Exchange')
     .controller('exchangeConfirmController',
-        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window',
-            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window) {
-                if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
+        ['$scope','$rootScope','$cookies', '$location', '$http', 'SessionFactory',
+            function ($scope, $rootScope, $cookies, $location, $http, SessionFactory) {
+                if(typeof SessionFactory.getData().session == 'undefined') $location.path('/login');
+                var user = SessionFactory.getData().currentUser.user;
+                var session = SessionFactory.getData().session;
+                var currency = SessionFactory.getData().currency;
+
+
                 $scope.ptransactions = $cookies.getObject('globals').prefreredDeals;
-                var user = $cookies.getObject('globals').currentUser.user;
-
-                debugger;
-
 
                 $scope.confirmTransfer = function() {
-                    debugger;
-
                     $scope.transfer = angular.copy($scope.ptransactions[0]);
+                    $scope.transfer.names = $scope.transfer.first_name + " " + $scope.transfer.last_name;
+
 
                     if($scope.ptransactions.length > 1) {
                         $scope.transfer.currency_offer_amount = 0;
-                        $scope.transfer.currency_offer_requested = 0;
+                        $scope.transfer.currency_requested_amount = 0;
                         angular.forEach($scope.ptransactions, function (trans, key) {
-                            debugger;
                             $scope.transfer.currency_offer_amount += trans.currency_offer_amount;
-                            $scope.transfer.currency_offer_requested += trans.currency_offer_requested;
+                            $scope.transfer.currency_requested_amount += trans.currency_requested_amount;
+                            $http.put('/users/balance/'+ $scope.transfer.offer_user_id + '/' + trans.currency_requested_type, {value: $scope.transfer.currency_requested_amount});
+                            $http.put('/users/balance/'+ $scope.transfer.offer_user_id + '/' + trans.currency_offer_type, {value: -1 * $scope.transfer.currency_offer_amount});
+
+                            $scope.transfer.names = trans.first_name + " " + trans.last_name;
+                            if(key == 0) return true;
+                            $http.put('/transactions/'+ trans.id +'/'+ user.id);
                         });
                     }
 
                     $http.put('/transactions/'+ $scope.transfer.id +'/'+ user.id)
                         .then(function (response) {
                             //$scope.ptransactions = response.data;
-                            debugger;
-                            $('#myModal').modal('show');
+                            $http.put('/users/balance/'+ user.id + '/' + $scope.transfer.currency_requested_type, {value:  -1 * $scope.transfer.currency_requested_amount});
+                            $http.put('/users/balance/'+ user.id + '/' + $scope.transfer.currency_offer_type, {value: $scope.transfer.currency_offer_amount});
+
+                             $('#myModal').modal('show');
                             $('#myModal').on('hidden.bs.modal', function () {
                                 $location.path("/");
                                 $scope.$apply()

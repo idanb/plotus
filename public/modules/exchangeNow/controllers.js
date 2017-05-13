@@ -1,15 +1,16 @@
 'use strict';
 angular.module('Exchange')
     .controller('ExchangeNowController',
-        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window','$animate', '$sanitize',
-            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, uibDateParser) {
+        ['$scope','$rootScope','$cookies', '$location', '$http','SessionFactory',
+            function ($scope, $rootScope, $cookies, $location, $http,SessionFactory) {
                 if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
 
-                $scope.session = $cookies.getObject('globals').session;
-                var user = $cookies.getObject('globals').currentUser.user;
-                $scope.balance = $cookies.getObject('globals').balanace;
+                $scope.session = SessionFactory.getData().session;
+                var user = SessionFactory.getData().currentUser.user;
+                $scope.balance = SessionFactory.getData().balance;
                 $scope.format = 'yyyy/MM/dd';
                 $scope.date = new Date();
+                $scope.rate_is_lower = false;
                 if($scope.session) {
                     //$scope.current_rate = $scope.session.rate
                 }
@@ -36,7 +37,7 @@ angular.module('Exchange')
                 $scope.updateRate = function(rate) {
                     console.log($scope.session.req_curr,$scope.session.off_curr);
                     // if( typeof $scope.session.off_curr != 'undefined' &&  typeof $scope.session.req_curr != 'undefined')
-                    $scope.session.rate = $scope.currency[$scope.session.off_curr-1].rate / $scope.currency[$scope.session.req_curr-1].rate
+                    $scope.session.rate = $scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate
                 }
 
 
@@ -53,28 +54,32 @@ angular.module('Exchange')
                         if (oldValue > 0) {
                             if($scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate > (parseFloat(oldValue) - 0.1))
                             {
-                                alert('you cannot offer under formal Exchange rate');
+                                $scope.rate_is_lower = true;
+                                $scope.$apply();
                                 return true;
                             }
-
                             var newVal = parseFloat(oldValue) - 0.1;
                         } else {
+                            //$scope.rate_is_lower = false;
                             newVal = 0;
                         }
                     }
-
+                    $scope.rate_is_lower = false;
+                    $scope.$apply();
+                    //$scope.rate_is_lower = false;
                     $button.parent().find("input").val(newVal);
 
                 });
 
 
                 $scope.sub = function() {
-                    $rootScope.session = $scope.session;
-                    var globals = $cookies.getObject('globals');
+                    $scope.amount_balance = $scope.balance[$scope.session.off_curr - 1].value;
+                    $scope.overload = $scope.session.amount <= $scope.balance[$scope.session.off_curr - 1].value ? false : true
 
-                    globals.session = $rootScope.session;
-                    $cookies.putObject('globals', globals);
-                    $location.path("/searchCurrencyRate");
+                    if ($scope.form.amount.$valid && !$scope.overload) {
+                        SessionFactory.addData('session',$scope.session)
+                        $location.path("/searchCurrencyRate");
+                    }
                 }
 
 
@@ -171,28 +176,4 @@ angular.module('Exchange')
                 //
                 //     return '';
                 // }
-
-
-
-                // $scope.user = $cookies.getObject('globals').currentUser.user;
-                // $scope.user.cc_date = new Date($scope.user.cc_date);
-                //
-                //
-                // $scope.sub = function() {
-                //     $http.put('/users/' + $scope.user.id,$scope.user).
-                //     success(function(data) {
-                //         var globals = $cookies.getObject('globals');
-                //         globals.currentUser.user = $scope.user;
-                //         $cookies.putObject('globals', globals);
-                //         $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
-                //             $(".alert-success").slideUp(500);
-                //         });
-                //         console.log("posted successfully");
-                //     }).error(function(data) {
-                //         debugger;
-                //         console.error("error in posting");
-                //     })
-                // }
-
-
             }]);

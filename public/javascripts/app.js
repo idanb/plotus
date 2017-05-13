@@ -8,7 +8,7 @@ angular.module('Personal', []);
 angular.module('Exchange', []);
 angular.module('Helpers', []);
 
-angular.module('PlotusApp', [
+var PlotusApp = angular.module('PlotusApp', [
     'Authentication',
     'Home',
     'ngRoute',
@@ -19,7 +19,9 @@ angular.module('PlotusApp', [
     'Personal',
     'Exchange',
     'Helpers',
-    'ngAnimate', 'ngSanitize', 'ui.bootstrap'
+    'angularCSS',
+    'LocalStorageModule',
+    'ui.bootstrap'
 ])
 
     .config(['$routeProvider', function ($routeProvider) {
@@ -45,12 +47,16 @@ angular.module('PlotusApp', [
             })
             .when('/exchangeNow', {
                 templateUrl: 'modules/exchangeNow/views/exchangeNow.html',
-                controller: 'ExchangeNowController'
-
+                controller: 'ExchangeNowController',
+                css: {
+                    href: 'styles/exchangeForm.css',
+                    bustCache: true
+                }
             })
             .when('/exchangeInFuture', {
                 templateUrl: 'modules/exchangeInFuture/views/exchangeInFuture.html',
-                controller: 'ExchangeInFutureController'
+                controller: 'ExchangeInFutureController',
+                css: 'styles/exchangeForm.css'
 
             })
             .when('/searchCurrencyRate', {

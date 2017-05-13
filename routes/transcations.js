@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Transaction = require('../models/TransactionModel');
+var User = require('../models/UserModel');
+
 
 /* /transactions/:status/:userId
 

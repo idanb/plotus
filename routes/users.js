@@ -36,9 +36,28 @@ router.put('/:userId', function(req, res, next) {
 
 });
 
+/* GET init users balance */
+router.get('/balance/initbalance/', function(req, res, next) {
+    User.initBalance().then(function (rows,error) {
+        res.json({initBalance: 'ok'});
+    }, function(reason) {
+        res.json(reason);
+    });
+});
+
 /* GET User balance by User id. */
 router.get('/balance/:userId', function(req, res, next) {
     User.getUserBalanceByUserId(req.params.userId).then(function (rows,error) {
+        res.json(rows);
+    }, function(reason) {
+        res.json(reason);
+    });
+});
+
+
+/* PUT User balance by User id. */
+router.put('/balance/:userId/:currencyId', function(req, res, next) {
+    User.updateUserBalanceByUserId(req.params.userId,req.params.currencyId,req.body.value).then(function (rows,error) {
         res.json(rows);
     }, function(reason) {
         res.json(reason);

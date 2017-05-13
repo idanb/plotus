@@ -10,7 +10,7 @@
         <img ng-src="{{transaction.profile_picture_url}}" alt="Description" />
         <div class="potential_transaction_user">{{transaction.first_name}} {{transaction.last_name}}</div>
         <div class="potential_transaction_offer"> Offers you {{transaction.currency_offer_amount}} {{transaction.off_code}} for
-            {{transaction.currency_offer_requested}} {{transaction.req_code}}
+            {{transaction.currency_requested_amount}} {{transaction.req_code}}
         </div>
     </div>
 </div>
@@ -49,9 +49,9 @@ You can change your credit information at any time in 'My Profile'.
                     Amount of money for conversion: {{transfer.currency_offer_amount}} {{transfer.off_code}}<br/>
                     Source currency: {{transfer.off_code}}<br/>
                     Target currency: {{transfer.req_code}}<br/>
-                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_offer_requested}}<br/>
-                    Amount of money after conversion: {{transfer.currency_offer_requested}} {{transfer.req_code}}<br/>
-                    You chose to exchange the money with {{transfer.first_name}} {{transfer.last_name}}
+                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_requested_amount}}<br/>
+                    Amount of money after conversion: {{transfer.currency_requested_amount}} {{transfer.req_code}}<br/>
+                    You chose to exchange the money with {{transfer.names}}
                 </p>
             </div>
             <div class="modal-footer">

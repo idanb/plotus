@@ -2,7 +2,7 @@
 angular.module('Exchange')
     .controller('ExchangeInFutureController',
         ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window','$animate', '$sanitize',
-            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, uibDateParser) {
+            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, uibDateParser,SessionFactory) {
                 if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
 
                 $scope.session = $cookies.getObject('globals').session;
@@ -93,20 +93,33 @@ angular.module('Exchange')
                 //     showWeeks: true
                 // };
                 //
-                // $scope.dateOptions = {
-                //     dateDisabled: disabled,
-                //     formatYear: 'yy',
-                //     maxDate: new Date(2020, 5, 22),
-                //     minDate: new Date(),
-                //     startingDay: 1
-                // };
-                //
+
+                Date.prototype.addDays = function(days) {
+                    var dat = new Date(this.valueOf());
+                    dat.setDate(dat.getDate() + days);
+                    return dat;
+                }
+
+                $scope.dateOptions = {
+                    dateDisabled: disabled,
+                    formatYear: 'yy',
+                    maxDate: new Date().addDays(30),
+                    minDate: new Date(),
+                    startingDay: 1
+                };
+
+
+
+                //var dat = new Date();
+
+                //alert()
+
                 // // Disable weekend selection
-                // function disabled(data) {
-                //     var date = data.date,
-                //         mode = data.mode;
-                //     return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-                // }
+                function disabled(data) {
+                    var date = data.date,
+                        mode = data.mode;
+                    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+                }
                 //
                 // $scope.toggleMin = function() {
                 //     $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();

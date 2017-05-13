@@ -81,3 +81,37 @@ exports.updateUserByUserId = function(userId,data) {
      });
      return deferred.promise;
 }
+
+
+exports.updateUserBalanceByUserId = function(userId,currencyId,value) {
+    var deferred = q.defer();
+    var query = "UPDATE tblUserBalance SET value = value + ? WHERE userId = ? AND  currencyId = ?";
+console.log('test2',value, userId, currencyId);
+    db.getConnection(function(err, connection) {
+        connection.query(query, [value, userId, currencyId], function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
+    });
+    return deferred.promise;
+}
+
+exports.initBalance = function() {
+    var deferred = q.defer();
+    db.getConnection(function(err, connection) {
+        var query ="UPDATE tblUserBalance SET value = 200";
+        connection.query(query, [], function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
+    });
+    return deferred.promise;
+}

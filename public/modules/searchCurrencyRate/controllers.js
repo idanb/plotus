@@ -1,12 +1,12 @@
 'use strict';
 angular.module('Exchange')
     .controller('SearchCurrencyRateController',
-        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window',
-            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window) {
-                if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
-                var user = $cookies.getObject('globals').currentUser.user;
-                var session = $cookies.getObject('globals').session;
-                var currency = $cookies.getObject('globals').currency;
+        ['$scope','$rootScope','$cookies', '$location', '$http', 'SessionFactory',
+            function ($scope, $rootScope, $cookies, $location, $http, SessionFactory) {
+                if(typeof SessionFactory.getData().session == 'undefined') $location.path('/login');
+                var user = SessionFactory.getData().currentUser.user;
+                var session = SessionFactory.getData().session;
+                var currency = SessionFactory.getData().currency;
                 $scope.notice = false;
 
                 $scope.offered_amount = session.amount;
@@ -39,7 +39,7 @@ angular.module('Exchange')
                     $location.path("/exchangeConfirm");
                 }
 
-                $http.get('/transactions/'+ session.off_curr +'/'+ session.req_curr +'/' + user.id)
+                $http.get('/transactions/'+ session.req_curr  +'/'+ session.off_curr +'/' + user.id)
                     .then(function (response) {
                         if(response.data.length == 0) $scope.notice = true;
                         $scope.ptransactions = response.data;

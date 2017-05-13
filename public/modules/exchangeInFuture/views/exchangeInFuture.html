@@ -57,81 +57,42 @@
 </div>
 
 
-<style>
-
-    .input-group .end-date-picker, .input-group div{
-        display: inline-block;
-        margin-right: 0;
-        top: -5px;
-    }
-
-    #end-date{
-        margin-right: 0;
-    }
-
-    .input-group-btn.datepicker{
-        display: inline-block;
-    }
-    .input-group-btn.datepicker button{
-        padding: 5px 9px;
-    }
-
-    .exchangeNowForm label.col-sm-2.col-form-label {
-        width: 65%;
-        padding: 0;
-    }
-
-    .ratepicker .button {
-        margin: 0 0 0 5px;
-        text-indent: -9999px;
-        cursor: pointer;
-        width: 29px;
-        height: 29px;
-        display: inline-block;
-        text-align: center;
-        background: url('/images/buttons.png') no-repeat;
-    }
-    .ratepicker .button.dec {
-        background-position: 0 -29px;
-    }
-
-    .ratepicker .buttons {
-        padding: 20px 0 0 140px;
-    }
 
 
-    select,input{
-        width: auto !important;
-        display: inline-block !important;
-    }
+<!--Source currency: (The source currency)-->
+<!--Target currency: (The target currency)-->
+<!--Exchange rate: (the exchange rate)-->
+<!--Amount of money after conversion: (The calculated amount)+-->
 
-    input{
-        margin: 5px;
-    }
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    Your request has been saved successfully!
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    The system is now looking for the best match for you, based on the data you entered earlier.
+                    Once it finds a match for you, your credit card will be charged for your money amount and will send you an email with full transaction details.
+                    <br/>
+                    Your transaction details:<br/>
 
-    input#currency_rate{
-        width: 30% !important;
-    }
-    .buttons_wrapper{
-        display: -webkit-flex; /* Safari */
-        display: flex; flex-basis: 0;
-    }
-
-    .buttons_wrapper button { margin: 5px;}
-    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
-    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
-
-    /*span.notice{*/
-        /*color: gray;*/
-        /*font-size: 12px;*/
-        /*width: 160px;*/
-        /*display: inline-block;*/
-        /*float: right;*/
-    /*}*/
-
-    .form-group.amount-field input{
-        width: 20% !important;
-    }
-
-
-</style>
+                    Amount of money for conversion: {{transfer.currency_offer_amount}} {{transfer.off_code}}<br/>
+                    Source currency: {{transfer.off_code}}<br/>
+                    Target currency: {{transfer.req_code}}<br/>
+                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_requested_amount}}<br/>
+                    Amount of money after conversion: {{transfer.currency_requested_amount}} {{transfer.req_code}}<br/>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: left; margin-bottom: 0">You can redeem the money at any time in My Profile by clicking "Realize Money".
+                    For your convenience, you can click here and transfer immediately to redeem the money.</p>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,8 +36,8 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-var task = cron.schedule('1,2,3 * * * * *', function() {
-    console.log('immediately started');
+// var task = cron.schedule('1,2,3 * * * * *', function() {
+//     console.log('immediately started');
     // var url = "https://openexchangerates.org/api/latest.json?app_id=1f49ab9363964bf2ad2f113800a44fbe";
     //
     // request(url, function(err, resp, response) {
@@ -48,9 +48,26 @@ var task = cron.schedule('1,2,3 * * * * *', function() {
     //                 $scope.rates += k + ':' + response.data.rates[k] + ', ';
     //             });
     // });
-}, false);
+    // setup email data with unicode symbols
 
-task.start();
+//     var mailOptions = {
+//         from: '"Fred Foo 👻" <foo@blurdybloop.com>', // sender address
+//         to: 'idanbelah@gmail.com', // list of receivers
+//         subject: 'Hello ✔', // Subject line
+//         text: 'Hello world ?', // plain text body
+//         html: '<b>Hello world ?</b>' // html body
+//     };
+//
+// // send mail with defined transport object
+//     transporter.sendMail(mailOptions, function(error, info){
+//         if (error) {
+//             return console.log(error);
+//         }
+//         console.log('Message %s sent: %s', info.messageId, info.response);
+// });
+// }, false);
+
+// task.start();
 
 process.on('uncaughtException', function(err) {
     console.log(err);
