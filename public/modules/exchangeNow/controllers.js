@@ -8,30 +8,27 @@ angular.module('Exchange')
                 $scope.session = SessionFactory.getData().session;
                 var user = SessionFactory.getData().currentUser.user;
                 $scope.balance = SessionFactory.getData().balance;
+                $scope.currency = SessionFactory.getData().currency;
                 $scope.format = 'yyyy/MM/dd';
                 $scope.date = new Date();
                 $scope.rate_is_lower = false;
-                if($scope.session) {
-                    //$scope.current_rate = $scope.session.rate
-                }
-                else{
+                if(!$scope.session) {
                     $scope.session = {
                         amount: "",
-                        rate:1,
+                        rate: $scope.currency[0].rate / $scope.currency[1].rate,
                         req_curr: '1',
                         off_curr: '2'
-
                     }
                 }
 
-                $http.get('currency/')
-                    .then(function (response) {
-                        $scope.currency = response.data;
-                        $scope.updateRate();
-                        //$scope.session.rate = $scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate
-                    }).catch(function (e) {
-                    console.log('error',e);
-                });
+                // $http.get('currency/')
+                //     .then(function (response) {
+                //         $scope.currency = response.data;
+                //         $scope.updateRate();
+                //         //$scope.session.rate = $scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate
+                //     }).catch(function (e) {
+                //     console.log('error',e);
+                // });
 
 
                 $scope.updateRate = function(rate) {

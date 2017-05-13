@@ -18,13 +18,16 @@ angular.module('Exchange')
                 $scope.propertyName = 'rate';
                 $scope.selectedDeal = {};
 
+                var globals = $cookies.getObject('globals');
+                globals.prefreredDeals = [];
+
                 $scope.sortBy = function(propertyName) {
                     $scope.propertyName = propertyName;
                 };
 
                 $scope.confirmSelection = function() {
-                    var globals = $cookies.getObject('globals');
-                    globals.prefreredDeals = [];
+                    //var globals = $cookies.getObject('globals');
+                    //globals.prefreredDeals = [];
 
                     if(angular.equals($scope.selectedDeal, {})){
                         alert('none selected');
