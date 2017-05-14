@@ -11,6 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var transactions = require('./routes/transcations');
 var currency = require('./routes/currency');
+var nodemailer = require('nodemailer');
 
 var app = express();
 var port = process.env.PORT || '3000';
@@ -50,21 +51,7 @@ app.use(function(req, res, next) {
     // });
     // setup email data with unicode symbols
 
-//     var mailOptions = {
-//         from: '"Fred Foo 👻" <foo@blurdybloop.com>', // sender address
-//         to: 'idanbelah@gmail.com', // list of receivers
-//         subject: 'Hello ✔', // Subject line
-//         text: 'Hello world ?', // plain text body
-//         html: '<b>Hello world ?</b>' // html body
-//     };
-//
-// // send mail with defined transport object
-//     transporter.sendMail(mailOptions, function(error, info){
-//         if (error) {
-//             return console.log(error);
-//         }
-//         console.log('Message %s sent: %s', info.messageId, info.response);
-// });
+
 // }, false);
 
 // task.start();

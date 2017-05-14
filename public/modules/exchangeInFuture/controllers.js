@@ -1,42 +1,38 @@
+// ExchangeInFutureController
+
+
 'use strict';
 angular.module('Exchange')
     .controller('ExchangeInFutureController',
-        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window','$animate', '$sanitize',
-            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, uibDateParser,SessionFactory) {
+        ['$scope','$rootScope','$cookies', '$location', '$http','SessionFactory',
+            function ($scope, $rootScope, $cookies, $location, $http,SessionFactory) {
                 if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
 
-                $scope.session = $cookies.getObject('globals').session;
-                var user = $cookies.getObject('globals').currentUser.user;
-                $scope.balance = $cookies.getObject('globals').balanace;
-                $scope.format = 'yyyy/MM/dd';
+                $scope.session = SessionFactory.getData().session;
+                var user = SessionFactory.getData().currentUser.user;
+                $scope.balance = SessionFactory.getData().balance;
+                $scope.currency = SessionFactory.getData().currency;
+                $scope.format = 'dd/MM/yyyy';
                 $scope.date = new Date();
-                if($scope.session) {
-                    //$scope.current_rate = $scope.session.rate
-                }
-                else{
+                $scope.rate_is_lower = false;
+                if(!$scope.session) {
+                    var tomorrow = new Date();
+                    var afterTomorrow = new Date();
+                    afterTomorrow.setDate(tomorrow.getDate() + 3);
                     $scope.session = {
                         amount: "",
-                        rate:1,
+                        rate: $scope.currency[0].rate / $scope.currency[1].rate,
                         req_curr: '1',
-                        off_curr: '2'
-
+                        off_curr: '2',
+                        end_at: afterTomorrow
                     }
                 }
-
-                $http.get('currency/')
-                    .then(function (response) {
-                        $scope.currency = response.data;
-                        $scope.updateRate();
-                        //$scope.session.rate = $scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate
-                    }).catch(function (e) {
-                    console.log('error',e);
-                });
-
+                else{
+                    $scope.session.end_at = new Date($scope.session.end_at);
+                }
 
                 $scope.updateRate = function(rate) {
-                    console.log($scope.session.req_curr,$scope.session.off_curr);
-                   // if( typeof $scope.session.off_curr != 'undefined' &&  typeof $scope.session.req_curr != 'undefined')
-                        $scope.session.rate = $scope.currency[$scope.session.off_curr-1].rate / $scope.currency[$scope.session.req_curr-1].rate
+                    $scope.session.rate = $scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate;
                 }
 
 
@@ -53,46 +49,71 @@ angular.module('Exchange')
                         if (oldValue > 0) {
                             if($scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate > (parseFloat(oldValue) - 0.1))
                             {
-                                alert('you cannot offer under formal Exchange rate');
+                                $scope.rate_is_lower = true;
+                                $scope.$apply();
                                 return true;
                             }
-
                             var newVal = parseFloat(oldValue) - 0.1;
                         } else {
                             newVal = 0;
                         }
                     }
-
+                    $scope.rate_is_lower = false;
+                    $scope.$apply();
                     $button.parent().find("input").val(newVal);
 
                 });
 
 
-                $scope.sub = function() {
-                    $rootScope.session = $scope.session;
-                    var globals = $cookies.getObject('globals');
+                $scope.sendForm = function() {
+                    $scope.amount_balance = $scope.balance[$scope.session.off_curr - 1].value;
+                    $scope.overload = $scope.session.amount <= $scope.balance[$scope.session.off_curr - 1].value ? false : true
 
-                    globals.session = $rootScope.session;
-                    $cookies.putObject('globals', globals);
-                    $location.path("/searchCurrencyRate");
+                    if ($scope.form.amount.$valid && !$scope.overload) {
+                        var transaction = angular.copy($scope.session);
+
+                        transaction['currency_offer_amount'] = transaction['amount'];
+                        delete transaction['amount'];
+
+                        transaction['currency_requested_amount'] = transaction['currency_offer_amount'] * transaction['rate'];
+
+                        transaction['currency_requested_type'] = transaction['req_curr'];
+                        delete transaction['req_curr'];
+
+                        transaction['currency_offer_type'] = transaction['off_curr'];
+                        delete transaction['off_curr'];
+                        delete transaction['end_date'];
+                        delete transaction['rate'];
+
+                        transaction['end_at'] = '2017-05-22';
+                        transaction['offer_user_id'] = user.id;
+
+
+
+
+                        SessionFactory.addData('session',$scope.session)
+                        console.log($scope.session);
+                        debugger;
+                        $http.post('/transactions',transaction).
+                        success(function(data) {
+                            $scope.transfer = transaction;
+                            console.log(data);
+                            $('#myModal').modal('show');
+                            $('#myModal').on('hidden.bs.modal', function () {
+                                $location.path("/");
+                                $scope.$apply()
+                            })
+                        }).error(function(data) {
+                            console.error("error in posting");
+                        });
+                    }
                 }
 
 
                 $scope.today = function() {
-                    $scope.dt = new Date();
+                    $scope.end_at = new Date();
                 };
                 $scope.today();
-                //
-                // $scope.clear = function() {
-                //     $scope.dt = null;
-                // };
-                //
-                // $scope.inlineOptions = {
-                //     customClass: getDayClass,
-                //     minDate: new Date(),
-                //     showWeeks: true
-                // };
-                //
 
                 Date.prototype.addDays = function(days) {
                     var dat = new Date(this.valueOf());
@@ -101,7 +122,7 @@ angular.module('Exchange')
                 }
 
                 $scope.dateOptions = {
-                    dateDisabled: disabled,
+                    //dateDisabled: disabled,
                     formatYear: 'yy',
                     maxDate: new Date().addDays(30),
                     minDate: new Date(),
@@ -109,42 +130,31 @@ angular.module('Exchange')
                 };
 
 
-
-                //var dat = new Date();
-
-                //alert()
-
                 // // Disable weekend selection
-                function disabled(data) {
-                    var date = data.date,
-                        mode = data.mode;
-                    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-                }
-                //
+                // function disabled(data) {
+                //     var date = data.date,
+                //         mode = data.mode;
+                //     return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+                // }
+
                 // $scope.toggleMin = function() {
-                //     $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+                //     //$scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
                 //     $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
                 // };
                 //
                 // $scope.toggleMin();
-                //
-                $scope.open1 = function() {
-                    $scope.popup1.opened = true;
+                $scope.openCalendar = function() {
+                    $scope.calPopup.opened = true;
                 };
-                //
-                // $scope.open2 = function() {
-                //     $scope.popup2.opened = true;
-                // };
-                //
+
                 // $scope.setDate = function(year, month, day) {
                 //     $scope.dt = new Date(year, month, day);
                 // };
                 //
-                $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-                $scope.format = $scope.formats[0];
+                //$scope.formats = [, 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
                 // $scope.altInputFormats = ['M!/d!/yyyy'];
                 //
-                $scope.popup1 = {
+                $scope.calPopup = {
                     opened: false
                 };
                 //
@@ -184,28 +194,5 @@ angular.module('Exchange')
                 //
                 //     return '';
                 // }
-
-
-
-                // $scope.user = $cookies.getObject('globals').currentUser.user;
-                // $scope.user.cc_date = new Date($scope.user.cc_date);
-                //
-                //
-                // $scope.sub = function() {
-                //     $http.put('/users/' + $scope.user.id,$scope.user).
-                //     success(function(data) {
-                //         var globals = $cookies.getObject('globals');
-                //         globals.currentUser.user = $scope.user;
-                //         $cookies.putObject('globals', globals);
-                //         $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
-                //             $(".alert-success").slideUp(500);
-                //         });
-                //         console.log("posted successfully");
-                //     }).error(function(data) {
-                //         debugger;
-                //         console.error("error in posting");
-                //     })
-                // }
-
-
+                // $scope.$apply();
             }]);

@@ -108,6 +108,24 @@ exports.closeTransaction = function(transaction_id,user_id) {
     return deferred.promise;
 }
 
+exports.updateStatus = function(transaction_id,status) {
+    var deferred = q.defer();
+
+    db.getConnection(function(err, connection) {
+        var query ="UPDATE tblTransactions SET status = ? WHERE id = ?";
+
+        connection.query(query, [status,transaction_id], function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
+    });
+    return deferred.promise;
+}
+
 exports.initTransaction = function() {
     var deferred = q.defer();
     db.getConnection(function(err, connection) {
@@ -124,17 +142,30 @@ exports.initTransaction = function() {
     return deferred.promise;
 }
 
-//takes all 0 status transactions
-// iterateing and remove all the ones thats not match to the currency
-// check which one is the best rate
-// update transactions and remove them from list. update users balance.
-//
+
 
 exports.ExploreMatchTransactions = function() {
     var deferred = q.defer();
     db.getConnection(function(err, connection) {
-        var query ="UPDATE tblTransactions SET accepter_user_id = NULL, status = 0, exchanged_at = NULL";
+        var query ="SELECT * FROM tblTransactions WHERE status = 0 AND end_at IS NOT NULL";
         connection.query(query, [], function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
+    });
+    return deferred.promise;
+}
+
+
+exports.insertFutureTransaction = function(data) {
+    var deferred = q.defer();
+    db.getConnection(function(err, connection) {
+        var query ="INSERT INTO tblTransactions SET ?";
+        connection.query(query, [data], function (error, results) {
             connection.release();
             if (error) {
                 console.error(error);

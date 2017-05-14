@@ -1,24 +1,29 @@
 <h3>Future Currency Conversion</h3>
-<progress-bar stage="1"></progress-bar>
-<form class="exchangeNowForm">
+<form class="exchangeNowForm css-form" name="form" novalidate>
     <div class="form-group amount-field row">
         <label class="col-sm-2 col-form-label" for="amount">How much money would you like to exchange ?</label>
-        <input type="number" class="form-control" ng-model="session.amount" id="amount" placeholder="amount" required="true" autofocus="">
+        <input type="number" class="form-control" required ng-model="session.amount" name="amount" id="amount" placeholder="amount" required="true" autofocus="">
+        <br />
+        <div ng-show="form.$submitted || form.amount.$touched">
+            <span class="form-error" ng-show="form.amount.$error.required">Place amount</span>
+            <span class="form-error" ng-show="overload">Amount is higher then your balance {{amount_balance}}</span>
+        </div>
+
         <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
-<!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
+        <!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_own">Select the currency you own:</label>
-        <select class="form-control" id="currency_own" ng-model="session.off_curr" ng-change="updateRate()">
+        <select class="form-control" id="currency_own" required ng-model="session.off_curr" ng-change="updateRate()">
             <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
-               {{cur.code}} {{cur.symbol}}
+                {{cur.code}} {{cur.symbol}}
             </option>
         </select>
     </div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_to_exchange">Select the currency you want to exchange:</label>
-        <select class="form-control" id="currency_to_exchange" ng-model="session.req_curr" ng-change="updateRate()">
+        <select class="form-control" id="currency_to_exchange" required ng-model="session.req_curr" ng-change="updateRate()">
             <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
                 {{cur.code}} {{cur.symbol}}
             </option>
@@ -29,40 +34,35 @@
         <label class="col-sm-2 col-form-label"  for="currency_rate">What is your wanted rate ?</label>
         <div class="currency_rate_wrapper">
             <div class="dec button">-</div>
-            <input id="currency_rate" ng-model="session.rate" disabled="true" type="number" class="form-control">
+            <input name="currency_rate" id="currency_rate" ng-model="session.rate" required disabled="true" type="number" class="form-control">
             <div class="inc button">+</div>
         </div>
+        <span class="form-error" ng-show="rate_is_lower">You cannot offer under formal Exchange rate</span>
+
     </div>
 
     <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="end_date">Set end date to exchange :</label>
+        <label class="col-sm-2 col-form-label" for="end_at">Set end date to exchange :</label>
 
-            <p class="input-group">
-                <input type="text" class="form-control end-date-picker" id="end_date" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened"
-                       datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                <span class="input-group-btn datepicker">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+        <p class="input-group">
+            <input type="text" class="form-control end-date-picker" id="end_at" name="end_at" uib-datepicker-popup="{{format}}" ng-model="session.end_at" is-open="calPopup.opened"
+                   datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required />
+            <span class="input-group-btn datepicker">
+            <button type="button" class="btn btn-default" ng-click="openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
-            </p>
+        </p>
+        <div ng-show="form.$submitted || form.end_at.$touched">
+            <span class="form-error" ng-show="form.end_at.$error.required">Place end date</span>
         </div>
-
+    </div>
 
 </form>
 
-<p>Click on 'search' for best matches</p>
 
 <div class="buttons_wrapper">
-    <button ng-click="sub()" class="btn btn-primary btn-lg">Confirm</button>
+    <button ng-click="sendForm()" class="btn btn-primary btn-lg">Confirm</button>
     <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
 </div>
-
-
-
-
-<!--Source currency: (The source currency)-->
-<!--Target currency: (The target currency)-->
-<!--Exchange rate: (the exchange rate)-->
-<!--Amount of money after conversion: (The calculated amount)+-->
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -76,16 +76,16 @@
             </div>
             <div class="modal-body">
                 <p>
-                    The system is now looking for the best match for you, based on the data you entered earlier.
+                    The system is now looking for the best match for you, based on the data you just entered.
                     Once it finds a match for you, your credit card will be charged for your money amount and will send you an email with full transaction details.
                     <br/>
                     Your transaction details:<br/>
 
-                    Amount of money for conversion: {{transfer.currency_offer_amount}} {{transfer.off_code}}<br/>
-                    Source currency: {{transfer.off_code}}<br/>
-                    Target currency: {{transfer.req_code}}<br/>
-                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_requested_amount}}<br/>
-                    Amount of money after conversion: {{transfer.currency_requested_amount}} {{transfer.req_code}}<br/>
+                    Amount of money for conversion: {{transfer.currency_offer_amount}} {{currency[transfer.currency_offer_type - 1].code}}<br/>
+                    Source currency: {{currency[transfer.currency_offer_type - 1].code}}<br/>
+                    Target currency: {{currency[transfer.currency_requested_type - 1].code}}<br/>
+                    Exchange rate: {{session.rate}}<br/>
+                    Amount of money after conversion: {{transfer.currency_requested_amount}} {{currency[transfer.currency_requested_type - 1].code}}<br/>
                 </p>
             </div>
             <div class="modal-footer">
@@ -96,3 +96,4 @@
         </div>
     </div>
 </div>
+
