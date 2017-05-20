@@ -30,6 +30,7 @@ angular.module('Authentication')
 
                             $timeout(function(){ $location.path('/'); },2000);
                         } else {
+                            $('.alert.alert-danger').show();
                             $scope.error = response.message;
                             $scope.dataLoading = false;
                         }

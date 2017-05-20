@@ -67,8 +67,12 @@ var PlotusApp = angular.module('PlotusApp', [
             .when('/exchangeConfirm', {
                 templateUrl: 'modules/exchangeConfirm/views/exchangeConfirm.html',
                 controller: 'exchangeConfirmController'
-
             })
+
+            // .when('/withdraw', {
+            //     controller: 'WithdrawController',
+            //     templateUrl: 'modules/withdraw/views/withdraw.html'
+            // })
 
             .otherwise({ redirectTo: '/login' });
     }])

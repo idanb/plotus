@@ -84,12 +84,8 @@ angular.module('Exchange')
                         delete transaction['off_curr'];
                         delete transaction['end_date'];
                         delete transaction['rate'];
-
-                        transaction['end_at'] = '2017-05-22';
+                        transaction['end_at'] = $scope.session.end_at.toISOString().substring(0, 10);;
                         transaction['offer_user_id'] = user.id;
-
-
-
 
                         SessionFactory.addData('session',$scope.session)
                         console.log($scope.session);
@@ -124,7 +120,7 @@ angular.module('Exchange')
                 $scope.dateOptions = {
                     //dateDisabled: disabled,
                     formatYear: 'yy',
-                    maxDate: new Date().addDays(30),
+                    maxDate: new Date().addDays(30*6),
                     minDate: new Date(),
                     startingDay: 1
                 };
