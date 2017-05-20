@@ -84,8 +84,14 @@ angular.module('Exchange')
                         delete transaction['off_curr'];
                         delete transaction['end_date'];
                         delete transaction['rate'];
-                        transaction['end_at'] = $scope.session.end_at.toISOString().substring(0, 10);;
+
+                        var created = new Date();
+                        created.setTime(created.getTime() + (3*60*60*1000))
+
+                        transaction['created_at'] = created.toISOString().slice(0, 19).replace('T', ' ');
+                        transaction['end_at'] = $scope.session.end_at.toISOString().substring(0, 10);
                         transaction['offer_user_id'] = user.id;
+                        //transaction['created_at'] = new Date().toISOString().slice(0, 19).replace('T', ' ');;
 
                         SessionFactory.addData('session',$scope.session)
                         console.log($scope.session);
