@@ -73,7 +73,10 @@ input#currency_rate{
     color: red;
 }
 
-.form-group.amount-field input{
+.form-group.amount-field input,
+.form-group.secret-field input,
+.form-group.phone-num-field input
+{
     width: 20% !important;
 }
 

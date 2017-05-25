@@ -6,7 +6,7 @@ angular.module('Exchange')
     .controller('ExchangeInFutureController',
         ['$scope','$rootScope','$cookies', '$location', '$http','SessionFactory',
             function ($scope, $rootScope, $cookies, $location, $http,SessionFactory) {
-                if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
+                //if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
 
                 $scope.session = SessionFactory.getData().session;
                 var user = SessionFactory.getData().currentUser.user;
@@ -18,10 +18,11 @@ angular.module('Exchange')
                 if(!$scope.session) {
                     var tomorrow = new Date();
                     var afterTomorrow = new Date();
-                    afterTomorrow.setDate(tomorrow.getDate() + 3);
+                    afterTomorrow.setDate(tomorrow.getDate());
+                    debugger;
                     $scope.session = {
                         amount: "",
-                        rate: $scope.currency[0].rate / $scope.currency[1].rate,
+                        rate: parseFloat(($scope.currency[0].rate / $scope.currency[1].rate).toFixed(2)),
                         req_curr: '1',
                         off_curr: '2',
                         end_at: afterTomorrow
@@ -32,6 +33,7 @@ angular.module('Exchange')
                 }
 
                 $scope.updateRate = function(rate) {
+                    debugger;
                     $scope.session.rate = $scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate;
                 }
 

@@ -6,6 +6,7 @@ angular.module('Home', []);
 angular.module('Profile', []);
 angular.module('Personal', []);
 angular.module('Exchange', []);
+angular.module('Withdraw', []);
 angular.module('Helpers', []);
 
 var PlotusApp = angular.module('PlotusApp', [
@@ -18,6 +19,7 @@ var PlotusApp = angular.module('PlotusApp', [
     'Profile',
     'Personal',
     'Exchange',
+    'Withdraw',
     'Helpers',
     'angularCSS',
     'LocalStorageModule',
@@ -68,11 +70,12 @@ var PlotusApp = angular.module('PlotusApp', [
                 templateUrl: 'modules/exchangeConfirm/views/exchangeConfirm.html',
                 controller: 'exchangeConfirmController'
             })
+            .when('/withdrawCash', {
+                controller: 'WithdrawCashController',
+                templateUrl: 'modules/withdrawCash/views/withdrawCash.html',
+                css: 'styles/exchangeForm.css'
 
-            // .when('/withdraw', {
-            //     controller: 'WithdrawController',
-            //     templateUrl: 'modules/withdraw/views/withdraw.html'
-            // })
+            })
 
             .otherwise({ redirectTo: '/login' });
     }])
@@ -88,8 +91,8 @@ var PlotusApp = angular.module('PlotusApp', [
 
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
                 // redirect to login page if not logged in
-                if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-                    $location.path('/login');
-                }
+                // if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                //     $location.path('/login');
+                // }
             });
         }]);

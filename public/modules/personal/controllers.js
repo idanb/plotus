@@ -3,7 +3,7 @@ angular.module('Personal')
     .controller('PersonalController',
         ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window',
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window) {
-                if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
+                // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
                 $scope.user = $cookies.getObject('globals').currentUser.user;
                 $scope.user.cc_date = new Date($scope.user.cc_date);
 

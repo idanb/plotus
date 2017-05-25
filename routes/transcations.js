@@ -28,6 +28,16 @@ router.get('/initTransaction', function(req, res, next) {
 // return report - transaction expired | transaction
 
 /* GET explore and Match transactions . */
+// router.get('/idan', function(req, res, next) {
+//     res.json({status: 'OK'});
+//     transporter.sendMail(transporter.expiredEmail('idanbelah@gmail.com'), function(error, info){
+//         if (error) {
+//             return console.log(error);
+//         }
+//         console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
+//     });
+// });
+/* GET explore and Match transactions . */
 router.get('/explore-and-match', function(req, res, next) {
     Transaction.ExploreMatchTransactions()
         .then(function (transactions) {
@@ -38,7 +48,6 @@ router.get('/explore-and-match', function(req, res, next) {
             now.setHours(0,0,0,0);
 
             transactions.forEach(function(transaction,key){
-                console.log('transaction.id',transaction.id);
                 var transaction_date = new Date(transaction.end_at);
                 if(transaction_date < now){
                     expired++;
@@ -87,8 +96,8 @@ router.get('/explore-and-match', function(req, res, next) {
                             });
                         });
 
-                        User.updateUserBalanceByUserId(transaction.offer_user_id,transaction.currency_offer_type,ttransaction.currency_offer_amount * -1);
-                        User.updateUserBalanceByUserId(transaction.offer_user_id,transaction.currency_requested_type,ttransaction.currency_requested_amount);
+                        User.updateUserBalanceByUserId(transaction.offer_user_id,transaction.currency_offer_type,transaction.currency_offer_amount * -1);
+                        User.updateUserBalanceByUserId(transaction.offer_user_id,transaction.currency_requested_type,transaction.currency_requested_amount);
 
                         User.updateUserBalanceByUserId(ttransaction.offer_user_id,ttransaction.currency_offer_type,ttransaction.currency_offer_amount * -1);
                         User.updateUserBalanceByUserId(ttransaction.offer_user_id,ttransaction.currency_requested_type,ttransaction.currency_requested_amount);
@@ -96,7 +105,8 @@ router.get('/explore-and-match', function(req, res, next) {
                         transaction.status = 1;
                         ttransaction.status = 1;
 
-                        console.log('mached!',ttransaction.id,transaction.id);
+                        console.log('mached!','ttransaction.id',ttransaction.id);
+                        console.log('mached!','transaction.id',transaction.id);
                 });
 
 

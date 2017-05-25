@@ -3,7 +3,7 @@ angular.module('Exchange')
     .controller('ExchangeNowController',
         ['$scope','$rootScope','$cookies', '$location', '$http','SessionFactory',
             function ($scope, $rootScope, $cookies, $location, $http,SessionFactory) {
-                if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
+                // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
 
                 $scope.session = SessionFactory.getData().session;
                 var user = SessionFactory.getData().currentUser.user;
@@ -15,7 +15,7 @@ angular.module('Exchange')
                 if(!$scope.session) {
                     $scope.session = {
                         amount: "",
-                        rate: ($scope.currency[0].rate / $scope.currency[1].rate).toFixed(2),
+                        rate: parseFloat(($scope.currency[0].rate / $scope.currency[1].rate).toFixed(2)),
                         req_curr: '1',
                         off_curr: '2'
                     }

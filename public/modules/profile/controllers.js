@@ -3,7 +3,7 @@ angular.module('Profile')
     .controller('ProfileController',
         ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window', 'SessionFactory',
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, SessionFactory) {
-                if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
+                // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
                 $scope.user = SessionFactory.getData().currentUser.user;
 
                 $http.get('users/balance/' + SessionFactory.getData().currentUser.user.id)
