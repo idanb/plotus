@@ -3,6 +3,7 @@ var router = express.Router();
 var Transaction = require('../models/TransactionModel');
 var User = require('../models/UserModel');
 var transporter = require('../mailer.js');
+var request = require('request');
 
 
 /* /transactions/:status/:userId
@@ -167,11 +168,18 @@ router.put('/:transactionId/:userId', function(req, res, next) {
     });
 });
 
-/* PUT update transactions after approve by User. */
+/* PUT insert new transaction after created by User. */
 router.post('/', function(req, res, next) {
     console.log(req.body);
     Transaction.insertFutureTransaction(req.body)
         .then(function (rows) {
+        console.log('explore-and-match started')
+        var url = "https://hidden-savannah-96382.herokuapp.com/transactions/explore-and-match"; //http://127.0.0.1:3000
+
+        request(url, function(err, resp, response) {
+            console.log(response);
+        });
+
         res.json(rows);
     }, function(reason) {
         res.json(reason);
