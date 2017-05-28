@@ -20,7 +20,7 @@ exports.getAll = function() {
 exports.getAllAtms = function() {
    var deferred = q.defer();
     db.getConnection(function(err, connection) {
-        connection.query('SELECT id AS idKey, title, address, latitude, longitude FROM tblAtmLocations', function (error, results) {
+        connection.query('SELECT id AS idKey, id, title, address, latitude, longitude FROM tblAtmLocations', function (error, results) {
             connection.release();
             if (error) {
                 console.error(error);
