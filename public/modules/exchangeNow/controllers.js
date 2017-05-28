@@ -3,8 +3,6 @@ angular.module('Exchange')
     .controller('ExchangeNowController',
         ['$scope','$rootScope','$cookies', '$location', '$http','SessionFactory',
             function ($scope, $rootScope, $cookies, $location, $http,SessionFactory) {
-                // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
-
                 $scope.session = SessionFactory.getData().session;
                 var user = SessionFactory.getData().currentUser.user;
                 $scope.balance = SessionFactory.getData().balance;

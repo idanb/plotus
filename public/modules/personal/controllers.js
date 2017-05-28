@@ -7,7 +7,6 @@ angular.module('Personal')
                 $scope.user = $cookies.getObject('globals').currentUser.user;
                 $scope.user.cc_date = new Date($scope.user.cc_date);
 
-
                 $scope.sub = function() {
                     $http.put('/users/' + $scope.user.id,$scope.user).
                     success(function(data) {
@@ -25,6 +24,4 @@ angular.module('Personal')
                         console.error("error in posting");
                     })
                 }
-
-
             }]);

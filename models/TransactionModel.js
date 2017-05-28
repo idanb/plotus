@@ -19,7 +19,7 @@ exports.getAll = function() {
 
 }
 
-exports.getById = function(status, id) {
+exports.getById = function(id) {
     var deferred = q.defer();
     db.getConnection(function(err, connection) {
         connection.query('SELECT * FROM tblTransactions WHERE id = ?', [id], function (error, results) {

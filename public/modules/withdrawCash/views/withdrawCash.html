@@ -1,0 +1,141 @@
+
+<h3>Cash Withdrawal</h3>
+
+<p>Hi {{user.first_name}}, You can now withdraw your cash with an ATM to withdraw the foreign currency you choose.
+    So, how does it work?
+    You enter a code that only you will know. (E.g., date of birth)
+    You receive Email with additional code from the system.
+    Once you have reached your chosen ATM, you will be asked to type your two codes. </p>
+
+<form class="exchangeNowForm css-form" name="form" novalidate>
+    <div class="form-group amount-field row">
+        <label class="col-sm-2 col-form-label" for="amount">How much money would you like to withdraw ?</label>
+        <input type="number" class="form-control" required ng-model="session_withdraw.amount" name="amount" id="amount" placeholder="amount" required="true" autofocus="">
+        <br />
+        <div ng-show="form.$submitted || form.amount.$touched">
+            <span class="form-error" ng-show="form.amount.$error.required">Place amount</span>
+            <span class="form-error" ng-show="overload">Amount is higher then your balance {{amount_balance}}</span>
+        </div>
+
+        <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
+        <!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="currency_own">Currency:</label>
+        <select class="form-control" id="currency_own" required ng-model="session_withdraw.off_curr" ng-change="updateRate()">
+            <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
+                {{cur.code}} {{cur.symbol}}
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="secret_code">Enter secret code:</label>
+        <input type="number" class="form-control secret_field" required placeholder="Secret Code" name="secret_code" id="secret_code" ng-model="session_withdraw.secret_code" required="true" autofocus="">
+        <div style="display: inline-block;     position: relative;
+    top: -30px;" data-toggle="tooltip" data-placement="top" title="This is the first code you only know. For example, date of birth."></div>
+            <span class="glyphicon glyphicon-info-sign"></span>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="email_address">Email address:</label>
+        <input type="email" class="form-control email-address-field" required placeholder="Email Address" name="email_address" id="email_address" ng-model="session_withdraw.email_address" required="true" autofocus="">
+        <div style="display: inline-block;     position: relative;
+    top: -30px;" data-toggle="tooltip" data-placement="top" title="Enter your email to send another secret code to complete the action" ></div>
+            <span class="glyphicon glyphicon-info-sign"></span>
+    </div>
+
+    <div class="form-group row" style="position: relative;">
+        <label class="col-sm-2 col-form-label" for="currency_own">Select ATM to withdraw:</label>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
+
+            <ui-gmap-markers models="randomMarkers" events="map.events" coords="'self'" icon="'icon'" click="setAtmLocation(atm)">
+            </ui-gmap-markers>
+
+            <ui-gmap-window coords="activeModel" options="windowOptions" show="activeModel.show">
+            </ui-gmap-window>
+
+        </ui-gmap-google-map>
+        <div class="zoom-btn-wrapper">
+        <button type="button" ng-click="setZoom(14)" class="btn btn-outline btn-dis">5KM</button>
+        <button type="button" ng-click="setZoom(13.5)" class="btn btn-outline btn-dis">10KM</button>
+        <button type="button" ng-click="setZoom(13)" class="btn btn-outline btn-dis">20KM</button>
+
+    </div>
+    </div>
+
+</form>
+
+<div class="buttons_wrapper">
+    <button ng-click="sub()" class="btn btn-primary btn-lg">Approve</button>
+    <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    the transaction completed successfully!
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p>You will be sent an Email with the code to be drawn.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    #main {
+        height : 100%;
+        display:block;
+        overflow-y:auto;
+    }
+
+        .btn-outline {
+            color: #5bc0de;
+            background-image: none;
+            background-color: transparent;
+            border-color: #5bc0de;
+            font-size: 10px;
+            padding: 5px 7px;
+    }
+
+        .zoom-btn-wrapper{
+            display: inline-block;
+            /* float: left; */
+            position: absolute;
+            right: 48px;
+            top: 37px;
+        }
+
+        .btn-dis {
+            display: grid;
+            margin: 3px;
+        }
+
+        /*.angular-google-map-container {*/
+            /*position: absolute;*/
+            /*top: 0;*/
+            /*bottom: 0;*/
+            /*right: 0;*/
+            /*left: 0;*/
+        /*}*/
+
+
+         img[src="http://www.google.com/intl/en_us/mapfiles/close.gif"] {
+             display: none;
+         }
+    .angular-google-map-container { height: 400px; width: 300px; margin: 10px; padding: 10px; background-color: #4AA02C; }
+
+</style>

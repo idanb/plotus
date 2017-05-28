@@ -32,7 +32,7 @@ angular.module('Exchange')
                 }
 
                 $scope.updateRate = function(rate) {
-                    $scope.session.rate = ($scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate).toFixed(2);
+                    $scope.session.rate = parseFloat(($scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate).toFixed(2));
                 }
 
 

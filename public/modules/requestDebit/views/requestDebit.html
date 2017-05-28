@@ -1,0 +1,154 @@
+
+<h3>Request to issue a debit card</h3>
+
+<div class="title-header">
+    <div>
+    <p>You are in compliance with the conditions for issuing a debit card! <br/><br/>
+    </p>
+    </div>
+    <div style="background-color: yellow; width: 30%;">
+
+    </div>
+</div>
+<p>Please enter the following fields:</p>
+<form class="exchangeNowForm css-form" name="form" novalidate>
+
+
+    <div class="name_fields row">
+        <input type="text" class="form-control" ng-model="user.first_name" placeholder="First Name" required="true" disabled="disabled" autofocus="">
+        <input type="text" class="form-control" ng-model="user.last_name" placeholder="Last Name" required="true" disabled="disabled" autofocus="">
+    </div>
+
+    <div class="ids_fields row">
+        <input type="number" class="form-control" ng-model="user.social_id" placeholder="ID ?" required="true" disabled="disabled" autofocus="">
+        <input type="number" class="form-control" placeholder="Phone Number" ng-model="user.phone_number" required="true" disabled="disabled" autofocus="">
+    </div>
+    <br/>
+
+    <div class="form-group amount-field row">
+        <label class="col-sm-2 col-form-label" for="amount">How much money would you like to withdraw ?</label>
+        <input type="number" class="form-control" required ng-model="session_debit.amount" name="amount" id="amount" placeholder="amount" required="true" autofocus="">
+        <br />
+        <div ng-show="form.$submitted || form.amount.$touched">
+            <span class="form-error" ng-show="form.amount.$error.required">Place amount</span>
+            <span class="form-error" ng-show="overload">Amount is higher then your balance {{amount_balance}}</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="currency_own">Currency:</label>
+        <select class="form-control" id="currency_own" required ng-model="session_debit.off_curr" ng-change="updateRate()">
+            <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
+                {{cur.code}} {{cur.symbol}}
+            </option>
+        </select>
+    </div>
+    <div>The card will be send to :</div>
+
+    <div class="contact_fields row">
+        <input type="text" class="form-control" ng-model="user.city" placeholder="city" required="true" disabled="disabled" autofocus="">
+        <input type="text" class="form-control" ng-model="user.street" placeholder="Street" required="true" disabled="disabled" autofocus="">
+        <input type="number" class="form-control" ng-model="user.street_number" placeholder="Number" required="true" disabled="disabled" autofocus="">
+    </div>
+
+    <div class="row">
+        <div style="    display: inline-block;">Do you agree to out tems of use ?</div>
+        <input type="checkbox" ng-checked="all">I'm Agree<br>
+    </div>
+
+    </div>
+
+</form>
+
+<div class="buttons_wrapper">
+    <div>{{form.input.$error.required}}</div>
+    <button ng-click="sub()" class="btn btn-primary btn-lg">Send</button>
+    <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    the transaction completed successfully!
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p>You will be sent an Email with the code to be drawn.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .title-header div{
+        display: table-cell;
+    }
+    .title-header{
+        display: table;
+    }
+
+
+    input{
+        margin: 5px;
+    }
+    .name_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+        flex-basis: 0;}
+
+    .name_fields input:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .name_fields input:nth-of-type(2) {-webkit-flex-grow: 1;  flex-grow: 1; flex-basis: 0;}
+
+    .ids_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex; }
+
+    .ids_fields input:nth-of-type(1) {-webkit-flex-grow: 1;  flex-grow: 1; flex-basis: 0;}
+    .ids_fields input:nth-of-type(2) {-webkit-flex-grow: 1;  flex-grow: 1; flex-basis: 0;}
+
+    .contact_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex;}
+
+    .contact_fields input:nth-of-type(1) {     width: 40% !important;}
+    .contact_fields input:nth-of-type(2) {     width: 35% !important;}
+    .contact_fields input:nth-of-type(3) {     width: 15% !important;}
+
+    .credit_fields{
+        display: -webkit-flex; /* Safari */
+        display: flex;}
+
+
+
+    .currency_balance{
+        display: -webkit-flex; /* Safari */
+        display: flex;
+    }
+
+    .currency_balance img {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;
+        min-width: 50px;
+        height: 80px;
+        margin: 5px;}
+    .currency_balance div {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0; text-align: left;}
+
+    .buttons_wrapper{
+        display: -webkit-flex; /* Safari */
+        display: flex; flex-basis: 0;
+    }
+
+    .buttons_wrapper button { margin: 5px;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
+
+
+</style>

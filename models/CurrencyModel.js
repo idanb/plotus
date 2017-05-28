@@ -17,6 +17,21 @@ exports.getAll = function() {
     return deferred.promise;
 }
 
+exports.getAllAtms = function() {
+   var deferred = q.defer();
+    db.getConnection(function(err, connection) {
+        connection.query('SELECT * FROM tblAtmLocations', function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
+    });
+    return deferred.promise;
+}
+
 // exports.getByUser = function(status, userId) {
 //     var deferred = q.defer();
 //     db.query('SELECT * FROM tblTransactions WHERE offer_user_id = ? AND status = ?', [userId, status], function (error, results) {
