@@ -91,13 +91,13 @@ var PlotusApp = angular.module('PlotusApp', [
 
             .otherwise({ redirectTo: '/login' });
     }])
-    // .config(function(uiGmapGoogleMapApiProvider) {
-    //     uiGmapGoogleMapApiProvider.configure({
-    //         key: 'AIzaSyBxeGpuLv3hg5yQ_nfk2wILCpZO-Sqzms4',
-    //         v: '3.20', //defaults to latest 3.X anyhow
-    //         libraries: 'weather,geometry,visualization'
-    //     });
-    // })
+    .config(function(uiGmapGoogleMapApiProvider) {
+        uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyBxeGpuLv3hg5yQ_nfk2wILCpZO-Sqzms4',
+            v: '3.20', //defaults to latest 3.X anyhow
+            libraries: 'weather,geometry,visualization'
+        });
+    })
     .run(['$rootScope', '$location', '$cookieStore', '$http',
         function ($rootScope, $location, $cookieStore, $http) {
             $rootScope.currentPath = $location.path();
