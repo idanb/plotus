@@ -83,8 +83,9 @@ angular.module('Withdraw')
                 }
 
 
+                $('[data-toggle="tooltip"]').tooltip();
+
                 $scope.sub = function() {
-                    debugger;
                     $scope.amount_balance = $scope.balance[$scope.session_withdraw.off_curr - 1].value;
                     $scope.overload = $scope.session_withdraw.amount <= $scope.balance[$scope.session_withdraw.off_curr - 1].value ? false : true
 

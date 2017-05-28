@@ -1,66 +1,93 @@
-<div class="profile_header">
-    <div> <p>Hi, <br/> {{user.first_name + " " + user.last_name }},</p> </div>
-    <div> <img class="profile_image" ng-src="{{ user.profile_picture_url }}" /> </div>
-</div>
 
-<p style="text-decoration: underline">Your Account balance is :</p>
 
-<div id="currency_balance_wrapper">
-    <div class="currency_balance" ng-repeat="currency in balance track by $index">
-        <img ng-src="{{currency.picture_url}}" alt="Description" />
-        <div> {{currency.code}} {{currency.value}}<br/>
-        <button type="button" class="btn btn-primary btn-sm bold">Add</button>
-        </div>
+<div id="page-wrap">
+
+    <div id="well">
+
+        <div class="slider slider-1"><strong id="slider"></strong> <span>Cash Withdraw</span></div>
+        <!--<div class="slider slider-2"><strong id="slider2"></strong> <span>slide to unlock</span></div>-->
+
     </div>
-</div>
 
-
-<div class="buttons_wrapper">
-<button type="button" class="btn btn-primary btn-lg">Reedem The Money</button>
-<button type="button" ng-click="changePage()" class="btn btn-secondary btn-lg">New Exchange</button>
 </div>
 
 
 
 <style>
-    .profile_header{
-        display: flex; /* Safari */
-        display: flex;
+
+    /*
+         CSS-Tricks Example
+         by Chris Coyier
+         http://css-tricks.com
+    */
+
+    /** { margin: 0; padding: 0; }*/
+    /*html { background: black; }*/
+    /*body {*/
+        /*font: 14px Georgia, serif;*/
+        /*background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #3b3b3b),color-stop(1, #000000));*/
+        /*background-repeat: no-repeat;*/
+        /*min-height: 350px;*/
+
+    /*}*/
+    #page-wrap { width: 720px; margin: 0 auto; padding-top: 100px; }
+
+    #well {
+        transform: scale(0.4);
+        position: relative;
+        right: 190px;
+
+        padding: 14px 20px 20px 20px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+
+        background: -moz-linear-gradient(top, #010101, #181818);
+        background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #010101),color-stop(1, #181818));
+
+        border: 2px solid #454545;
+        overflow: hidden;
+
+        -webkit-user-select: none;
     }
 
-    .profile_header div:nth-of-type(1) {flex-grow: 1;}
-    .profile_header div:nth-of-type(2) {flex-grow: 1; text-align: right;}
-    #currency_balance_wrapper{
-        height: 300px;
+    .slider {
+        background: -moz-linear-gradient(left, #4d4d4d, 0.4, #4d4d4d, 0.5, white, 0.6, #4d4d4d, #4d4d4d);
+        background: -webkit-gradient(linear,left top,right top,color-stop(0, #4d4d4d),color-stop(0.4, #4d4d4d),color-stop(0.5, white),color-stop(0.6, #4d4d4d),color-stop(1, #4d4d4d));
+
+        -moz-background-clip: text;
+        -webkit-background-clip: text;
+
+        -moz-text-fill-color: transparent;
+        -webkit-text-fill-color: transparent;
+
+        -webkit-animation: slidetounlock 5s infinite;
+
+        font-size: 80px;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: 300;
+
+        padding: 0;
+        width: 200%;
+
+        -webkit-text-size-adjust: none;
+    }
+    #slider {
+        background: url(../images/arrow.png) no-repeat;
+        width: 146px;
+        height: 98px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
     }
 
-    .currency_balance{
-        display: flex; /* Safari */
-        display: flex;
+    @-webkit-keyframes slidetounlock {
+        0% {
+            background-position: -720px 0;
+        }
+        100%{
+            background-position: 720px 0;
+        }
     }
-
-    .currency_balance img {flex-grow: 1;
-        min-width: 50px;
-        height: 80px;
-        margin: 5px;}
-    .currency_balance div {flex-grow: 1; text-align: left;}
-
-    .buttons_wrapper{
-        display: flex; /* Safari */
-        display: flex;
-    }
-
-    .buttons_wrapper button { margin: 5px;}
-    .buttons_wrapper button:nth-of-type(1) {flex-grow: 1;}
-    .buttons_wrapper button:nth-of-type(2) {flex-grow: 1;}
-
-    .profile_image{
-        width: 140px;
-        height: 140px;
-        background: #e4e4e4;
-        margin: 2px;
-        padding: 2px;
-    }
-
 
 </style>

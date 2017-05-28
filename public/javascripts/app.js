@@ -72,6 +72,11 @@ var PlotusApp = angular.module('PlotusApp', [
                 templateUrl: 'modules/exchangeConfirm/views/exchangeConfirm.html',
                 controller: 'exchangeConfirmController'
             })
+            .when('/withdraw', {
+                controller: 'WithdrawController',
+                templateUrl: 'modules/withdraw/views/withdraw.html'
+
+            })
             .when('/withdrawCash', {
                 controller: 'WithdrawCashController',
                 templateUrl: 'modules/withdrawCash/views/withdrawCash.html',
