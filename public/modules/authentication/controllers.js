@@ -10,8 +10,8 @@ angular.module('Authentication')
                     $scope.dataLoading = true;
                     AuthenticationService.Login($scope.email, $scope.password, function(response) {
                         if(response.success) {
-                            AuthenticationService.SetCredentials($scope.email, $scope.password, response.user,
-                                response.transactions);
+                            AuthenticationService.SetCredentials($scope.email, $scope.password, response.user);
+                            SessionFactory.addData('transactions',response.transactions);
                             $http.get('currency/')
                                 .then(function (response) {
                                     SessionFactory.addData('currency',response.data);

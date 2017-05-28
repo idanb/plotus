@@ -17,8 +17,8 @@ angular.module('Profile')
 
 
                 $scope.show_nav = true;
-                $scope.changePage = function(){
-                    $location.path("/exchangeNow");
+                $scope.changePage = function(url){
+                    $location.path(url);
                 }
 
             }]);

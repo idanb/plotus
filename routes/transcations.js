@@ -162,6 +162,19 @@ router.get('/:currency_requested_type/:currency_offer_type/:userId', function(re
 router.put('/:transactionId/:userId', function(req, res, next) {
     Transaction.closeTransaction(req.params.transactionId, req.params.userId)
         .then(function (rows) {
+
+            Transaction.getById(req.params.transactionId).then(function(transaction){
+                User.getByUser(transaction[0].offer_user_id).then(function(user){
+                    transporter.sendMail(transporter.transactionMadeEmail(user[0].email_address), function(error, info){
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
+                    });
+                });
+            });
+
+
         res.json(rows);
     }, function(reason) {
         res.json(reason);

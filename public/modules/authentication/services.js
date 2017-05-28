@@ -15,7 +15,7 @@ angular.module('Authentication')
 
                 };
 
-                service.SetCredentials = function (email, password, user_data, transactions) {
+                service.SetCredentials = function (email, password, user_data) {
                     var authdata = Base64.encode(email + ':' + password);
 
                     $rootScope.globals = {
@@ -23,8 +23,7 @@ angular.module('Authentication')
                             email: email,
                             user: user_data,
                             authdata: authdata
-                        },
-                        transactions: transactions
+                        }
                     };
 
                     $http.defaults.headers.common['Authorization'] = 'Basic:' + authdata; // jshint ignore:line

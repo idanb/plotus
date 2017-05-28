@@ -9,8 +9,8 @@
          ng-class="{'selected':selectedDeal === $index}" ng-click="selectDeal($index)" >
         <img ng-src="{{transaction.profile_picture_url}}" alt="Description" />
         <div class="potential_transaction_user">{{transaction.first_name}} {{transaction.last_name}}</div>
-        <div class="potential_transaction_offer"> Offers you {{transaction.currency_offer_amount}} {{transaction.off_code}} for
-            {{transaction.currency_requested_amount}} {{transaction.req_code}}
+        <div class="potential_transaction_offer"> Offers you {{transaction.currency_offer_amount.toFixed(2)}} {{transaction.off_code}} for
+            {{transaction.currency_requested_amount.toFixed(2)}} {{transaction.req_code}}
         </div>
     </div>
 </div>
@@ -46,11 +46,11 @@ You can change your credit information at any time in 'My Profile'.
             <div class="modal-body">
                 <p>
                     Your transaction details: <br/>
-                    Amount of money for conversion: {{transfer.currency_offer_amount}} {{transfer.off_code}}<br/>
+                    Amount of money for conversion: {{transfer.currency_offer_amount.toFixed(2)}} {{transfer.off_code}}<br/>
                     Source currency: {{transfer.off_code}}<br/>
                     Target currency: {{transfer.req_code}}<br/>
-                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_requested_amount}}<br/>
-                    Amount of money after conversion: {{transfer.currency_requested_amount}} {{transfer.req_code}}<br/>
+                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_requested_amount.toFixed(2)}}<br/>
+                    Amount of money after conversion: {{transfer.currency_requested_amount.toFixed(2)}} {{transfer.req_code}}<br/>
                     You chose to exchange the money with {{transfer.names}}
                 </p>
             </div>

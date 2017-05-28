@@ -9,7 +9,7 @@ angular.module('Exchange')
                 var currency = SessionFactory.getData().currency;
                 $scope.notice = false;
 
-                $scope.offered_amount = session.amount;
+                $scope.offered_amount = session.amount.toFixed(2);
                 $scope.offered_amount_currency = currency[session.off_curr-1].code;
 
                 $scope.requested_amount = (Math.round(session.amount * session.rate * 100)/100).toFixed(2);
@@ -26,8 +26,8 @@ angular.module('Exchange')
                 };
 
                 $scope.confirmSelection = function() {
-                    //var globals = $cookies.getObject('globals');
-                    //globals.prefreredDeals = [];
+                    var globals = $cookies.getObject('globals');
+                    globals.prefreredDeals = [];
 
                     if(angular.equals($scope.selectedDeal, {})){
                         alert('none selected');
