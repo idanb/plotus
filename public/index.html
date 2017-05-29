@@ -207,6 +207,31 @@
             display: none;
         }
 
+        .spinner-wrapper{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(   86, 92, 93, 0.69);
+        }
+
+        .spinner span{
+            position: relative;
+            top: 95px;
+            left: 12px;
+        }
+        .spinner{
+            background-image: url('/images/loading.gif');
+            position: absolute;
+            background-size: 100px;
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 37%;
+        }
+
+
+
     </style>
 
 
@@ -257,7 +282,10 @@
         </div>
     </div>
 </div>
-<footer class="footer"></footer>
+<div class="spinner-wrapper" ng-show="loading">
+    <div class="spinner" ng-show="loading"><span>{{loading_text}}</span></div>
+    <footer class="footer"></footer>
+</div>
 
 
 <!--<div class="credits text-center">-->
@@ -306,6 +334,7 @@
 <script src="/modules/withdraw/controllers.js"></script>
 <script src="/modules/withdrawCash/controllers.js"></script>
 <script src="/modules/requestDebit/controllers.js"></script>
+<script src="/modules/requestDebitDenied/controllers.js"></script>
 </body>
 
 </html>

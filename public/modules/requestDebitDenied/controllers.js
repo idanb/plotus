@@ -1,29 +1,17 @@
 'use strict';
 angular.module('Withdraw')
-    .controller('WithdrawCashController',
-        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window', 'SessionFactory', 'uiGmapGoogleMapApi',
+    .controller('RequestDebitDeniedController',
+        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window', 'SessionFactory',
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, SessionFactory) {
-               // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
-                $scope.map = { center: { latitude: 32.073550, longitude: 34.822407 }, zoom: 14,
-                    events: {
-                        click: function(mapModel, eventName, originalEventArgs) {
-                            console.log("user defined event: " + eventName, mapModel, originalEventArgs);
-                            originalEventArgs.show = !originalEventArgs.show;
-                            $scope.activeModel = originalEventArgs;
-                            $scope.session_withdraw.atm_id = mapModel.key;
-                            //var e = originalEventArgs[0];
-                            //_scope.$apply();
-                        }
-                    }};
-                $scope.session_withdraw = {};
 
+                $scope.session_debit = {};
                 $scope.show1 = true;
 
                 $scope.user = SessionFactory.getData().currentUser.user;
                 $scope.currency = SessionFactory.getData().currency;
                 $scope.balance = SessionFactory.getData().balance;
 
-                $scope.session_withdraw.email_address = $scope.user.email_address;
+                $scope.session_debit.email_address = $scope.user.email_address;
 
                 $scope.options = {
                     disableDefaultUI: true,
@@ -69,11 +57,6 @@ angular.module('Withdraw')
                     console.log('error',e);
                 });
 
-
-                $scope.setAtmLocation = function(atm){
-                    console.log(atm);
-                }
-
                 $scope.setZoom = function(zoom){
                     $scope.map.zoom = zoom;
                 };
@@ -83,18 +66,14 @@ angular.module('Withdraw')
                 }
 
 
-                $('[data-toggle="tooltip"]').tooltip();
-
                 $scope.sub = function() {
-                    $scope.amount_balance = $scope.balance[$scope.session_withdraw.off_curr - 1].value;
-                    $scope.overload = $scope.session_withdraw.amount <= $scope.balance[$scope.session_withdraw.off_curr - 1].value ? false : true
+                    debugger;
+                    $scope.amount_balance = $scope.balance[$scope.session_debit.off_curr - 1].value;
+                    $scope.overload = $scope.session_debit.amount <= $scope.balance[$scope.session_debit.off_curr - 1].value ? false : true
 
-                    if (!$scope.session_withdraw.atm_id) {
-                        alert('please select atm');
-                    }
-                    else if ($scope.form.amount.$valid && !$scope.overload) {
+                    if ($scope.form.amount.$valid && !$scope.overload) {
                         //SessionFactory.addData('session',$scope.session)
-                        $http.put('/users/withdraw/'+ $scope.user.id + '/' + $scope.session_withdraw.off_curr, $scope.session_withdraw).
+                        $http.put('/users/withdraw/'+ $scope.user.id + '/' + $scope.session_debit.off_curr, $scope.session_debit).
                         success(function(data) {
                             // $scope.transfer = transaction;
                             console.log(data);

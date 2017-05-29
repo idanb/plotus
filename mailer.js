@@ -28,12 +28,12 @@ transporter.transactionMadeEmail = function(email){
     }
 };
 
-transporter.withdrawMadeEmail = function(email){
+transporter.withdrawMadeEmail = function(email, code){
     return  {
         from: '"Plotus Application" <AppPlutus@gmail.com>', // sender address
         to: email, // list of receivers
         subject: 'Your request to withdraw', // Subject line
-        html: '<b>your withdraw from atm has approved </b>' // html body
+        html: '<b>your withdraw from atm has been approved, your code is : '+ code +'</b>' // html body
     }
 };
 

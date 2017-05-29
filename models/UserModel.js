@@ -33,6 +33,26 @@ exports.getByUser = function(userId) {
 }
 // SELECT * FROM tblUserBalance ub WHERE userId = ? LEFT JOIN tblCurrency c ON c.id = ub.currencyId
 
+exports.validateDebit = function(userId) {
+    var deferred = q.defer();
+    db.getConnection(function(err, connection) {
+        connection.query('SELECT count(*) as num FROM tblTransactions t WHERE (offer_user_id = ? OR accepter_user_id = ?) AND' +
+            ' status = 1 AND ( currency_offer_amount > 50 OR currency_requested_amount > 50) AND exchanged_at >= DATE_SUB(NOW(),INTERVAL 1 YEAR)',
+            [userId,userId], function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
+    });
+    return deferred.promise;
+
+}
+
+
+
 exports.getUserBalanceByUserId = function(userId) {
     var deferred = q.defer();
     db.getConnection(function(err, connection) {
@@ -85,7 +105,7 @@ exports.updateUserByUserId = function(userId,data) {
 
 exports.updateUserBalanceByUserId = function(userId,currencyId,value) {
     var deferred = q.defer();
-    var query = "UPDATE tblUserBalance SET value = value + ? WHERE userId = ? AND  currencyId = ?";
+    var query = "UPDATE tblUserBalance SET value = value + ? WHERE userId = ? AND currencyId = ?";
 console.log('test2',value, userId, currencyId);
     db.getConnection(function(err, connection) {
         connection.query(query, [value, userId, currencyId], function (error, results) {

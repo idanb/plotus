@@ -67,20 +67,20 @@ angular.module('Withdraw')
 
 
                 $scope.sub = function() {
-                    debugger;
+                    if(!$scope.session_debit.off_curr || !$scope.session_debit.amount || !$scope.session_debit.terms){
+                        alert('please fill al fields and agree the tems of use');
+                        return;
+                    }
                     $scope.amount_balance = $scope.balance[$scope.session_debit.off_curr - 1].value;
                     $scope.overload = $scope.session_debit.amount <= $scope.balance[$scope.session_debit.off_curr - 1].value ? false : true
 
                     if ($scope.form.amount.$valid && !$scope.overload) {
-                        //SessionFactory.addData('session',$scope.session)
-                        $http.put('/users/withdraw/'+ $scope.user.id + '/' + $scope.session_debit.off_curr, $scope.session_debit).
+                        $http.put('/users/withdraw_debit/'+ $scope.user.id + '/' + $scope.session_debit.off_curr, $scope.session_debit).
                         success(function(data) {
-                            // $scope.transfer = transaction;
-                            console.log(data);
                             $('#myModal').modal('show');
                             $('#myModal').on('hidden.bs.modal', function () {
                                 $location.path("/");
-                                $scope.$apply()
+                                $scope.$apply();
                             })
                         }).error(function(data) {
                             console.error("error in posting");

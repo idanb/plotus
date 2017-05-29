@@ -87,6 +87,11 @@ var PlotusApp = angular.module('PlotusApp', [
                 templateUrl: 'modules/requestDebit/views/requestDebit.html',
                 css: 'styles/exchangeForm.css'
 
+            }).when('/requestDebitDenied', {
+                controller: 'RequestDebitDeniedController',
+                templateUrl: 'modules/requestDebitDenied/views/requestDebitDenied.html',
+                css: 'styles/exchangeForm.css'
+
             })
 
             .otherwise({ redirectTo: '/login' });
@@ -101,6 +106,7 @@ var PlotusApp = angular.module('PlotusApp', [
     .run(['$rootScope', '$location', '$cookieStore', '$http',
         function ($rootScope, $location, $cookieStore, $http) {
             $rootScope.currentPath = $location.path();
+            $rootScope.pageLoadFinished = true;
 
             // keep user logged in after page refresh
             $rootScope.globals = $cookieStore.get('globals') || {};

@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/UserModel');
 var Transaction = require('../models/TransactionModel');
+var transporter = require('../mailer.js');
+
 
 /* /transactions/:status/:userId
 
@@ -22,6 +24,17 @@ router.get('/:userId', function(req, res, next) {
         res.json(reason);
     });
 });
+
+/* GET User data by User id. */
+router.get('/debit-request/:userId', function(req, res, next) {
+    User.validateDebit(req.params.userId).then(function (rows) {
+        console.log("rows[0]['num']", rows[0]['num']);
+        res.json({"is_valid": rows[0]['num'] >= 4 });
+    }, function(reason) {
+        res.json(reason);
+    });
+});
+
 /* PUT User data by User id. */
 router.put('/:userId', function(req, res, next) {
     var userId = req.body['id'];
@@ -63,6 +76,39 @@ router.put('/balance/:userId/:currencyId', function(req, res, next) {
         res.json(reason);
     });
 });
+
+/* PUT User balance by User id. */ //withdrawMadeEmail
+router.put('/withdraw/:userId/:currencyId', function(req, res, next) {
+    User.updateUserBalanceByUserId(req.params.userId,req.params.currencyId,req.body.amount * -1).then(function (rows,error) {
+        transporter.sendMail(transporter.withdrawMadeEmail(req.body.email_address,req.body.secret_code), function(error, info){
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
+        });
+
+        res.json(rows);
+    }, function(reason) {
+        res.json(reason);
+    });
+});
+
+/* PUT User balance by User id. */ //withdrawMadeEmail
+router.put('/withdraw_debit/:userId/:currencyId', function(req, res, next) {
+    User.updateUserBalanceByUserId(req.params.userId,req.params.currencyId,req.body.amount * -1).then(function (rows,error) {
+        // transporter.sendMail(transporter.withdrawMadeEmail(req.body.email_address), function(error, info){
+        //     if (error) {
+        //         return console.log(error);
+        //     }
+        //     console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
+        // });
+
+        res.json(rows);
+    }, function(reason) {
+        res.json(reason);
+    });
+});
+
 
 // route to authenticate a user (POST http://localhost:8080/users/authenticate)
 router.post('/authenticate', function(req, res) {
