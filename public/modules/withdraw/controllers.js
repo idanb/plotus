@@ -13,7 +13,7 @@ angular.module('Withdraw')
                         axis: 'x',
                         containment: 'parent',
                         drag: function(event, ui) {
-                            if (ui.position.left > 550) {
+                            if (ui.position.left > 250) {
                                 //$("#well").fadeOut();
                             } else {
                                 // Apparently Safari isn't allowing partial opacity on text with background clip? Not sure.
@@ -21,7 +21,7 @@ angular.module('Withdraw')
                             }
                         },
                         stop: function(event, ui) {
-                            if (ui.position.left < 551) {
+                            if (ui.position.left < 251) {
                                 alert("slider");
                                 $(this).animate({
                                     left: 0
@@ -38,7 +38,7 @@ angular.module('Withdraw')
                         var touch = event.touches[0];
                         var curX = touch.pageX - this.offsetLeft - 73;
                         if(curX <= 0) return;
-                        if(curX > 550){
+                        if(curX > 250){
                             $location.path("/withdrawCash");
                             $scope.$apply();
                             //$('#well').fadeOut();
@@ -58,7 +58,7 @@ angular.module('Withdraw')
                         var touch = event.touches[0];
                         var curX = touch.pageX - this.offsetLeft - 73;
                         if(curX <= 0) return;
-                        if(curX > 550){
+                        if(curX > 250){
                             $('#myModal').modal('show');
                             // $scope.$apply();
                             //$('#well').fadeOut();
