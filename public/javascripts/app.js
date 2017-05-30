@@ -105,6 +105,10 @@ var PlotusApp = angular.module('PlotusApp', [
                 templateUrl: 'modules/addToBalanceFinal/views/addToBalanceFinal.html',
                 css: 'styles/exchangeForm.css'
             })
+            .when('/about', {
+                controller: 'aboutController',
+                templateUrl: 'modules/about/views/about.html'
+            })
 
             .otherwise({ redirectTo: '/login' });
     }])
