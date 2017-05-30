@@ -61,12 +61,10 @@ var PlotusApp = angular.module('PlotusApp', [
                 templateUrl: 'modules/exchangeInFuture/views/exchangeInFuture.html',
                 controller: 'ExchangeInFutureController',
                 css: 'styles/exchangeForm.css'
-
             })
             .when('/searchCurrencyRate', {
                 templateUrl: 'modules/searchCurrencyRate/views/searchCurrencyRate.html',
                 controller: 'SearchCurrencyRateController'
-
             })
             .when('/exchangeConfirm', {
                 templateUrl: 'modules/exchangeConfirm/views/exchangeConfirm.html',
@@ -75,23 +73,37 @@ var PlotusApp = angular.module('PlotusApp', [
             .when('/withdraw', {
                 controller: 'WithdrawController',
                 templateUrl: 'modules/withdraw/views/withdraw.html'
-
             })
             .when('/withdrawCash', {
                 controller: 'WithdrawCashController',
                 templateUrl: 'modules/withdrawCash/views/withdrawCash.html',
                 css: 'styles/exchangeForm.css'
-
-            }).when('/requestDebit', {
+            })
+            .when('/requestDebit', {
                 controller: 'RequestDebitController',
                 templateUrl: 'modules/requestDebit/views/requestDebit.html',
                 css: 'styles/exchangeForm.css'
-
-            }).when('/requestDebitDenied', {
+            })
+            .when('/requestDebitDenied', {
                 controller: 'RequestDebitDeniedController',
                 templateUrl: 'modules/requestDebitDenied/views/requestDebitDenied.html',
                 css: 'styles/exchangeForm.css'
 
+            })
+            .when('/addToBalance', {
+                controller: 'addToBalanceController',
+                templateUrl: 'modules/addToBalance/views/addToBalance.html',
+                css: 'styles/exchangeForm.css'
+            })
+            .when('/addToBalanceConfirm', {
+                controller: 'addToBalanceConfirmController',
+                templateUrl: 'modules/addToBalanceConfirm/views/addToBalanceConfirm.html',
+                css: 'styles/exchangeForm.css'
+            })
+            .when('/addToBalanceFinal', {
+                controller: 'addToBalanceFinalController',
+                templateUrl: 'modules/addToBalanceFinal/views/addToBalanceFinal.html',
+                css: 'styles/exchangeForm.css'
             })
 
             .otherwise({ redirectTo: '/login' });
@@ -107,6 +119,9 @@ var PlotusApp = angular.module('PlotusApp', [
         function ($rootScope, $location, $cookieStore, $http) {
             $rootScope.currentPath = $location.path();
             $rootScope.pageLoadFinished = true;
+            $rootScope.parseAmount = function(num) {
+                return parseFloat(num).toFixed(2)
+            };
 
             // keep user logged in after page refresh
             $rootScope.globals = $cookieStore.get('globals') || {};

@@ -37,7 +37,7 @@
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_own">Currency:</label>
-        <select class="form-control" id="currency_own" required ng-model="session_debit.off_curr" ng-change="updateRate()">
+        <select style="width: 24%;"class="form-control" id="currency_own" required ng-model="session_debit.off_curr" ng-change="updateRate()">
             <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
                 {{cur.code}} {{cur.symbol}}
             </option>
@@ -52,20 +52,22 @@
     </div>
 
     <div class="row">
-        <div style="display: inline-block;">Do you agree to out tems of use ?</div>
-        <input type="checkbox" ng-model="session_debit.terms">I'm Agree<br>
+        <div style="display: inline-block;">Do you agree to out terms of use ?</div>
+        <input type="checkbox" ng-model="session_debit.terms" required name="terms">I'm Agree<br>
+        <div ng-show="form.$submitted || form.amount.$touched">
+            <span class="form-error" ng-show="form.terms.$error.required">Please read the terms of use</span>
+        </div>
     </div>
 
+    </div>
+
+    <div class="buttons_wrapper">
+        <div>{{form.input.$error.required}}</div>
+        <button ng-click="sub()" class="btn btn-primary btn-lg">Send</button>
+        <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
     </div>
 
 </form>
-
-<div class="buttons_wrapper">
-    <div>{{form.input.$error.required}}</div>
-    <button ng-click="sub()" class="btn btn-primary btn-lg">Send</button>
-    <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
-</div>
-
 
 
 <!-- Modal -->

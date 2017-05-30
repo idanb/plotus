@@ -94,6 +94,7 @@ angular.module('Exchange')
                         SessionFactory.addData('session',$scope.session);
                         $http.post('/transactions',transaction).
                         success(function(data) {
+                            SessionFactory.addData('is_new',false);
                             $scope.transfer = transaction;
                             $('#myModal').modal('show');
                             $('#myModal').on('hidden.bs.modal', function () {

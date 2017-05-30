@@ -79,14 +79,24 @@ router.put('/balance/:userId/:currencyId', function(req, res, next) {
 
 /* PUT User balance by User id. */ //withdrawMadeEmail
 router.put('/withdraw/:userId/:currencyId', function(req, res, next) {
+    var secret_code = req.body.secret_code * 765 / 1000
     User.updateUserBalanceByUserId(req.params.userId,req.params.currencyId,req.body.amount * -1).then(function (rows,error) {
-        transporter.sendMail(transporter.withdrawMadeEmail(req.body.email_address,req.body.secret_code), function(error, info){
+        transporter.sendMail(transporter.withdrawMadeEmail(req.body.email_address,secret_code), function(error, info){
             if (error) {
                 return console.log(error);
             }
             console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
         });
 
+        res.json(rows);
+    }, function(reason) {
+        res.json(reason);
+    });
+});
+
+/* PUT User balance by User id. */ //withdrawMadeEmail
+router.put('/addToBalance/:userId/:currencyId', function(req, res, next) {
+    User.updateUserBalanceByUserId(req.params.userId,req.params.currencyId,req.body.amount).then(function (rows,error) {
         res.json(rows);
     }, function(reason) {
         res.json(reason);
@@ -131,7 +141,7 @@ router.post('/authenticate', function(req, res) {
                         message: 'Authentication success',
                         token: token,
                         user: user[0],
-                        transactions: transactions
+                        is_new: transactions.length == 0
                     });
                 }, function(reason) {
                     res.json(reason);

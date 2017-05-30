@@ -9,9 +9,6 @@
             <span class="form-error" ng-show="form.amount.$error.required">Place amount</span>
             <span class="form-error" ng-show="overload">Amount is higher then your balance {{amount_balance}}</span>
         </div>
-
-        <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
-        <!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_own">Select the currency you own:</label>
@@ -41,11 +38,13 @@
         <span class="form-error" ng-show="rate_is_lower">You cannot offer under formal Exchange rate</span>
 
     </div>
+
+    <p>Click on 'search' for best matches</p>
+
+    <div class="buttons_wrapper">
+        <button ng-click="sub()" class="btn btn-primary btn-lg">Search</button>
+        <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
+    </div>
+
 </form>
 
-<p>Click on 'search' for best matches</p>
-
-<div class="buttons_wrapper">
-    <button ng-click="sub()" class="btn btn-primary btn-lg">Search</button>
-    <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
-</div>

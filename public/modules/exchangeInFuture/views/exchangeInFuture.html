@@ -84,8 +84,8 @@
                     Amount of money for conversion: {{transfer.currency_offer_amount}} {{currency[transfer.currency_offer_type - 1].code}}<br/>
                     Source currency: {{currency[transfer.currency_offer_type - 1].code}}<br/>
                     Target currency: {{currency[transfer.currency_requested_type - 1].code}}<br/>
-                    Exchange rate: {{session.rate.toFixed(2) }}<br/>
-                    Amount of money after conversion: {{transfer.currency_requested_amount.toFixed(2)}} {{currency[transfer.currency_requested_type - 1].code}}<br/>
+                    Exchange rate: {{ parseAmount(session.rate) }}<br/>
+                    Amount of money after conversion: {{ parseAmount(transfer.currency_requested_amount)}} {{currency[transfer.currency_requested_type - 1].code}}<br/>
                 </p>
             </div>
             <div class="modal-footer">

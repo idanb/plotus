@@ -230,6 +230,10 @@
             left: 37%;
         }
 
+        .row{
+            margin: 5px 0 5px 0;
+        }
+
 
 
     </style>
@@ -257,7 +261,7 @@
     </script>
 
     <div class="jumbotron">
-        <div class="container ">
+
             <div class="alerts">
                 <div class="alert alert-success">
                     <strong>Success!</strong> Update User Details Success !
@@ -280,7 +284,6 @@
                 <div ng-view></div>
             </div>
         </div>
-    </div>
 </div>
 <div class="spinner-wrapper" ng-show="loading">
     <div class="spinner" ng-show="loading"><span>{{loading_text}}</span></div>
@@ -322,6 +325,7 @@
 <script src="/javascripts/app.js"></script>
 <script src="/javascripts/sessionFactory.js"></script>
 <script src="/directives/progress-bar/progress-bar.js"></script>
+<script src="/directives/progress-bar-balance/progress-bar.js"></script>
 <script src="/modules/authentication/services.js"></script>
 <script src="/modules/authentication/controllers.js"></script>
 <script src="/modules/home/controllers.js"></script>
@@ -335,6 +339,9 @@
 <script src="/modules/withdrawCash/controllers.js"></script>
 <script src="/modules/requestDebit/controllers.js"></script>
 <script src="/modules/requestDebitDenied/controllers.js"></script>
+<script src="/modules/addToBalance/controllers.js"></script>
+<script src="/modules/addToBalanceConfirm/controllers.js"></script>
+<script src="/modules/addToBalanceFinal/controllers.js"></script>
 </body>
 
 </html>

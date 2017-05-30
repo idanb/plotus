@@ -24,6 +24,7 @@ angular.module('Withdraw')
                 $scope.balance = SessionFactory.getData().balance;
 
                 $scope.session_withdraw.email_address = $scope.user.email_address;
+                $scope.session_withdraw.off_curr = "1";
 
                 $scope.options = {
                     disableDefaultUI: true,
@@ -86,13 +87,22 @@ angular.module('Withdraw')
                 $('[data-toggle="tooltip"]').tooltip();
 
                 $scope.sub = function() {
+
+                    if (!$scope.session_withdraw.amount) {
+                        angular.element('#main')[0].scrollTop=0;
+                        return;
+                    }
+
                     $scope.amount_balance = $scope.balance[$scope.session_withdraw.off_curr - 1].value;
                     $scope.overload = $scope.session_withdraw.amount <= $scope.balance[$scope.session_withdraw.off_curr - 1].value ? false : true
 
-                    if (!$scope.session_withdraw.atm_id) {
-                        alert('please select atm');
+                     if (!$scope.session_withdraw.atm_id) {
+                        alert('please select Atm location.');
+                         return;
                     }
-                    else if ($scope.form.amount.$valid && !$scope.overload) {
+
+                    if ($scope.form.amount.$valid && !$scope.overload) {
+                        debugger
                         //SessionFactory.addData('session',$scope.session)
                         $http.put('/users/withdraw/'+ $scope.user.id + '/' + $scope.session_withdraw.off_curr, $scope.session_withdraw).
                         success(function(data) {

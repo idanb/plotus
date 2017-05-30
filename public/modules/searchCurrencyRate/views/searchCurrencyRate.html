@@ -24,7 +24,7 @@
                <!-- ng-disabled="{{transaction.currency_requested_amount > offered_amount}}"-->
         <img ng-src="{{transaction.profile_picture_url}}" alt="Description" />
         <div class="potential_transaction_user">{{transaction.first_name}} {{transaction.last_name}}</div>
-        <div class="potential_transaction_offer"> Offers you {{transaction.currency_offer_amount.toFixed(2)}} {{transaction.off_code.toFixed(2)}} for
+        <div class="potential_transaction_offer"> Offers you {{transaction.currency_offer_amount.toFixed(2)}} {{transaction.off_code}} for
             {{transaction.currency_requested_amount.toFixed(2)}} {{transaction.req_code}}
         </div>
     </div>

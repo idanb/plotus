@@ -67,10 +67,6 @@ angular.module('Withdraw')
 
 
                 $scope.sub = function() {
-                    if(!$scope.session_debit.off_curr || !$scope.session_debit.amount || !$scope.session_debit.terms){
-                        alert('please fill al fields and agree the tems of use');
-                        return;
-                    }
                     $scope.amount_balance = $scope.balance[$scope.session_debit.off_curr - 1].value;
                     $scope.overload = $scope.session_debit.amount <= $scope.balance[$scope.session_debit.off_curr - 1].value ? false : true
 
@@ -89,8 +85,6 @@ angular.module('Withdraw')
                     else{
                         angular.element('#main')[0].scrollTop=0;
                     }
-
-
                 }
 
             }]);

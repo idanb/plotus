@@ -7,7 +7,6 @@ angular.module('Exchange')
                 var user = SessionFactory.getData().currentUser.user;
 
                 $scope.ptransactions = $cookies.getObject('globals').prefreredDeals;
-
                 $scope.confirmTransfer = function() {
                     $scope.transfer = angular.copy($scope.ptransactions[0]);
                     $scope.transfer.names = $scope.transfer.first_name + " " + $scope.transfer.last_name;
@@ -31,6 +30,7 @@ angular.module('Exchange')
                                  $http.put('/users/balance/'+ tran.offer_user_id + '/' + tran.currency_requested_type, {value: tran.currency_requested_amount});
                                  $http.put('/users/balance/'+ tran.offer_user_id + '/' + tran.currency_offer_type, {value: -1 * tran.currency_offer_amount});
 
+                                 SessionFactory.addData('is_new',false);
                                  $('#myModal').modal('show');
                                  $('#myModal').on('hidden.bs.modal', function () {
                                      $location.path("/");

@@ -1,0 +1,131 @@
+<h3>Adding money to your account</h3>
+
+<progress-bar-balance stage="1"></progress-bar-balance>
+
+<h3>Payment methods</h3>
+
+<form class="exchangeNowForm css-form" name="form" novalidate>
+<div class="credit_fields">
+    <div class="visa_pic"></div>
+    <input type="password" class="form-control" ng-model="user.credit_card" placeholder="Credit Card Number" required="true" disabled="disabled" autofocus="">
+</div>
+
+<p>
+    Please note: At any time, you can change your
+    credit card information in My Profile by clicking <a href="/personal">'Update Personal Information'</a>
+</p>
+
+<div class="form-group amount-field row">
+    <label class="col-sm-2 col-form-label" for="amount">How much money would you like to add ?</label>
+    <input type="number" class="form-control" required ng-model="session_balance.amount" name="amount" id="amount" placeholder="amount" required="true" autofocus="">
+    <span>{{session_balance.curr.symbol}}</span><br />
+    <span>The minimum value to add is {{limit}} {{session_currency.symbol}}.</span>
+    <ul ng-show="form.$submitted || form.amount.$touched || under_minimum">
+        <li class="form-error" ng-show="form.amount.$error.required">Place amount</li>
+        <li class="form-error" ng-show="under_minimum">You have entered an amount lower than the required minimum. Please enter the amount you want again</li>
+    </ul>
+
+    <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
+    <!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
+</div>
+
+    <div class="buttons_wrapper">
+        <button ng-click="sub()" class="btn btn-primary btn-lg">Confirm</button>
+        <a href="/#/" class="btn btn-secondary btn-lg">Back to Homepage</a>
+    </div>
+
+</form>
+
+<style>
+
+    .visa_pic{
+        background: #5e5e86;
+        height: 10px;
+        width: 10px;
+        display: inline-block;
+    }
+
+    .dec {
+        background-position: 0 -29px;
+    }
+
+    .buttons {
+        padding: 20px 0 0 140px;
+    }
+
+
+    select,input{
+        width: auto !important;
+        display: inline-block !important;
+    }
+
+    input{
+        margin: 5px;
+    }
+
+    input#currency_rate{
+        width: 30% !important;
+    }
+    .buttons_wrapper{
+        display: -webkit-flex; /* Safari */
+        display: flex; flex-basis: 0;
+    }
+
+    .buttons_wrapper button { margin: 5px;}
+    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
+    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
+
+    .money-present-box {
+        width: 45%;
+        display: inline-block;
+        background: #dadada;
+        padding: 8px;
+        overflow: hidden;
+    }
+
+    .sort-option {
+        display: inline-block;
+        font-size: 12px;
+        background: gainsboro;
+        border-radius: 10px;
+        padding: 1px;
+    }
+
+    .potential_transaction {
+        overflow: hidden;
+        background: #efe9e9;
+        padding: 5px;
+        margin: 3px;
+        border-radius: 3px;
+        position: relative;
+    }
+
+    .potential_transaction div{
+        display: inline-block;
+    }
+    .potential_transaction img{
+        width: 70px;
+        display: inline-block;
+    }
+
+    .potential_transaction_user {
+        vertical-align: top;
+    }
+
+    .potential_transaction_offer {
+        width: 60%;
+        /* float: right; */
+        position: absolute;
+        top: 26px;
+        left: 80px;
+    }
+
+    p span{
+        white-space: nowrap;
+    }
+
+    .selected{
+        background-color: #ccb7b7;
+    }
+
+</style>

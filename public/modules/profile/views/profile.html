@@ -9,7 +9,7 @@
     <div class="currency_balance" ng-repeat="currency in balance track by $index">
         <img ng-src="{{currency.picture_url}}" alt="Description" />
         <div> {{currency.code}} {{currency.value}}<br/>
-        <button type="button" class="btn btn-primary btn-sm bold">Add</button>
+        <button ng-click="addToBalance(currency)" type="button" class="btn btn-primary btn-sm bold">Add</button>
         </div>
     </div>
 </div>

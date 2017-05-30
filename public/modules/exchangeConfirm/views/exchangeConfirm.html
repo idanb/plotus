@@ -47,11 +47,11 @@ You can change your credit information at any time in 'My Profile'.
                 <p>
                     Your transaction details: <br/>
                     Amount of money for conversion: {{transfer.currency_offer_amount.toFixed(2)}} {{transfer.off_code}}<br/>
-                    Source currency: {{transfer.off_code}}<br/>
-                    Target currency: {{transfer.req_code}}<br/>
-                    Exchange rate: {{transfer.currency_offer_amount / transfer.currency_requested_amount.toFixed(2)}}<br/>
-                    Amount of money after conversion: {{transfer.currency_requested_amount.toFixed(2)}} {{transfer.req_code}}<br/>
-                    You chose to exchange the money with {{transfer.names}}
+                    Source currency: {{ transfer.off_code }}<br/>
+                    Target currency: {{ transfer.req_code }}<br/>
+                    Exchange rate: {{ parseAmount(transfer.currency_offer_amount / (transfer.currency_requested_amount)) }}<br/>
+                    Amount of money after conversion: {{ parseAmount(transfer.currency_requested_amount)}} {{transfer.req_code}}<br/>
+                    You chose to exchange the money with {{ transfer.names }}
                 </p>
             </div>
             <div class="modal-footer">

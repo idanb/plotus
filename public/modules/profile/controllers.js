@@ -15,6 +15,10 @@ angular.module('Profile')
                     console.log('error',e);
                 });
 
+                $scope.addToBalance = function(currency){
+                    SessionFactory.addData('session_currency',currency);
+                    $location.path('/addToBalance');
+                }
 
                 $scope.show_nav = true;
                 $scope.changePage = function(url){
