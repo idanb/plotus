@@ -12,7 +12,7 @@
 
 <p>
     Please note: At any time, you can change your
-    credit card information in My Profile by clicking <a href="/personal">'Update Personal Information'</a>
+    credit card information in My Profile by clicking <a href="/#/personal">'Update Personal Information'</a>
 </p>
 
 <div class="form-group amount-field row">
@@ -30,8 +30,7 @@
 </div>
 
     <div class="buttons_wrapper">
-        <button ng-click="sub()" class="btn btn-primary btn-lg">Confirm</button>
-        <a href="/#/" class="btn btn-secondary btn-lg">Back to Homepage</a>
+        <button ng-click="sub()" class="btn btn-primary btn-lg">Continue</button>
     </div>
 
 </form>
@@ -69,6 +68,9 @@
     .buttons_wrapper{
         display: -webkit-flex; /* Safari */
         display: flex; flex-basis: 0;
+        width: 50%;
+        /* text-align: center; */
+        margin-top: 10px;
     }
 
     .buttons_wrapper button { margin: 5px;}

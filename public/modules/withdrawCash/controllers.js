@@ -4,15 +4,36 @@ angular.module('Withdraw')
         ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window', 'SessionFactory', 'uiGmapGoogleMapApi',
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, SessionFactory) {
                // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
-                $scope.map = { center: { latitude: 32.073550, longitude: 34.822407 }, zoom: 14,
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                }
+                else{
+                    console.log('error - showing user location');
+                }
+
+                function showPosition(position) {
+                    debugger;
+                    $scope.map = {
+                        center: {latitude: position.coords.latitude, longitude: position.coords.longitude}, zoom: 14,
+                        events: {
+                            click: function (mapModel, eventName, originalEventArgs) {
+                                console.log("user defined event: " + eventName, mapModel, originalEventArgs);
+                                originalEventArgs.show = !originalEventArgs.show;
+                                $scope.activeModel = originalEventArgs;
+                                $scope.session_withdraw.atm_id = mapModel.key;
+                            }
+                        }
+                    };
+                }
+
+
+                $scope.map = { center: { latitude: 31.073550, longitude: 34.822407 }, zoom: 14,
                     events: {
                         click: function(mapModel, eventName, originalEventArgs) {
                             console.log("user defined event: " + eventName, mapModel, originalEventArgs);
                             originalEventArgs.show = !originalEventArgs.show;
                             $scope.activeModel = originalEventArgs;
                             $scope.session_withdraw.atm_id = mapModel.key;
-                            //var e = originalEventArgs[0];
-                            //_scope.$apply();
                         }
                     }};
                 $scope.session_withdraw = {};
@@ -25,6 +46,7 @@ angular.module('Withdraw')
 
                 $scope.session_withdraw.email_address = $scope.user.email_address;
                 $scope.session_withdraw.off_curr = "1";
+
 
                 $scope.options = {
                     disableDefaultUI: true,
@@ -39,17 +61,18 @@ angular.module('Withdraw')
                 });
 
 
+
                 $scope.windowOptions = {
                     boxClass: "infobox",
                     boxStyle: {
                         backgroundColor: "white",
-                        border: "1px solid #bfb478",
-                        width: "74px",
+                        border: "1px solid rgb(181, 184, 208)",
                         borderRadius: "5px",
-                        height: "17px",
-                        padding: "2px"
+                        'text-align': "center",
+                        'text-transform': "capitalize",
+                        padding: "1px"
                     },
-                    content: "atm selected",
+                    content: "atm selected : " + $scope.atm_address,
                     disableAutoPan: true,
                     maxWidth: 0,
 
@@ -101,7 +124,7 @@ angular.module('Withdraw')
                          return;
                     }
 
-                    if ($scope.form.amount.$valid && !$scope.overload) {
+                    if ($scope.form.$valid && !$scope.overload) {
                         debugger
                         //SessionFactory.addData('session',$scope.session)
                         $http.put('/users/withdraw/'+ $scope.user.id + '/' + $scope.session_withdraw.off_curr, $scope.session_withdraw).

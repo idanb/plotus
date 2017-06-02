@@ -79,7 +79,7 @@ router.put('/balance/:userId/:currencyId', function(req, res, next) {
 
 /* PUT User balance by User id. */ //withdrawMadeEmail
 router.put('/withdraw/:userId/:currencyId', function(req, res, next) {
-    var secret_code = req.body.secret_code * 765 / 1000
+    var secret_code = parseInt(req.body.secret_code * 765 / 100);
     User.updateUserBalanceByUserId(req.params.userId,req.params.currencyId,req.body.amount * -1).then(function (rows,error) {
         transporter.sendMail(transporter.withdrawMadeEmail(req.body.email_address,secret_code), function(error, info){
             if (error) {

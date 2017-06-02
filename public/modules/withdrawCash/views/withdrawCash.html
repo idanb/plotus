@@ -1,7 +1,7 @@
 
 <h3>Cash Withdrawal</h3>
 
-<p>Hi {{user.first_name}}, You can now withdraw your cash with an ATM to withdraw the foreign currency you choose.
+<p>Hi {{user.first_name}},<br/> You can now withdraw your cash with an ATM to withdraw the foreign currency you choose.
     So, how does it work?
     <ul>
     <li>You enter a code that only you will know. (E.g., date of birth)</li>
@@ -36,17 +36,25 @@
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" style="    width: 40%;" for="secret_code">Enter secret code:</label>
-        <input type="number" class="form-control secret_field" required placeholder="Secret Code" name="secret_code" id="secret_code" ng-model="session_withdraw.secret_code" required="true" >
-        <div style="display: inline-block;" data-toggle="tooltip" data-placement="top" title="This is the first code you only know. For example, date of birth.">
+        <div style="display: inline-block; float: right;" data-toggle="tooltip" data-placement="top" title="This is the first code you only know. For example, date of birth.">
             <span class="glyphicon glyphicon-info-sign"></span></div>
+        <input style="width: 38%;float: right;" type="number" class="form-control secret_field" required required="true" placeholder="Secret Code" name="secret_code" id="secret_code" ng-model="session_withdraw.secret_code" required="true" >
+
+        <div ng-show="form.$submitted || form.amount.$touched">
+            <span class="form-error" ng-show="form.secret_code.$error.required">Place your secret code</span>
+        </div>
     </div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" style=" width: 40%;" for="email_address">Email address:</label>
-        <input type="email" class="form-control email-address-field" required placeholder="Email Address" name="email_address" id="email_address" ng-model="session_withdraw.email_address" required="true" >
-        <div data-toggle="tooltip" style="display: inline-block;" data-placement="top" title="Enter your email to send another secret code to complete the action" >
+        <div data-toggle="tooltip" style="float: right; display: inline-block;" data-placement="top" title="Enter your email to send another secret code to complete the action" >
             <span class="glyphicon glyphicon-info-sign"></span></div>
+        <input style="    width: 52%;
+    float: right;" type="email" class="form-control email-address-field" required placeholder="Email Address" name="email_address" id="email_address" ng-model="session_withdraw.email_address" required="true" >
+
+        <div ng-show="form.$submitted || form.amount.$touched">
         <span class="form-error" ng-show="form.email_address.$error.required">Place Email</span>
+        </div>
     </div>
 
     <div class="form-group row" style="position: relative;">
@@ -56,7 +64,8 @@
             <ui-gmap-markers models="randomMarkers" events="map.events" coords="'self'" icon="'icon'" click="setAtmLocation(atm)">
             </ui-gmap-markers>
 
-            <ui-gmap-window coords="activeModel" options="windowOptions" show="activeModel.show">
+            <ui-gmap-window coords="activeModel" options="windowOptions" show="activeModel.show" templateUrl="'infowindow.tpl.html'"
+                            templateParameter="activeModel">
             </ui-gmap-window>
 
         </ui-gmap-google-map>

@@ -5,6 +5,7 @@ angular.module('Withdraw')
             function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, SessionFactory) {
 
                 $scope.session_debit = {};
+                $scope.session_debit.off_curr = "1";
                 $scope.show1 = true;
 
                 $scope.user = SessionFactory.getData().currentUser.user;
@@ -67,10 +68,15 @@ angular.module('Withdraw')
 
 
                 $scope.sub = function() {
+                    debugger;
                     $scope.amount_balance = $scope.balance[$scope.session_debit.off_curr - 1].value;
-                    $scope.overload = $scope.session_debit.amount <= $scope.balance[$scope.session_debit.off_curr - 1].value ? false : true
-
-                    if ($scope.form.amount.$valid && !$scope.overload) {
+                    if($scope.session_debit.amount) {
+                        $scope.overload = $scope.session_debit.amount <= $scope.balance[$scope.session_debit.off_curr - 1].value ? false : true
+                    }
+                    else{
+                        $scope.overload = false;
+                    }
+                    if ($scope.form.$valid && !$scope.overload) {
                         $http.put('/users/withdraw_debit/'+ $scope.user.id + '/' + $scope.session_debit.off_curr, $scope.session_debit).
                         success(function(data) {
                             $('#myModal').modal('show');
