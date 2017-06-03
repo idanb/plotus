@@ -77,8 +77,8 @@
     </div>
     </div>
     <div class="buttons_wrapper">
-        <button ng-click="sub()" class="btn btn-primary btn-lg">Approve</button>
-        <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
+        <button ng-click="sub()" class="btn btn-primary btn-lg btn-warning">Approve</button>
+        <a href="/#/" class="btn btn-secondary btn-lg btn-warning">Cancel</a>
     </div>
 </form>
 
@@ -130,7 +130,9 @@
         }
 
         .btn-dis {
-            display: grid;
+            display: inline-block;
+            background-color: rgba(37, 125, 145, 0.19);
+            font-weight: 700;
             margin: 3px;
         }
 

@@ -50,6 +50,10 @@ input#end_at{
     cursor: pointer;
     width: 29px;
     height: 29px;
+    border-radius: 30px;
+    margin: 5px;
+    top: -5px;
+    position: relative;
     display: inline-block;
     text-align: center;
     background: url('/images/buttons.png') no-repeat;

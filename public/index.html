@@ -7,6 +7,8 @@
     <title>Plotus Application</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant" rel="stylesheet">
 </head>
 
 <body>
@@ -15,7 +17,7 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#/about" class="navlinkbtn">About</a>
     <a href="#/personal" class="navlinkbtn">Update Personal Details</a>
-    <a href="#/exchange-rates" class="navlinkbtn">Watching exchange rates</a>
+    <a href="#/convertor" class="navlinkbtn">Watching exchange rates</a>
     <a href="#/" class="navlinkbtn">Home Page</a>
     <a href="#/profile" class="navlinkbtn">Profile</a>
     <a href="#/login" class="navlinkbtn">Logout</a>
@@ -35,7 +37,9 @@
             </div>
 
             <div class="navbar-logo">
-                <img width="40" height="40" ng-src="https://image.flaticon.com/icons/png/128/189/189093.png" alt="logo" />
+                <a class="" href="#/">
+                <img width="40" height="40" ng-src="/images/logo.png" alt="logo" />
+                </a>
             </div>
         </div>
 
@@ -44,6 +48,11 @@
 
 
     <style>
+
+        .jumbotron p {
+            font-size: 17px;
+            font-weight: 600;
+        }
 
 
         .container-fluid {
@@ -60,11 +69,28 @@
         }
 
         body{
+
+            background-color: #257d91;
             /*background-color: #eee;*/
-            font-family: "Lato", sans-serif;
+            font-family: 'Cormorant', serif;
+            font-size: 17px;
             transition: background-color .5s;
         }
+        h1{
+            font-size: 24px;
+            text-align: center;
+            margin: 17px 0;
+        }
+        h3{
+            font-size: 20px;
+            text-align: center;
+            margin: 17px 0;
+        }
 
+        h1, h3, .navbar-brand{
+            font-family: 'Roboto Slab','Roboto', sans-serif;
+
+        }
         h3{
             white-space: nowrap;
             margin-bottom: 18px;
@@ -72,8 +98,8 @@
         }
 
         .navbar-inverse {
-            background-color: #e80000;
-            border-color: #e80000;
+            background-color: #1f7282;;
+            border-color: #1f7282;
             margin-bottom: 0;
         }
 
@@ -82,7 +108,7 @@
         }
 
         .jumbotron{
-            background-color: #fff;
+            background-color: transparent;
         }
 
         .sidenav {
@@ -92,7 +118,7 @@
             z-index: 3;
             top: 0;
             left: 0;
-            background-color: #c7c7c7;
+            background-color: rgba(144, 175, 197, 0.9);
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
@@ -178,16 +204,12 @@
         }
 
         .footer {
-            position: relative;
-            margin-top: -150px; /* negative value of footer height */
-            height: 150px;
-            clear:both;
-            padding-top:20px;
-            background: red;
-        }
-
-        .jumbotron p{
-            font-size: 14px;
+            /*position: relative;*/
+            /*margin-top: -150px; !* negative value of footer height *!*/
+            /*height: 150px;*/
+            /*clear:both;*/
+            /*padding-top:20px;*/
+            /*background: red;*/
         }
 
         .alert{
@@ -236,6 +258,27 @@
             margin: 5px 0 5px 0;
         }
 
+        .btn-warning{
+            background-color: #333332;
+            border-color: #737373;
+            color: #ebecec;
+        }
+
+        .btn-warning.hover,
+        .btn-warning:hover,
+        .btn-warning.focus,
+        .btn-warning:focus,
+        .btn-warning.active,
+        .btn-warning:active,
+        .open>.dropdown-toggle.btn-warning {
+            background-color: #333337;
+            border-color: #737377;
+            color: #ebecec;
+        }
+
+        .ok_icon{
+
+        }
 
 
     </style>
@@ -343,7 +386,8 @@
 <script src="/modules/requestDebitDenied/controllers.js"></script>
 <script src="/modules/addToBalance/controllers.js"></script>
 <script src="/modules/addToBalanceConfirm/controllers.js"></script>
-<script src="/modules/addToBalanceFinal/controllers.js"></script>
+<script src="/modules/currencyConverter/controllers.js"></script>
+<script src="/modules/about/controllers.js"></script>
 </body>
 
 </html>

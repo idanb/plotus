@@ -109,7 +109,10 @@ var PlotusApp = angular.module('PlotusApp', [
                 controller: 'aboutController',
                 templateUrl: 'modules/about/views/about.html'
             })
-
+            .when('/convertor', {
+                controller: 'convertorController',
+                templateUrl: 'modules/currencyConverter/views/convertor.html'
+            })
             .otherwise({ redirectTo: '/login' });
     }])
     .config(function(uiGmapGoogleMapApiProvider) {

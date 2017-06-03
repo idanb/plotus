@@ -8,7 +8,7 @@ angular.module('Withdraw')
                     navigator.geolocation.getCurrentPosition(showPosition);
                 }
                 else{
-                    console.log('error - showing user location');
+                    alert('error - showing user location');
                 }
 
                 function showPosition(position) {

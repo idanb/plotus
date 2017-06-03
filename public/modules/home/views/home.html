@@ -1,25 +1,38 @@
-<p>Hi {{user.first_name}}, {{welcome_text}}</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p>V</p>
-
-<div class="button_info_wrapper">
-    <div style="display: inline-block;     position: relative;
-    top: -30px;" data-toggle="tooltip" data-placement="top" title="In this process, you can convert your money today!" >
-        <span class="glyphicon glyphicon-info-sign"></span>
-    </div>
-<button type="button" ng-click="exchangenow()" class="btn btn-warning" href="/exchangenow">Exchange Now</button>
+<p class="main_text">Hi {{user.first_name}}, {{welcome_text}}</p>
+<div class="text-center main_text">
+<div>|</div>
+    <div>|</div>
+    <div>|</div>
+    <div>V</div>
 </div>
-<div class="button_info_wrapper">
-    <div style="display: inline-block;     position: relative;
-    top: -30px;" data-toggle="tooltip" data-placement="top" title="In this process, you can convert your money within a set date range of your choice. Our system will find the match for you." >
-        <span class="glyphicon glyphicon-info-sign"></span>
+<div class="buttons-wrapper">
+    <div class="button_info_wrapper">
+        <div style="display: inline-block;     position: relative;
+        top: -30px;" data-toggle="tooltip" data-placement="top" title="In this process, you can convert your money today!" >
+            <span class="glyphicon glyphicon-info-sign"></span>
+        </div>
+    <button type="button" ng-click="exchangenow()" class="btn btn-warning" href="/exchangenow">Exchange Now</button>
     </div>
-<button type="button" ng-click="exchangefuture()" class="btn btn-warning">Future Exchange</button>
+    <div class="button_info_wrapper">
+        <div style="display: inline-block;     position: relative;
+        top: -30px;" data-toggle="tooltip" data-placement="top" title="In this process, you can convert your money within a set date range of your choice. Our system will find the match for you." >
+            <span class="glyphicon glyphicon-info-sign"></span>
+        </div>
+    <button type="button" ng-click="exchangefuture()" class="btn btn-warning">Future Exchange</button>
+    </div>
 </div>
 
 <style>
+
+    .buttons-wrapper{
+        margin: 35px;
+    }
+
+    .main_text{
+        font-weight: 800 !important;
+        font-size: 21px !important;
+        text-align: center;
+    }
 
 .button_info_wrapper {
     display: inline-block;
