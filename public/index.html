@@ -15,11 +15,11 @@
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#/about" class="navlinkbtn">About</a>
-    <a href="#/personal" class="navlinkbtn">Update Personal Details</a>
-    <a href="#/convertor" class="navlinkbtn">Watching exchange rates</a>
     <a href="#/" class="navlinkbtn">Home Page</a>
     <a href="#/profile" class="navlinkbtn">Profile</a>
+    <a href="#/personal" class="navlinkbtn">Update Personal Details</a>
+    <a href="#/convertor" class="navlinkbtn">Watching exchange rates</a>
+    <a href="#/about" class="navlinkbtn">About</a>
     <a href="#/login" class="navlinkbtn">Logout</a>
 </div>
 
@@ -32,8 +32,8 @@
                 </md-button>
             </div>
 
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/">TimeToSave</a>
+            <div class="navbar-brand">
+                <a class="" href="#/"><img width="80" height="40" ng-src="/images/plutusbanner.png" alt="logo" /></a>
             </div>
 
             <div class="navbar-logo">
@@ -49,6 +49,16 @@
 
     <style>
 
+
+        .glyphicon-info-sign:before {
+            color: white;
+        }
+        .navbar-brand{
+            position: relative;
+            right: 26%;
+            top: -9px;
+        }
+
         .jumbotron p {
             font-size: 17px;
             font-weight: 600;
@@ -61,8 +71,8 @@
         }
 
         .navbar-header{ flex-grow: 1; }
-        .hamburger { flex-grow: 1; }
-        .hamburger { flex-grow: 1; }
+        .hamburger { flex-grow: 1;     top: 4px;
+            position: relative; }
 
         .hamburger .md-button{
             visibility: hidden;
@@ -111,6 +121,13 @@
             background-color: transparent;
         }
 
+        .sidenav a:active,
+        .sidenav a:focus,
+        .sidenav a:hover {
+            color: #3a2b2b !important;
+            background: #7dc8ff !important;
+        }
+
         .sidenav {
             height: 100%;
             width: 0;
@@ -118,7 +135,7 @@
             z-index: 3;
             top: 0;
             left: 0;
-            background-color: rgba(144, 175, 197, 0.9);
+            background-color: rgba(144, 175, 197, 0.98);
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
@@ -262,6 +279,7 @@
             background-color: #333332;
             border-color: #737373;
             color: #ebecec;
+            margin: 5px;
         }
 
         .btn-warning.hover,
@@ -370,7 +388,7 @@
 <script src="/javascripts/app.js"></script>
 <script src="/javascripts/sessionFactory.js"></script>
 <script src="/directives/progress-bar/progress-bar.js"></script>
-<script src="/directives/progress-bar-balance/progress-bar.js"></script>
+<script src="/directives/progress-bar-balance/progress-bar-balance.js"></script>
 <script src="/modules/authentication/services.js"></script>
 <script src="/modules/authentication/controllers.js"></script>
 <script src="/modules/home/controllers.js"></script>

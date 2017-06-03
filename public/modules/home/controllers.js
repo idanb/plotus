@@ -6,8 +6,12 @@ angular.module('Home')
                 // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
                 $rootScope.currentPath = $location.path();
                 $scope.user = SessionFactory.getData().currentUser.user;
-                $scope.welcome_text = !SessionFactory.getData().is_new  ? 'Welcome back, for additional funds transfer.' :
-                    'Welcome to Plotu$, you have not made any money conversions yet. it\'s time to start !';
+                $scope.welcome_text_1 = !SessionFactory.getData().is_new  ? 'Welcome back, ' :
+                    'Welcome to Plotu$,';
+
+                $scope.welcome_text_2 = !SessionFactory.getData().is_new  ? 'for additional funds transfer.' :
+                    'you have not made any money conversions yet. it\'s time to start !';
+
 
                 var isOS = /iPad|iPhone|iPod/.test(navigator.platform);
                 if(isOS) $('body').on("touchstart", function(e){

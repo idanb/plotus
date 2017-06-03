@@ -5,7 +5,7 @@
 <img ng-src="{{selected_curr.flag_url}}" alt="flag" />
 </div>
 <div class="convert-input-wrapper">
-    <label class="col-sm-2 col-form-label" for="currency_to_exchange">Convers From:</label>
+    <label class="col-sm-2 col-form-label" style="    white-space: nowrap;" for="currency_to_exchange">Convers From:</label>
     <select class="form-control convert-input" id="currency_to_exchange" required ng-model="selected_curr_index" ng-change="change_curr()">
         <option ng-repeat="cur in currencys" value="{{cur.id}}" rate="{{cur.rate}}">
             {{cur.code}} {{cur.symbol}}
@@ -57,7 +57,7 @@
     }
 
 .flag-wrapper img{
-    width: 100%;
+    width: 80%;
 }
 .flag-wrapper{
     width: 45%;
@@ -66,6 +66,7 @@
     .convert-input-wrapper{
         width: 40%;
         display: inline-block;
+        float: right;
     }
     .currency_balance {
         background: grey;

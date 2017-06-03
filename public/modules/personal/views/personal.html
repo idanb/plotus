@@ -11,27 +11,28 @@
         <input type="email" class="form-control" ng-model="user.email_address" placeholder="Email address" required="true" autofocus="">
     </div>
 
-    <p style="text-decoration: underline">Contact Information:</p>
+    <p style="text-decoration: underline">Contact Information</p>
 
     <div class="contact_fields">
         <input type="text" class="form-control" ng-model="user.city" placeholder="city" required="true" autofocus="">
         <input type="text" class="form-control" ng-model="user.street" placeholder="Street" required="true" autofocus="">
         <input type="number" class="form-control" ng-model="user.street_number" placeholder="Number" required="true" autofocus="">
     </div>
-    <input type="number" class="form-control" placeholder="Phone Number" ng-model="user.phone_number" required="true" autofocus="">
+    <input type="number" style="    width: 98%;" class="form-control" placeholder="Phone Number" ng-model="user.phone_number" required="true" autofocus="">
 
-    <p style="text-decoration: underline">Credit Details:</p>
+    <p style="text-decoration: underline">Credit Details</p>
 
     <div class="credit_fields">
         <input type="password" class="form-control" ng-model="user.credit_card" placeholder="Credit Card Number" required="true" autofocus="">
         <input type="number" class="form-control" placeholder="CVV" ng-model="user.cc_cw" required="true" autofocus="">
     </div>
-    Validity:
-    <input type="month" class="form-control" placeholder="validity" ng-model="user.cc_date" required="true" autofocus="">
+
+    <input type="month" style="    width: 98%;" class="form-control" placeholder="validity" ng-model="user.cc_date" required="true" autofocus="">
 
     <div class="buttons_wrapper">
+        <a href="/#/" class="btn btn-secondary btn-lg btn-warning">Cancel</a>
+
         <button ng-submit="sub()" class="btn btn-primary btn-lg btn-warning">Save</button>
-        <a href="/#/" class="btn btn-secondary btn-lg">Back to Homepage</a>
     </div>
 </form>
 

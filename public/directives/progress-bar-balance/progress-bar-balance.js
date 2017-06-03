@@ -4,7 +4,7 @@ angular.module('Helpers', []).directive("progressBarBalance", function() {
         scope: {
             stage: '='
         },
-        templateUrl : "/directives/progress-bar-balance/progress-bar.html",
+        templateUrl : "/directives/progress-bar-balance/progress-bar-balance.html",
         controller: function($scope, $element, $attrs, $location) {
             $scope.circle1_link = "/AddToBalance";
             $scope.circle2_link = "/AddToBalanceConfirm";

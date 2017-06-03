@@ -3,14 +3,14 @@
     <div> <p>Hi, <br/> {{user.first_name + " " + user.last_name }}</p> </div>
 </div>
 
-<p style="text-decoration: underline">Your Account balance is :</p>
+<h3 style="text-decoration: underline"> Your account balance :</h3>
 
 <div id="currency_balance_wrapper">
     <div class="currency_balance" ng-repeat="currency in balance track by $index">
         <div class="img_wrapper"><img ng-src="{{currency.picture_url}}" alt="Description" />
         </div>
         <div> {{currency.code}} {{ parseAmount(currency.value) }}<br/>
-        <button ng-click="addToBalance(currency)" type="button" class="btn btn-primary btn-sm bold">Add</button>
+        <button ng-click="addToBalance(currency)" type="button" class="btn btn-primary btn-sm bold add-button">Add</button>
         </div>
     </div>
 </div>
@@ -18,12 +18,17 @@
 
 <div class="buttons_wrapper">
 <button type="button" ng-click="changePage('/withdraw')" class="btn btn-primary btn-lg btn-warning">Reedem The Money</button>
-<button type="button" ng-click="changePage('/exchangeNow')" class="btn btn-secondary btn-lg btn-warning">New Exchange</button>
 </div>
 
 
 
 <style>
+    .add-button{
+        display: inline-block;
+        position: relative;
+        top: -19px;
+        left: 102px;
+    }
     .profile_header{
         text-align: center;
     }
@@ -35,7 +40,7 @@
         margin: 10px;
     }
     #currency_balance_wrapper{
-        height: 300px;
+        margin-bottom: 4px;
     }
 
     .currency_balance{
@@ -48,7 +53,7 @@
         text-align: center;
     }
     .currency_balance img {
-        height: 80px;
+        height: 40px;
         margin: 5px;}
 
     .buttons_wrapper{
@@ -61,10 +66,11 @@
     .buttons_wrapper button:nth-of-type(2) {flex-grow: 1;}
 
     .profile_image{
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 120px;
         border-radius: 75px;
     }
+
 
 
 </style>
