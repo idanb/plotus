@@ -7,7 +7,7 @@ angular.module('Home')
                 $rootScope.currentPath = $location.path();
                 $scope.user = SessionFactory.getData().currentUser.user;
                 $scope.welcome_text_1 = !SessionFactory.getData().is_new  ? 'Welcome back, ' :
-                    'Welcome to Plotu$,';
+                    'Welcome to Plutu$,';
 
                 $scope.welcome_text_2 = !SessionFactory.getData().is_new  ? 'for additional funds transfer.' :
                     'you have not made any money conversions yet. it\'s time to start !';
