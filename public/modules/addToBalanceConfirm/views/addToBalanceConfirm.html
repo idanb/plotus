@@ -3,7 +3,7 @@
 <progress-bar-balance stage="2"></progress-bar-balance>
 
 <p>Please confirm your information</p>
-<h4>Payment methods</h4>
+<span class="payment_header">Payment methods</span>
 
 <div class="credit_fields">
     <div class="visa_pic"></div>
@@ -14,13 +14,14 @@
     Amount of money to add : {{session_balance.amount}} {{session_balance.curr.symbol}}
 </p>
 
-<p>
+<p class="pnote">
     Note : Once you click Confirm, you will not be able to change the details.
 </p>
 
 <div class="buttons_wrapper">
+    <a href="/#/addToBalance" class="btn btn-secondary btn-lg btn-warning">Back</a>
+
     <button ng-click="sub()" class="btn btn-primary btn-lg btn-warning">Confirm</button>
-    <a href="/#/addToBalance" class="btn btn-secondary btn-lg">Back</a>
 </div>
 
 

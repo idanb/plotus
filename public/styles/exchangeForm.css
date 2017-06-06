@@ -12,10 +12,6 @@ input{
     margin: 5px;
 }
 
-input#currency_rate{
-    width: 30% !important;
-}
-
 input#end_at{
     width: auto !important;
 
@@ -77,6 +73,11 @@ input#end_at{
 
 .form-error{
     color: red;
+    color: #d61111;
+    background: rgba(204, 204, 204, 0.51);
+    border-radius: 5px;
+    padding: 0 2px;
+    font-weight: 700;
 }
 
 .form-group.secret-field input,
@@ -138,8 +139,9 @@ input{
 }
 
 input#currency_rate{
-    width: 30% !important;
+    width: 40% !important;
 }
+
 .buttons_wrapper{
     display: -webkit-flex; /* Safari */
     display: flex; flex-basis: 0;

@@ -38,7 +38,7 @@ angular.module('Withdraw')
                         var touch = event.touches[0];
                         var curX = touch.pageX - this.offsetLeft - 73;
                         if(curX <= 0) return;
-                        if(curX > 250){
+                        if(curX > 200){
                             $location.path("/withdrawCash");
                             $scope.$apply();
                             //$('#well').fadeOut();
@@ -58,7 +58,7 @@ angular.module('Withdraw')
                         var touch = event.touches[0];
                         var curX = touch.pageX - this.offsetLeft - 73;
                         if(curX <= 0) return;
-                        if(curX > 250){
+                        if(curX > 200){
                             $('#myModal').modal('show');
                             // $scope.$apply();
                             //$('#well').fadeOut();

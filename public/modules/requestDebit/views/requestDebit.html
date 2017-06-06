@@ -6,8 +6,10 @@
     <p>You are in compliance with the conditions for issuing a debit card! <br/><br/>
     </p>
     </div>
-    <div style="background-color: yellow; width: 30%;">
-        Happy smiley
+    <div style="     text-align: center;
+} width: 27%;">
+        <img style="    position: relative;
+    top: 22px;"  width="70" height="70" ng-src="/images/happy.png" alt="logo" />
     </div>
 </div>
 <p>Please enter the following fields:</p>
@@ -26,7 +28,7 @@
     <br/>
 
     <div class="form-group amount-field row">
-        <label class="col-sm-2 col-form-label" for="amount">How much money would you like to withdraw ?</label>
+        <label class="col-sm-2 col-form-label" for="amount">How much money would you like to load to the debit card?</label>
         <input type="number" class="form-control" required ng-model="session_debit.amount" name="amount" id="amount" placeholder="amount" required="true" autofocus="">
         <br />
         <div ng-show="form.$submitted || form.amount.$touched">

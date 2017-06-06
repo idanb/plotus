@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cormorant" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 </head>
 
 <body>
@@ -49,6 +49,9 @@
 
     <style>
 
+        a {
+            color: #ffffff;
+        }
 
         .glyphicon-info-sign:before {
             color: white;
@@ -80,21 +83,27 @@
 
         body{
 
-            background-color: #257d91;
+            background: linear-gradient(-56deg, #2d5483, #2e9597);
             /*background-color: #eee;*/
-            font-family: 'Cormorant', serif;
+            font-family: 'Open Sans Condensed', serif;
+            letter-spacing: 0.2px;
             font-size: 17px;
             transition: background-color .5s;
+            color: antiquewhite;
         }
         h1{
-            font-size: 24px;
+            font-family: 'Roboto Slab', serif;
+            font-size: 22px;
             text-align: center;
             margin: 17px 0;
+            letter-spacing: 0;
         }
         h3{
-            font-size: 20px;
+            font-family: 'Roboto Slab', serif;
+            font-size: 22px;
             text-align: center;
             margin: 17px 0;
+            letter-spacing: 0;
         }
 
         h1, h3, .navbar-brand{
@@ -275,6 +284,20 @@
             margin: 5px 0 5px 0;
         }
 
+        .main-frame .btn-warning:hover{
+            background-color: #A33650;
+        }
+        .main-frame .btn-warning {
+            background-color: #76D0C4;
+            border-color: #332d2d;
+            color: rgba(0, 0, 0, 0.75);
+            margin: 5px;
+            font-weight: 700;
+            font-size: 19px;
+            letter-spacing: 0.4px;
+            box-shadow: 2px 2px 3px #5d5d5d;
+        }
+
         .btn-warning{
             background-color: #333332;
             border-color: #737373;
@@ -296,6 +319,19 @@
 
         .ok_icon{
 
+        }
+
+        .payment_header{
+            font-weight: bold;
+            text-decoration: underline;
+            /* text-align: center; */
+            letter-spacing: 0.2px;
+            font-size: 20px;
+        }
+
+        .pnote{
+            font-size: 14px;
+            font-weight: 400;
         }
 
 
