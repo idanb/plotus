@@ -13,10 +13,14 @@ angular.module('Exchange')
                 if(!$scope.session) {
                     $scope.session = {
                         amount: "",
-                        rate: parseFloat(($scope.currency[0].rate / $scope.currency[1].rate).toFixed(2)),
+                        rate: $rootScope.parseAmount($scope.currency[0].rate / $scope.currency[1].rate),
                         req_curr: '1',
                         off_curr: '2'
                     }
+                }
+                else{
+                    $scope.session.rate = $rootScope.parseAmount($scope.session.rate);
+
                 }
 
                 // $http.get('currency/')
@@ -32,7 +36,7 @@ angular.module('Exchange')
                 $scope.updateRate = function(rate) {
                     console.log($scope.session.req_curr,$scope.session.off_curr);
                     // if( typeof $scope.session.off_curr != 'undefined' &&  typeof $scope.session.req_curr != 'undefined')
-                    $scope.session.rate = $scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate
+                    $scope.session.rate = $rootScope.parseAmount($scope.currency[$scope.session.req_curr-1].rate / $scope.currency[$scope.session.off_curr-1].rate);
                 }
 
 

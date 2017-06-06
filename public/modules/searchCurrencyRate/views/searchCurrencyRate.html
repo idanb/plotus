@@ -3,11 +3,11 @@
 <progress-bar stage="2"></progress-bar>
 
 <div class="money-present-box replace-amount">
-    <p>The amount money i have : <span>{{offered_amount}} {{offered_amount_currency}}</span></p>
+    <p>Money I owned: <br/> <span>{{offered_amount}} {{offered_amount_currency}}</span></p>
 </div>
 
 <div class="money-present-box requested-amount">
-    <p>My desired target amount : <span>{{requested_amount}} {{requested_amount_currency}}</span></p>
+    <p>My desired target:<br/> <span>{{requested_amount}} {{requested_amount_currency}}</span></p>
 </div>
 
 <div class="sort-options-wrapper">
@@ -31,8 +31,9 @@
 </div>
 
 <div class="buttons_wrapper">
+    <a href="/#/" class="btn btn-secondary btn-lg btn-warning">Back</a>
+
     <button ng-click="confirmSelection()" ng-disabled="notice" class="btn btn-primary btn-lg btn-warning">Confirm</button>
-    <a href="/#/" class="btn btn-secondary btn-lg btn-warning">Back to Homepage</a>
 </div>
 
 
@@ -56,37 +57,38 @@
         margin: 5px;
     }
 
-    input#currency_rate{
-        width: 30% !important;
-    }
+
     .buttons_wrapper{
         display: -webkit-flex; /* Safari */
         display: flex; flex-basis: 0;
     }
 
-    .buttons_wrapper button { margin: 5px;}
-    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
-    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
-
+    .money-present-box span{
+        color: red;
+    }
     .money-present-box {
-        width: 45%;
+        width: 48%;
+        text-align: center;
         display: inline-block;
-        background: #dadada;
+        background: rgba(107, 173, 177, 0.68);;
         padding: 8px;
         overflow: hidden;
+        border-radius: 5px;
     }
 
     .sort-option {
         display: inline-block;
         font-size: 12px;
-        background: gainsboro;
+        border-radius: 10px;
+        background: #828282;
         border-radius: 10px;
         padding: 1px;
+        padding-right: 7px;
     }
 
     .potential_transaction {
         overflow: hidden;
-        background: #efe9e9;
+        background: #5799a5;
         padding: 5px;
         margin: 3px;
         border-radius: 3px;
@@ -99,6 +101,7 @@
     .potential_transaction img{
         width: 70px;
         display: inline-block;
+        margin-right: 3px;
     }
 
     .potential_transaction_user {
@@ -118,7 +121,8 @@
     }
 
     .selected{
-        background-color: #ccb7b7;
+        background-color: #fffdf1;
+        color: black;
     }
 
 </style>

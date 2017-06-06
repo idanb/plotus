@@ -29,11 +29,11 @@
     </div>
 
     <div class="form-group row ratepicker">
-        <label class="col-sm-2 col-form-label"  for="currency_rate">What is your wanted rate ?</label>
+        <label class="col-sm-2 col-form-label" for="currency_rate">What is your wanted rate ?</label>
         <div class="currency_rate_wrapper">
-            <div class="dec button">-</div>
+            <div class="dec button"><img width="29" height="29" ng-src="/images/min.png"></div>
             <input name="currency_rate" id="currency_rate" ng-model="session.rate" required disabled="true" type="number" class="form-control">
-            <div class="inc button">+</div>
+            <div class="inc button"><img width="29" height="29" ng-src="/images/plus.png"></div>
         </div>
         <span class="form-error" ng-show="rate_is_lower">You cannot offer under formal Exchange rate</span>
 

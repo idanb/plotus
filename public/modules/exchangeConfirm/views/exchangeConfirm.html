@@ -16,9 +16,8 @@
 </div>
 
 
-<p>
-
-Please note: Once you click 'Confirm' the conversion will be done and
+<p class="pnote">
+    <span>Please note:</span> Once you click 'Confirm' the conversion will be done and
     the money will be taken from the credit card stored in the system.
 You can change your credit information at any time in 'My Profile'.
 
@@ -26,8 +25,8 @@ You can change your credit information at any time in 'My Profile'.
 
 
 <div class="buttons_wrapper">
+    <a href="/#/searchCurrencyRate" class="btn btn-secondary btn-lg btn-warning">Back</a>
     <button ng-click="confirmTransfer()" class="btn btn-primary btn-lg btn-warning">Confirm</button>
-    <a href="/#/" class="btn btn-secondary btn-lg">Back to Homepage</a>
 </div>
 
 
@@ -39,18 +38,18 @@ You can change your credit information at any time in 'My Profile'.
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">
-                    <span class="ok_icon"></span>The transaction completed successfully!
+                    <span class="ok_icon">V</span>The transaction completed successfully!
                 </h4>
                 Your conversion transaction number: {{transfer.id + '234249866'}}
             </div>
             <div class="modal-body">
                 <p>
                     Your transaction details: <br/>
-                    Amount of money for conversion: {{transfer.currency_offer_amount.toFixed(2)}} {{transfer.off_code}}<br/>
                     Source currency: {{ transfer.off_code }}<br/>
+                    Amount of money for conversion: {{transfer.currency_offer_amount.toFixed(2)}} {{transfer.off_code}}<br/>
                     Target currency: {{ transfer.req_code }}<br/>
-                    Exchange rate: {{ parseAmount(transfer.currency_offer_amount / (transfer.currency_requested_amount)) }}<br/>
                     Amount of money after conversion: {{ parseAmount(transfer.currency_requested_amount)}} {{transfer.req_code}}<br/>
+                    Exchange rate: {{ parseAmount(transfer.currency_offer_amount / (transfer.currency_requested_amount)) }}<br/>
                     You chose to exchange the money with {{ transfer.names }}
                 </p>
             </div>
@@ -84,17 +83,10 @@ You can change your credit information at any time in 'My Profile'.
         margin: 5px;
     }
 
-    input#currency_rate{
-        width: 30% !important;
-    }
     .buttons_wrapper{
         display: -webkit-flex; /* Safari */
         display: flex; flex-basis: 0;
     }
-
-    .buttons_wrapper button { margin: 5px;}
-    .buttons_wrapper button:nth-of-type(1) {-webkit-flex-grow: 1; flex-grow: 1; flex-basis: 0;}
-    .buttons_wrapper button:nth-of-type(2) {-webkit-flex-grow: 1;flex-grow: 1; flex-basis: 0; }
 
     .money-present-box {
         width: 45%;
@@ -114,7 +106,7 @@ You can change your credit information at any time in 'My Profile'.
 
     .potential_transaction {
         overflow: hidden;
-        background: #efe9e9;
+        background: #5799a5;
         padding: 5px;
         margin: 3px;
         border-radius: 3px;

@@ -42,7 +42,6 @@ input#end_at{
 
 .ratepicker .button {
     margin: 0 0 0 5px;
-    text-indent: -9999px;
     cursor: pointer;
     width: 29px;
     height: 29px;
@@ -52,14 +51,19 @@ input#end_at{
     position: relative;
     display: inline-block;
     text-align: center;
-    background: url('/images/buttons.png') no-repeat;
 }
 .ratepicker .button.dec {
-    background-position: 0 -29px;
+    box-shadow: 2px 3px 5px #212121;
+}
+
+.ratepicker .button.inc {
+    box-shadow: 2px 3px 5px #212121;
 }
 
 .ratepicker .buttons {
     padding: 20px 0 0 140px;
+    background: url('/images/min.png') no-repeat;
+
 }
 
 .buttons_wrapper{
@@ -90,7 +94,8 @@ input#end_at{
 
 /*exchange now*/
  .currency_rate_wrapper{
-     width: 50%;
+     text-align: center;
+     margin-bottom: 12px;
  }
 
 .input-group .end-date-picker, .input-group div{
@@ -115,31 +120,13 @@ input#end_at{
     padding: 0;
 }
 
-.ratepicker .button {
-    margin: 0 0 0 5px;
-    text-indent: -9999px;
-    cursor: pointer;
-    width: 29px;
-    height: 29px;
-    display: inline-block;
-    text-align: center;
-    background: url('/images/buttons.png') no-repeat;
-}
-.ratepicker .button.dec {
-    background-position: 0 -29px;
-}
-
-.ratepicker .buttons {
-    padding: 20px 0 0 140px;
-}
-
 
 input{
     margin: 5px;
 }
 
 input#currency_rate{
-    width: 40% !important;
+    width: 17% !important;
 }
 
 .buttons_wrapper{
@@ -161,6 +148,18 @@ input#currency_rate{
 
 .form-group.amount-field input{
     width: 23% !important;
+    float: right;
+    margin-right: 0;
+    position: relative;
+    top: 5px;
+}
+
+.input-group {
+    left: 76px;
+}
+
+.form-group select{
+    float: right;
 }
 
 

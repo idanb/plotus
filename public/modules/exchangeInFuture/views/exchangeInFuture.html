@@ -33,9 +33,9 @@
     <div class="form-group row ratepicker">
         <label class="col-sm-2 col-form-label"  for="currency_rate">What is your wanted rate ?</label>
         <div class="currency_rate_wrapper">
-            <div class="dec button">-</div>
+            <div class="dec button"><img width="29" height="29" ng-src="/images/min.png"></div>
             <input name="currency_rate" id="currency_rate" ng-model="session.rate" required disabled="true" type="number" class="form-control">
-            <div class="inc button">+</div>
+            <div class="inc button"><img width="29" height="29" ng-src="/images/plus.png"></div>
         </div>
         <span class="form-error" ng-show="rate_is_lower">You cannot offer under formal Exchange rate</span>
 
@@ -76,16 +76,19 @@
             </div>
             <div class="modal-body">
                 <p>
-                    The system is now looking for the best match for you, based on the data you just entered.
-                    Once it finds a match for you, your credit card will be charged for your money amount and will send you an email with full transaction details.
+                    The system is now looking for the best match for you, based on the data you entered earlier.<br/>
+                    Once it finds a match for you, your credit card will be charged for your <br/>
+                    money amount and will send you an email with full transaction details.
                     <br/>
                     Your transaction details:<br/>
 
-                    Amount of money for conversion: {{transfer.currency_offer_amount}} {{currency[transfer.currency_offer_type - 1].code}}<br/>
                     Source currency: {{currency[transfer.currency_offer_type - 1].code}}<br/>
+
+                    Amount of money for conversion: {{transfer.currency_offer_amount}} {{currency[transfer.currency_offer_type - 1].code}}<br/>
                     Target currency: {{currency[transfer.currency_requested_type - 1].code}}<br/>
-                    Exchange rate: {{ parseAmount(session.rate) }}<br/>
                     Amount of money after conversion: {{ parseAmount(transfer.currency_requested_amount)}} {{currency[transfer.currency_requested_type - 1].code}}<br/>
+
+                    Exchange rate: {{ parseAmount(session.rate) }}<br/>
                 </p>
             </div>
             <div class="modal-footer">

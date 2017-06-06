@@ -28,6 +28,7 @@ angular.module('Exchange')
                     }
                 }
                 else{
+                    $scope.session.rate = parseFloat($scope.session.rate.toFixed(2));
                     $scope.session.end_at = new Date($scope.session.end_at);
                 }
 

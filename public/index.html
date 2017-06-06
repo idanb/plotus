@@ -50,7 +50,13 @@
     <style>
 
         a {
-            color: #ffffff;
+            color: #e8e8e8;
+            text-decoration: underline;
+        }
+
+        a.btn-warning {
+            /*color: #e8e8e8;*/
+            text-decoration: none;
         }
 
         .glyphicon-info-sign:before {
@@ -225,7 +231,6 @@
 
         #main {
             overflow:auto;
-            padding-bottom:150px; /* this needs to be bigger than footer height*/
             min-height: 100%;
         }
 
@@ -281,12 +286,9 @@
         }
 
         .row{
-            margin: 5px 0 5px 0;
+            margin: 20px 0 5px 0;
         }
 
-        .main-frame .btn-warning:hover{
-            background-color: #A33650;
-        }
         .main-frame .btn-warning {
             background-color: #76D0C4;
             border-color: #332d2d;
@@ -299,12 +301,13 @@
         }
 
         .btn-warning{
-            background-color: #333332;
-            border-color: #737373;
+            background-color: #76D0C4;
+            border-color: #c1c1c1;
             color: #ebecec;
             margin: 5px;
         }
 
+        .btn-warning.active.focus, .btn-warning.active:focus, .btn-warning.active:hover, .btn-warning:active.focus, .btn-warning:active:focus, .btn-warning:active:hover, .open>.dropdown-toggle.btn-warning.focus, .open>.dropdown-toggle.btn-warning:focus, .open>.dropdown-toggle.btn-warning:hover,
         .btn-warning.hover,
         .btn-warning:hover,
         .btn-warning.focus,
@@ -312,14 +315,12 @@
         .btn-warning.active,
         .btn-warning:active,
         .open>.dropdown-toggle.btn-warning {
-            background-color: #333337;
+            background-color: #589a94;
             border-color: #737377;
             color: #ebecec;
         }
 
-        .ok_icon{
 
-        }
 
         .payment_header{
             font-weight: bold;
@@ -329,11 +330,37 @@
             font-size: 20px;
         }
 
+        .pnote span{
+            color: red;
+        }
         .pnote{
-            font-size: 14px;
-            font-weight: 400;
+            font-size: 14px !important;
+            font-weight: 400 !important;
         }
 
+        .modal-dialog a{
+            color: #6eb7dc;
+        }
+        .modal-dialog{
+            color: #040404;
+        }
+
+        .buttons_wrapper button { margin: 5px;}
+        .buttons_wrapper .btn-primary{ width: 60%}
+        .buttons_wrapper .btn-secondary{ width: 40%}
+
+        #ptransactions_wrapper{
+            margin: 15px 0;
+            min-height: 175px;
+        }
+
+        .modal-title{
+            color: darkolivegreen;
+        }
+
+        .modal-title .ok_icon{
+            background: green;
+        }
 
     </style>
 
@@ -440,6 +467,7 @@
 <script src="/modules/requestDebitDenied/controllers.js"></script>
 <script src="/modules/addToBalance/controllers.js"></script>
 <script src="/modules/addToBalanceConfirm/controllers.js"></script>
+<script src="/modules/addToBalanceFinal/controllers.js"></script>
 <script src="/modules/currencyConverter/controllers.js"></script>
 <script src="/modules/about/controllers.js"></script>
 </body>

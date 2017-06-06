@@ -126,8 +126,9 @@ var PlotusApp = angular.module('PlotusApp', [
         function ($rootScope, $location, $cookieStore, $http) {
             $rootScope.currentPath = $location.path();
             $rootScope.pageLoadFinished = true;
+
             $rootScope.parseAmount = function(num) {
-                return parseFloat(num).toFixed(2)
+                return parseFloat(parseFloat(num).toFixed(2))
             };
 
             // keep user logged in after page refresh

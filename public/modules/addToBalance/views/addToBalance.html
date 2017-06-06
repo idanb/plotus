@@ -10,20 +10,22 @@
     <input type="password" class="form-control" ng-model="user.credit_card" placeholder="Credit Card Number" required="true" disabled="disabled" autofocus="">
 </div>
 
-<p>
-    Please note: At any time, you can change your
-    credit card information in My Profile by clicking <a href="/#/personal">'Update Personal Information'</a>
+<p class="pnote">
+    <span>Please note:</span> At any time, you can change your
+    credit card information by clicking <a href="/#/personal">'Update Personal Information'</a>
 </p>
 
 <div class="form-group amount-field row">
     <label class="col-sm-2 col-form-label" for="amount">How much money would you like to add ?</label>
     <input type="number" class="form-control" required ng-model="session_balance.amount" name="amount" id="amount" placeholder="amount" required="true" autofocus="">
-    <span>{{session_balance.curr.symbol}}</span><br />
+    <span style="    position: relative;
+    top: -14px;
+    left: 15px;">{{session_balance.curr.symbol}}</span><br />
     <span>The minimum value to add is {{limit}} {{session_currency.symbol}}.</span>
-    <ul ng-show="form.$submitted || form.amount.$touched || under_minimum">
-        <li class="form-error" ng-show="form.amount.$error.required">Place amount</li>
-        <li class="form-error" ng-show="under_minimum">You have entered an amount lower than the required minimum. Please enter the amount you want again</li>
-    </ul>
+    <div ng-show="form.$submitted || form.amount.$touched || under_minimum">
+        <div class="form-error" ng-show="form.amount.$error.required">Place amount</div>
+        <div class="form-error" ng-show="under_minimum">You have entered an amount lower than the required minimum. Please enter the amount you want again</div>
+    </div>
 
     <!--<span class="notice">Total amount : {{balance[session.off_curr - 1].value}} {{balance[session.off_curr - 1].code}}-->
     <!--</span>  max="{{balance[session.off_curr - 1].value}}" -->
@@ -89,7 +91,7 @@
 
     .potential_transaction {
         overflow: hidden;
-        background: #efe9e9;
+        background: #5799a5;
         padding: 5px;
         margin: 3px;
         border-radius: 3px;

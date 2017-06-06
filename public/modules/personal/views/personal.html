@@ -23,8 +23,12 @@
     <p style="text-decoration: underline">Credit Details</p>
 
     <div class="credit_fields">
-        <input type="password" class="form-control" ng-model="user.credit_card" placeholder="Credit Card Number" required="true" autofocus="">
-        <input type="number" class="form-control" placeholder="CVV" ng-model="user.cc_cw" required="true" autofocus="">
+        <input type="password" class="form-control" ng-model="user.credit_card" name="credit_card" placeholder="Credit Card Number" required="true" autofocus="">
+        <input type="number" class="form-control" ng-model="user.cc_cw" name="cvv" placeholder="CVV" required="true" autofocus="">
+        <div ng-show="form.$submitted || form.credit_card.$touched">
+            <span class="form-error" ng-show="form.credit_card.$error.required">Place Credit Card Number</span>
+            <span class="form-error" ng-show="form.cvv.$error.required">Place CVV</span>
+        </div>
     </div>
 
     <input type="month" style="    width: 98%;" class="form-control" placeholder="validity" ng-model="user.cc_date" required="true" autofocus="">

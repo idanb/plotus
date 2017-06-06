@@ -1,10 +1,10 @@
 
 <h3>Cash Withdrawal</h3>
 
-<p>Hi {{user.first_name}},<br/> You can now withdraw your cash with an ATM to withdraw the foreign currency you choose.
+<p>You can now withdraw your cash with an ATM to withdraw the foreign currency you choose.
     So, how does it work?
     <ul>
-    <li>You enter a code that only you will know. (E.g., date of birth)</li>
+    <li>You enter a code combined by numbers that only you will know. (E.g., date of birth)</li>
     <li>You receive Email with additional code from the system.</li>
 </ul>
     Once you have reached your chosen ATM, you will be asked to type your two codes. </p>
@@ -35,9 +35,10 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label" style="    width: 40%;" for="secret_code">Enter secret code:</label>
-        <div style="display: inline-block; float: right;" data-toggle="tooltip" data-placement="top" title="This is the first code you only know. For example, date of birth.">
-            <span class="glyphicon glyphicon-info-sign"></span></div>
+        <label class="col-sm-2 col-form-label" style="    width: 40%;" for="secret_code">Enter secret code
+            <div style="display: inline-block; float: right;" data-toggle="tooltip" data-placement="top" title="This is the first code you only know. For example, date of birth.">
+                <span class="glyphicon glyphicon-info-sign"></span></div>:</label>
+
         <input style="width: 38%;float: right;" type="number" class="form-control secret_field" required required="true" placeholder="Secret Code" name="secret_code" id="secret_code" ng-model="session_withdraw.secret_code" required="true" >
 
         <div ng-show="form.$submitted || form.amount.$touched">
@@ -46,9 +47,10 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label" style=" width: 40%;" for="email_address">Email address:</label>
-        <div data-toggle="tooltip" style="float: right; display: inline-block;" data-placement="top" title="Enter your email to send another secret code to complete the action" >
-            <span class="glyphicon glyphicon-info-sign"></span></div>
+        <label class="col-sm-2 col-form-label" style=" width: 40%;" for="email_address">Email address
+            <div data-toggle="tooltip" style="float: right; display: inline-block;" data-placement="top" title="Enter your email to send another secret code to complete the action" >
+                <span class="glyphicon glyphicon-info-sign"></span></div>:</label>
+
         <input style="    width: 50%;
     float: right;" type="email" class="form-control email-address-field" required placeholder="Email Address" name="email_address" id="email_address" ng-model="session_withdraw.email_address" required="true" >
 
@@ -77,8 +79,9 @@
     </div>
     </div>
     <div class="buttons_wrapper">
-        <button ng-click="sub()" class="btn btn-primary btn-lg btn-warning">Approve</button>
         <a href="/#/" class="btn btn-secondary btn-lg btn-warning">Cancel</a>
+
+        <button ng-click="sub()" class="btn btn-primary btn-lg btn-warning">Approve</button>
     </div>
 </form>
 
@@ -90,7 +93,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">
-                    the transaction completed successfully!
+                    <span class="ok_icon">V</span>the transaction completed successfully!
                 </h4>
             </div>
             <div class="modal-body">
@@ -125,7 +128,7 @@
             display: inline-block;
             /* float: left; */
             position: absolute;
-            right: 48px;
+            right: 3px;
             top: 37px;
         }
 

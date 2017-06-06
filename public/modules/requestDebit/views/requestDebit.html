@@ -6,13 +6,12 @@
     <p>You are in compliance with the conditions for issuing a debit card! <br/><br/>
     </p>
     </div>
-    <div style="     text-align: center;
-} width: 27%;">
+    <div style="text-align: center; width: 27%;">
         <img style="    position: relative;
-    top: 22px;"  width="70" height="70" ng-src="/images/happy.png" alt="logo" />
+    top: 22px;"  width="70" height="70" ng-src="/images/happy.jpg" alt="logo" />
     </div>
 </div>
-<p>Please enter the following fields:</p>
+<p style="font-size: 20px;">Please enter the following fields:</p>
 <form class="exchangeNowForm css-form" name="form" novalidate>
 
 
@@ -55,7 +54,7 @@
 
     <div class="row">
         <div style="display: inline-block;">Do you agree to out terms of use ?</div>
-        <input type="checkbox" ng-model="session_debit.terms" required name="terms">I'm Agree<br>
+        <input type="checkbox" style="    margin: 0 5px;" ng-model="session_debit.terms" required name="terms">I'm Agree<br>
         <div ng-show="form.$submitted || form.amount.$touched">
             <span class="form-error" ng-show="form.terms.$error.required">Please read the terms of use</span>
         </div>
@@ -65,8 +64,8 @@
 
     <div class="buttons_wrapper">
         <div>{{form.input.$error.required}}</div>
+        <a href="/#/" class="btn btn-secondary btn-lg btn-warning">Cancel</a>
         <button ng-click="sub()" class="btn btn-primary btn-lg btn-warning">Send</button>
-        <a href="/#/" class="btn btn-secondary btn-lg">Cancel</a>
     </div>
 
 </form>

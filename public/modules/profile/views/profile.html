@@ -1,6 +1,6 @@
 <div class="profile_header">
     <div> <img class="profile_image" ng-src="{{ user.profile_picture_url }}" /> </div>
-    <div> <p>Hi, <br/> {{user.first_name + " " + user.last_name }}</p> </div>
+    <div> <p>{{user.first_name + " " + user.last_name }}</p> </div>
 </div>
 
 <h3 style="text-decoration: underline"> Your account balance :</h3>
@@ -17,7 +17,7 @@
 
 
 <div class="buttons_wrapper">
-<button type="button" ng-click="changePage('/withdraw')" class="btn btn-primary btn-lg btn-warning">Reedem The Money</button>
+<button type="button" ng-click="changePage('/withdraw')" class="btn btn-primary btn-lg btn-warning">Redeem The Money</button>
 </div>
 
 
@@ -62,12 +62,11 @@
     }
 
     .buttons_wrapper button { margin: 5px;}
-    .buttons_wrapper button:nth-of-type(1) {flex-grow: 1;}
-    .buttons_wrapper button:nth-of-type(2) {flex-grow: 1;}
+    .buttons_wrapper button:nth-of-type(1) {flex-grow: 1; background: #76D0C4;     border-color: #c3c3c3;}
 
     .profile_image{
-        width: 120px;
-        height: 120px;
+        width: 110px;
+        height: 110px;
         border-radius: 75px;
     }
 
