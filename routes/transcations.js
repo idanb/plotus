@@ -29,16 +29,6 @@ router.get('/initTransaction', function(req, res, next) {
 // return report - transaction expired | transaction
 
 /* GET explore and Match transactions . */
-// router.get('/idan', function(req, res, next) {
-//     res.json({status: 'OK'});
-//     transporter.sendMail(transporter.expiredEmail('idanbelah@gmail.com'), function(error, info){
-//         if (error) {
-//             return console.log(error);
-//         }
-//         console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
-//     });
-// });
-/* GET explore and Match transactions . */
 router.get('/explore-and-match', function(req, res, next) {
     Transaction.ExploreMatchTransactions()
         .then(function (transactions) {
@@ -57,7 +47,7 @@ router.get('/explore-and-match', function(req, res, next) {
                     console.log('expired!',transaction.id);
 
                     User.getByUser(transaction.offer_user_id).then(function(user){
-                        transporter.sendMail(transporter.expiredEmail(user[0].email_address), function(error, info){
+                        transporter.sendMail(transporter.expiredEmail(user[0]), function(error, info){
                             if (error) {
                                 return console.log(error);
                             }
@@ -80,7 +70,7 @@ router.get('/explore-and-match', function(req, res, next) {
                         Transaction.closeTransaction(ttransaction.id, transaction.offer_user_id);
 
                         User.getByUser(ttransaction.offer_user_id).then(function(user){
-                            transporter.sendMail(transporter.transactionMadeEmail(user[0].email_address), function(error, info){
+                            transporter.sendMail(transporter.transactionMadeEmail(user[0],ttransaction), function(error, info){
                                 if (error) {
                                     return console.log(error);
                                 }
@@ -89,7 +79,7 @@ router.get('/explore-and-match', function(req, res, next) {
                         });
 
                         User.getByUser(transaction.offer_user_id).then(function(user){
-                            transporter.sendMail(transporter.transactionMadeEmail(user[0].email_address), function(error, info){
+                            transporter.sendMail(transporter.transactionMadeEmail(user[0],transaction), function(error, info){
                                 if (error) {
                                     return console.log(error);
                                 }
@@ -165,7 +155,7 @@ router.put('/:transactionId/:userId', function(req, res, next) {
 
             Transaction.getById(req.params.transactionId).then(function(transaction){
                 User.getByUser(transaction[0].offer_user_id).then(function(user){
-                    transporter.sendMail(transporter.transactionMadeEmail(user[0].email_address), function(error, info){
+                    transporter.sendMail(transporter.transactionMadeEmail(user[0],transaction[0]), function(error, info){
                         if (error) {
                             return console.log(error);
                         }

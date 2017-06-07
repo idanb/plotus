@@ -81,11 +81,15 @@ router.put('/balance/:userId/:currencyId', function(req, res, next) {
 router.put('/withdraw/:userId/:currencyId', function(req, res, next) {
     var secret_code = parseInt(req.body.secret_code * 765 / 100);
     User.updateUserBalanceByUserId(req.params.userId,req.params.currencyId,req.body.amount * -1).then(function (rows,error) {
-        transporter.sendMail(transporter.withdrawMadeEmail(req.body.email_address,secret_code), function(error, info){
-            if (error) {
-                return console.log(error);
-            }
-            console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
+        User.getByUser(req.params.userId).then(function (user) {
+            transporter.sendMail(transporter.withdrawMadeEmail(user[0],secret_code), function(error, info){
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
+            });
+        }, function(reason) {
+            res.json(reason);
         });
 
         res.json(rows);

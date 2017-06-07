@@ -1,8 +1,8 @@
 'use strict';
 angular.module('Withdraw')
     .controller('WithdrawCashController',
-        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window', 'SessionFactory', 'uiGmapGoogleMapApi',
-            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, SessionFactory) {
+        ['$scope','$rootScope','$cookies', '$location', '$http', '$sce','$window', 'SessionFactory', 'uiGmapGoogleMapApi', '$timeout',
+            function ($scope, $rootScope, $cookies, $location, $http, $sce, $window, SessionFactory, uiGmapGoogleMapApi, $timeout) {
                // if(typeof $cookies.getObject('globals') == 'undefined') $location.path('/login');
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
@@ -11,8 +11,11 @@ angular.module('Withdraw')
                     alert('error - showing user location');
                 }
 
+                $timeout(function () {
+                    $scope.map.zoom = 14;
+                }, 2000);
+
                 function showPosition(position) {
-                    debugger;
                     $scope.map = {
                         center: {latitude: position.coords.latitude, longitude: position.coords.longitude}, zoom: 14,
                         events: {
@@ -24,6 +27,8 @@ angular.module('Withdraw')
                             }
                         }
                     };
+
+
                 }
 
 
