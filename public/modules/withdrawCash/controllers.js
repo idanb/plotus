@@ -11,9 +11,7 @@ angular.module('Withdraw')
                     alert('error - showing user location');
                 }
 
-                $timeout(function () {
-                    $scope.map.zoom = 14;
-                }, 2000);
+
 
                 function showPosition(position) {
                     $scope.map = {
@@ -27,8 +25,10 @@ angular.module('Withdraw')
                             }
                         }
                     };
-
-
+                    $timeout(function () {
+                        alert("zoom in");
+                        $scope.map.zoom = 14;
+                    }, 2000);
                 }
 
 
@@ -104,7 +104,8 @@ angular.module('Withdraw')
                 }
 
                 $scope.setZoom = function(zoom){
-                    $scope.map.zoom = zoom;
+                    //navigator.geolocation.getCurrentPosition(showPosition);
+                    //$scope.map.zoom = zoom;
                 };
                 $scope.show_nav = true;
                 $scope.changePage = function(){
