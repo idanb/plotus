@@ -27,7 +27,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_own">Currency:</label>
         <select class="form-control" id="currency_own" ng-required="true" required name="currency" ng-model="session_withdraw.off_curr" ng-change="updateRate()">
-            <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
+            <option ng-repeat="cur in currency  | filter: { is_tradeable: '1' }" value="{{cur.id}}" rate="{{cur.rate}}">
                 {{cur.code}} {{cur.symbol}}
             </option>
         </select>

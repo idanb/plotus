@@ -13,7 +13,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_own">Select the currency you own:</label>
         <select class="form-control" id="currency_own" required ng-model="session.off_curr" ng-change="updateRate()">
-            <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
+            <option ng-repeat="cur in currency | filter: { is_tradeable: '1' }" value="{{cur.id}}" rate="{{cur.rate}}">
                 {{cur.code}} {{cur.symbol}}
             </option>
         </select>
@@ -22,7 +22,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="currency_to_exchange">Select the currency you want to exchange:</label>
         <select class="form-control" id="currency_to_exchange" required ng-model="session.req_curr" ng-change="updateRate()">
-            <option ng-repeat="cur in currency" value="{{cur.id}}" rate="{{cur.rate}}">
+            <option ng-repeat="cur in currency | filter: { is_tradeable: '1' }" value="{{cur.id}}" rate="{{cur.rate}}">
                 {{cur.code}} {{cur.symbol}}
             </option>
         </select>

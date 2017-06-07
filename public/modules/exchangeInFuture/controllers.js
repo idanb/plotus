@@ -28,7 +28,7 @@ angular.module('Exchange')
                     }
                 }
                 else{
-                    $scope.session.rate = parseFloat($scope.session.rate.toFixed(2));
+                    $scope.session.rate = $rootScope.parseAmount($scope.session.rate);
                     $scope.session.end_at = new Date($scope.session.end_at);
                 }
 
@@ -43,8 +43,8 @@ angular.module('Exchange')
                     var oldValue = $button.parent().find("input").val();
                     if(oldValue == '') oldValue = 1;
 
-                    if ($button.text() == "+") {
-                        var newVal = parseFloat(oldValue) + 0.1;
+                    if ($button.hasClass('inc')) {
+                        var newVal = $rootScope.parseAmount(parseFloat(oldValue) + 0.1);
                     } else {
                         // Don't allow decrementing below zero
                         if (oldValue > 0) {
@@ -54,7 +54,7 @@ angular.module('Exchange')
                                 $scope.$apply();
                                 return true;
                             }
-                            var newVal = parseFloat(oldValue) - 0.1;
+                            var newVal = $rootScope.parseAmount(parseFloat(oldValue) - 0.1);
                         } else {
                             newVal = 0;
                         }

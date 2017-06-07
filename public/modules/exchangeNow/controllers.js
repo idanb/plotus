@@ -46,8 +46,8 @@ angular.module('Exchange')
                     var oldValue = $button.parent().find("input").val();
                     if(oldValue == '') oldValue = 1;
 
-                    if ($button.text() == "+") {
-                        var newVal = parseFloat(oldValue) + 0.1;
+                    if ($button.hasClass('inc')) {
+                        var newVal = $rootScope.parseAmount(parseFloat(oldValue) + 0.1);
                     } else {
                         // Don't allow decrementing below zero
                         if (oldValue > 0) {
@@ -57,7 +57,7 @@ angular.module('Exchange')
                                 $scope.$apply();
                                 return true;
                             }
-                            var newVal = parseFloat(oldValue) - 0.1;
+                            var newVal = $rootScope.parseAmount(parseFloat(oldValue) - 0.1);
                         } else {
                             //$scope.rate_is_lower = false;
                             newVal = 0;
