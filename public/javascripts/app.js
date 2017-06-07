@@ -139,8 +139,10 @@ var PlotusApp = angular.module('PlotusApp', [
 
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
                 // redirect to login page if not logged in
+                $('.modal-backdrop.fade').hide()
                 if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
                     $location.path('/login');
                 }
+
             });
         }]);
