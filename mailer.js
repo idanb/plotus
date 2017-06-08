@@ -41,7 +41,7 @@ transporter.transactionMadeEmail = function(user,transaction){
 transporter.withdrawMadeEmail = function(user, code){
     return  {
         from: '"Plotus Application" <AppPlutus@gmail.com>', // sender address
-        to: user.first_name, // list of receivers
+        to: user.email_address, // list of receivers
         subject: 'Your request to withdraw', // Subject line
         html: 'Hi '+user.first_name+','+ '<br/>' +
         'Secret Code: '+ code + '<br/>' +
