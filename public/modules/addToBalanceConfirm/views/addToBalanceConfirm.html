@@ -7,7 +7,7 @@
 
 <div class="credit_fields">
     <div class="visa_pic"></div>
-    <input type="password" class="form-control" ng-model="user.credit_card" placeholder="Credit Card Number" required="true" disabled="disabled" autofocus="">
+    <input type="text" class="form-control" ng-model="user.credit_card" placeholder="Credit Card Number" required="true" disabled="disabled" autofocus="">
 </div>
 
 <p>
@@ -28,10 +28,12 @@
 <style>
 
     .visa_pic{
-        background: #5e5e86;
-        height: 10px;
-        width: 10px;
+        height: 26px;
+        width: 33px;
+        top: 5px;
+        position: relative;
         display: inline-block;
+        background-image: url(http://www.metalmulisha.com/shop/skin/frontend/base/default/cryozonic_stripe/img/visa.png);
     }
 
     .dec {

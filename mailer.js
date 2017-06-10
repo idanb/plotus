@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
 
 transporter.expiredEmail = function(user){
     return  {
-        from: '"Plotus Application" <AppPlutus@gmail.com>', // sender address
+        from: '"Plutus Application" <AppPlutus@gmail.com>', // sender address
         to: user.email_address, // list of receivers
         subject: 'Your Transaction Expired', // Subject line
         html: 'Hi '+user.first_name+','+
@@ -23,7 +23,7 @@ transporter.expiredEmail = function(user){
 
 transporter.transactionMadeEmail = function(user,transaction){
     return  {
-        from: '"Plotus Application" <AppPlutus@gmail.com>', // sender address
+        from: '"Plutus Application" <AppPlutus@gmail.com>', // sender address
         to: user.email_address, // list of receivers
         subject: 'Your Transaction Matched a customer', // Subject line
         html: 'Hi '+ user.first_name + ',' +
@@ -40,7 +40,7 @@ transporter.transactionMadeEmail = function(user,transaction){
 
 transporter.withdrawMadeEmail = function(user, code){
     return  {
-        from: '"Plotus Application" <AppPlutus@gmail.com>', // sender address
+        from: '"Plutus Application" <AppPlutus@gmail.com>', // sender address
         to: user.email_address, // list of receivers
         subject: 'Your request to withdraw', // Subject line
         html: 'Hi '+user.first_name+','+ '<br/>' +

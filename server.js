@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 // var task = cron.schedule('1,2,3 * * * * *', function() {
 //     console.log('immediately started');
     // var url = "https://openexchangerates.org/api/latest.json?app_id=1f49ab9363964bf2ad2f113800a44fbe";
-    //
+    //F
     // request(url, function(err, resp, response) {
     //     response = JSON.parse(response);
     //     var types = ['USD','ILS','JPY','EUR','GBP'];

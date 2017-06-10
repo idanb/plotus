@@ -15,6 +15,8 @@ angular.module('Exchange')
                     curr: $scope.session_currency
                 }
 
+                $scope.user.credit_card = $scope.user.credit_card.replace(/\d(?=\d{4})/g, "*");
+
                 $scope.sub = function() {
                     $scope.under_minimum = $scope.session_balance.amount < $scope.limit;
                     if (!$scope.under_minimum && $scope.form.amount.$valid) {
