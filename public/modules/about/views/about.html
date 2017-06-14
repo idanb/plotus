@@ -9,10 +9,22 @@
         <p>
         We created Plutu$ because we believe that ordinary people, and businesses, should have access to the same great exchange rates for international currency transfers normally reserved only for banks and market professionals dealing in millions.
     </p>
-    <div style="    text-align: center;">
-        <img class="profile_image" ng-src="/images/raz.jpg" />
-        <img class="profile_image" ng-src="/images/liron.jpg" />
-        <img class="profile_image" ng-src="/images/yaniv.PNG" />
+    <div style="    text-align: center; margin-bottom: 10px">
+        <div class="profile_image_wrapper">
+            <img class="profile_image" ng-src="/images/raz.jpg" />
+
+            <span>Raz Margolin</span>
+        </div>
+        <div class="profile_image_wrapper">
+            <img class="profile_image" ng-src="/images/liron.jpg" />
+
+            <span>Liron Baruch</span>
+        </div>
+        <div class="profile_image_wrapper">
+            <img class="profile_image" ng-src="/images/yaniv.PNG" />
+
+            <span>Yaniv Elgay</span>
+        </div>
     </div>
     <p class="text-center">
         Founder & CEO of Plutu$<br/>
@@ -23,11 +35,18 @@
 
 <style>
 
+    .profile_image_wrapper span{
+        display: block;
+    }
+    .profile_image_wrapper{
+        display: inline-block;
+
+    }
     .profile_image{
         width: 60px;
         height: 60px;
         border-radius: 75px;
-        margin: 5px;
+        margin: 5px 18px;
     }
 
 </style>
