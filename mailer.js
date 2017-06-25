@@ -21,7 +21,7 @@ transporter.expiredEmail = function(user){
 };
 
 
-transporter.transactionMadeEmail = function(user,transaction){
+transporter.transactionMadeEmail = function(transaction){
     return  {
         from: '"Plutus Application" <AppPlutus@gmail.com>', // sender address
         to: user.email_address, // list of receivers
@@ -29,12 +29,12 @@ transporter.transactionMadeEmail = function(user,transaction){
         html: 'Hi '+ user.first_name + ',' +
         '<b>We found a match for you!</b>'+ '<br/>' +
         'Your transaction details:'+ '<br/>' +
-        // 'You have converted with user id :'+ transaction.offer_user_id +'<br/>' +
-        // 'Source currency:'+ transaction.currency_offer_type + '<br/>' +
-        // 'Amount of money for conversion:  '+ transaction.currency_offer_amount + '<br/>' +
-        // 'Target currency: ' + transaction.currency_requested_type + '<br/>' +
-        // 'Amount of money after conversion:'+ transaction.currency_requested_amount + '<br/>' +
-        'Exchange rate:' + transaction.rate
+        'You have converted with user id :'+ transaction.first_name + " " + transaction.last_name +'<br/>' +
+        'Source currency:'+ transaction.off_code + '<br/>' +
+        'Amount of money for conversion:  '+ transaction.currency_offer_amount + '<br/>' +
+        'Target currency: ' + transaction.req_code + '<br/>' +
+        'Amount of money after conversion: '+ transaction.currency_requested_amount + '<br/>' +
+        'Exchange rate: ' + transaction.rate
     }
 };
 

@@ -74,6 +74,32 @@ exports.getPotentialTransactions = function(offered_cur, requested_cur, user_id)
     return deferred.promise;
 }
 
+exports.getTransactionDataById = function(transaction_id) {
+    var deferred = q.defer();
+
+
+    db.getConnection(function(err, connection) {
+        var fields = "SELECT tr.id, u.`email_address`, ur.`first_name`, ur.`last_name`, tr.offer_user_id, tr.currency_requested_type, tr.currency_offer_type,  tr.`currency_offer_amount`, tr.`currency_requested_amount`, " +
+            "cr_off.`code` AS off_code, cr_req.`code` AS req_code, tr.`currency_requested_amount` / tr.`currency_offer_amount` AS rate";
+        var tables = " FROM tblTransactions tr" +
+            " LEFT JOIN tblCurrency cr_off ON tr.`currency_offer_type` = cr_off.`id`" +
+            " LEFT JOIN tblCurrency cr_req ON tr.`currency_requested_type` = cr_req.`id`" +
+            " LEFT JOIN tblUsers u ON tr.`offer_user_id` = u.`id`" +
+            " LEFT JOIN tblUsers ur ON tr.`accepter_user_id` = ur.`id`";
+        var conditions = " WHERE tr.id = ?";
+
+        connection.query(fields + tables + conditions, [transaction_id], function (error, results) {
+            connection.release();
+            if (error) {
+                console.error(error);
+                deferred.reject(error);
+            }
+            deferred.resolve(results);
+        });
+    });
+    return deferred.promise;
+}
+
 exports.getbyStatus = function(status) {
     var deferred = q.defer();
 

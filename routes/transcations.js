@@ -69,8 +69,8 @@ router.get('/explore-and-match', function(req, res, next) {
                         Transaction.closeTransaction(transaction.id, ttransaction.offer_user_id);
                         Transaction.closeTransaction(ttransaction.id, transaction.offer_user_id);
 
-                        User.getByUser(ttransaction.offer_user_id).then(function(user){
-                            transporter.sendMail(transporter.transactionMadeEmail(user[0],ttransaction), function(error, info){
+                        Transaction.getTransactionDataById(ttransaction.id).then(function(ttrans){
+                            transporter.sendMail(transporter.transactionMadeEmail(ttrans), function(error, info){
                                 if (error) {
                                     return console.log(error);
                                 }
@@ -78,8 +78,8 @@ router.get('/explore-and-match', function(req, res, next) {
                             });
                         });
 
-                        User.getByUser(transaction.offer_user_id).then(function(user){
-                            transporter.sendMail(transporter.transactionMadeEmail(user[0],transaction), function(error, info){
+                        Transaction.getTransactionDataById(transaction.id).then(function(trans){
+                            transporter.sendMail(transporter.transactionMadeEmail(trans), function(error, info){
                                 if (error) {
                                     return console.log(error);
                                 }
@@ -120,6 +120,17 @@ router.get('/', function(req, res, next) {
     });
 });
 
+
+/* GET All transactions listing. */
+router.get('/getTransactionData/:transactionId', function(req, res, next) {
+    console.log(req.params.transactionId);
+    Transaction.getTransactionDataById(req.params.transactionId).then(function (rows) {
+        res.json(rows);
+    }, function(reason) {
+        res.json(reason);
+    });
+});
+
 /* GET any kind of transactions of all users. */
 router.get('/:status', function(req, res, next) {
     Transaction.getbyStatus(req.params.status).then(function (rows) {
@@ -153,16 +164,14 @@ router.put('/:transactionId/:userId', function(req, res, next) {
     Transaction.closeTransaction(req.params.transactionId, req.params.userId)
         .then(function (rows) {
 
-            Transaction.getById(req.params.transactionId).then(function(transaction){
-                User.getByUser(transaction[0].offer_user_id).then(function(user){
-                    transporter.sendMail(transporter.transactionMadeEmail(user[0],transaction[0]), function(error, info){
-                        if (error) {
-                            return console.log(error);
-                        }
-                        console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
-                    });
-                });
+        Transaction.getTransactionDataById(req.params.transactionId).then(function(transaction){
+            transporter.sendMail(transporter.transactionMadeEmail(transaction), function(error, info){
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Email has been sent, id : %s , %s', info.messageId, info.response);
             });
+        });
 
 
         res.json(rows);
