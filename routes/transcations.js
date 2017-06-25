@@ -70,7 +70,7 @@ router.get('/explore-and-match', function(req, res, next) {
                         Transaction.closeTransaction(ttransaction.id, transaction.offer_user_id);
 
                         Transaction.getTransactionDataById(ttransaction.id).then(function(ttrans){
-                            transporter.sendMail(transporter.transactionMadeEmail(ttrans), function(error, info){
+                            transporter.sendMail(transporter.transactionMadeEmail(ttrans[0]), function(error, info){
                                 if (error) {
                                     return console.log(error);
                                 }
@@ -79,7 +79,7 @@ router.get('/explore-and-match', function(req, res, next) {
                         });
 
                         Transaction.getTransactionDataById(transaction.id).then(function(trans){
-                            transporter.sendMail(transporter.transactionMadeEmail(trans), function(error, info){
+                            transporter.sendMail(transporter.transactionMadeEmail(trans[0]), function(error, info){
                                 if (error) {
                                     return console.log(error);
                                 }
@@ -165,7 +165,7 @@ router.put('/:transactionId/:userId', function(req, res, next) {
         .then(function (rows) {
 
         Transaction.getTransactionDataById(req.params.transactionId).then(function(transaction){
-            transporter.sendMail(transporter.transactionMadeEmail(transaction), function(error, info){
+            transporter.sendMail(transporter.transactionMadeEmail(transaction[0]), function(error, info){
                 if (error) {
                     return console.log(error);
                 }
