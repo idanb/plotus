@@ -22,11 +22,12 @@ transporter.expiredEmail = function(user){
 
 
 transporter.transactionMadeEmail = function(transaction){
+
     return  {
         from: '"Plutus Application" <AppPlutus@gmail.com>', // sender address
-        to: user.email_address, // list of receivers
+        to: transaction.email_address, // list of receivers
         subject: 'Your Transaction Matched a customer', // Subject line
-        html: 'Hi '+ user.first_name + ',' +
+        html: 'Hi '+ transaction.user_name + ',' +
         '<b>We found a match for you!</b>'+ '<br/>' +
         'Your transaction details:'+ '<br/>' +
         'You have converted with user id :'+ transaction.first_name + " " + transaction.last_name +'<br/>' +

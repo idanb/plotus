@@ -79,7 +79,7 @@ exports.getTransactionDataById = function(transaction_id) {
 
 
     db.getConnection(function(err, connection) {
-        var fields = "SELECT tr.id, u.`email_address`, ur.`first_name`, ur.`last_name`, tr.offer_user_id, tr.currency_requested_type, tr.currency_offer_type,  tr.`currency_offer_amount`, tr.`currency_requested_amount`, " +
+        var fields = "SELECT tr.id, u.`email_address`, u.`first_name` as user_name, ur.`first_name`, ur.`last_name`, tr.offer_user_id, tr.currency_requested_type, tr.currency_offer_type,  tr.`currency_offer_amount`, tr.`currency_requested_amount`, " +
             "cr_off.`code` AS off_code, cr_req.`code` AS req_code, tr.`currency_requested_amount` / tr.`currency_offer_amount` AS rate";
         var tables = " FROM tblTransactions tr" +
             " LEFT JOIN tblCurrency cr_off ON tr.`currency_offer_type` = cr_off.`id`" +
