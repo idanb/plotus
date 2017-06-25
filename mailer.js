@@ -22,7 +22,7 @@ transporter.expiredEmail = function(user){
 
 
 transporter.transactionMadeEmail = function(transaction){
-
+console.log(transaction);
     return  {
         from: '"Plutus Application" <AppPlutus@gmail.com>', // sender address
         to: transaction.email_address, // list of receivers
