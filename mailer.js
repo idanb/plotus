@@ -27,10 +27,10 @@ console.log(transaction);
         from: '"Plutus Application" <AppPlutus@gmail.com>', // sender address
         to: transaction.email_address, // list of receivers
         subject: 'Your Transaction Matched a customer', // Subject line
-        html: 'Hi '+ transaction.user_name + ',' +
+        html: 'Hi '+ transaction.user_name + ', ' +
         '<b>We found a match for you!</b>'+ '<br/>' +
-        'Your transaction details:'+ '<br/>' +
-        'You have converted with user id :'+ transaction.first_name + " " + transaction.last_name +'<br/>' +
+        'Your transaction details: '+ '<br/>' +
+        'You have converted with the user: '+ transaction.first_name + " " + transaction.last_name +'<br/>' +
         'Source currency:'+ transaction.off_code + '<br/>' +
         'Amount of money for conversion:  '+ transaction.currency_offer_amount + '<br/>' +
         'Target currency: ' + transaction.req_code + '<br/>' +
